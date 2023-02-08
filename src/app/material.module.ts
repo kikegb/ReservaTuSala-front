@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatListModule } from '@angular/material/list';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
     exports: [
@@ -13,7 +14,8 @@ import { MatListModule } from '@angular/material/list';
         MatIconModule,
         MatSidenavModule,
         MatTableModule,
-        MatListModule
+        MatListModule,
+        MatDialogModule
     ]
 })
 

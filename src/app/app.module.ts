@@ -8,11 +8,13 @@ import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { SidenavService } from './global/services/sidenav.service';
+import { DeleteDialogComponent } from './global/components/delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,
