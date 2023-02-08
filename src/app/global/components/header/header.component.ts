@@ -1,15 +1,16 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { SidenavService } from '../../services/sidenav.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
-  @Input() menuIsOpen: boolean = true;
-  @Output() menuIsOpenChange = new EventEmitter<boolean>();
-
-  changeMenuState() {
-    this.menuIsOpen = !this.menuIsOpen;
-  }
+export class HeaderComponent {     
+  constructor(
+    private sidenav: SidenavService) { }
+    
+    toggleSidenav() {
+       this.sidenav.toggle();
+    }
 }
