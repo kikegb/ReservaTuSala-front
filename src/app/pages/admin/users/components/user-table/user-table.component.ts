@@ -5,6 +5,7 @@ import { tap } from 'rxjs';
 import { DeleteDialogComponent } from 'src/app/global/components/delete-dialog/delete-dialog.component';
 import { User } from '../../interfaces/user.interface';
 import { UsersService } from '../../services/users.service';
+import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
 import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
 
 @Component({
@@ -30,9 +31,12 @@ export class UserTableComponent {
   addUser(user: User): void {
     this.userSvc.addUser(user)
     .pipe(
-      tap( (user: User) => this.users.push(user) )
+      tap( () => {
+        this.users = [...this.users, user];
+      })
     )
     .subscribe();
+    this.table.renderRows();
   }
 
   updateUser(updatedUser: User): void {
@@ -75,7 +79,6 @@ export class UserTableComponent {
   }
 
   showDeleteDialog(id: number): void {
-    
     const dialogRef = this.dialog.open(DeleteDialogComponent, { data: { elementName: 'user' } });
 
     dialogRef.afterClosed().subscribe( result => {
@@ -86,7 +89,6 @@ export class UserTableComponent {
   }
 
   showEditUserDialog(user: User): void {
-
     const dialogRef = this.dialog.open(EditUserDialogComponent, { data: { user: user } });
 
     dialogRef.afterClosed().subscribe( updatedUser => {
@@ -96,4 +98,13 @@ export class UserTableComponent {
     });
   }
 
+  showAddUserDialog(): void {
+    const dialogRef = this.dialog.open(AddUserDialogComponent);
+
+    dialogRef.afterClosed().subscribe( newUser => {
+      if(newUser) {
+        this.addUser(newUser);
+      }
+    });
+  }
 }

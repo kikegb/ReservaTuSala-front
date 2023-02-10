@@ -24,6 +24,7 @@ export class EditUserDialogComponent {
       'email': [data.user.email, Validators.required],
       'password': [data.user.password, Validators.required],
       'phone': [data.user.phone, Validators.required],
+      'role': [data.user.role, Validators.required],
       'deleted': [data.user.deleted, Validators.required],
     });
   }
@@ -40,6 +41,7 @@ export class EditUserDialogComponent {
       email: this.userForm.value.email,
       password: this.userForm.value.password,
       phone: this.userForm.value.phone,
+      role: this.userForm.value.role,
       deleted: this.userForm.value.deleted
     }
     this.dialogRef.close(updatedUser);

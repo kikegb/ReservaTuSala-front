@@ -1,3 +1,4 @@
+<button mat-flat-button color="primary" class="add-button" (click)="showAddUserDialog()">New user</button>
 <table mat-table [dataSource]="users" *ngIf="users.length">
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Name </th>
