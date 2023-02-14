@@ -43,15 +43,9 @@ export class UserTableComponent {
     this.userSvc.updateUser(updatedUser)
     .pipe(
       tap( () => {
-        let newUsers: User[] = [];
-        this.users.forEach( user => {
-          if(user.id == updatedUser.id) {
-            newUsers.push(updatedUser)
-          } else {
-            newUsers.push(user)
-          }
-        })
-        this.users = newUsers;
+        let index = this.users.findIndex( user => user.id == updatedUser.id );
+        this.users[index] = updatedUser;
+        this.users = [...this.users];
       })
     )
     .subscribe();
@@ -62,16 +56,9 @@ export class UserTableComponent {
     this.userSvc.deleteUser(id)
     .pipe(
       tap( () => {
-        let newUsers: User[] = [];
-        this.users.forEach( user => {
-          if(user.id == id) {
-            let deletedUser: User = {...user, deleted: true};
-            newUsers.push(deletedUser)
-          } else {
-            newUsers.push(user)
-          }
-        })
-        this.users = newUsers;
+        let index = this.users.findIndex( user => user.id == id );
+        this.users[index] = {...this.users[index], deleted: true};
+        this.users = [...this.users];
       })
     )
     .subscribe();
