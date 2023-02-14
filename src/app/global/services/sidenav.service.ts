@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+  })
 export class SidenavService {
     private sidenav!: MatSidenav;
 
