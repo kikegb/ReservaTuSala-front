@@ -5,8 +5,7 @@ import { tap } from 'rxjs';
 import { DeleteDialogComponent } from 'src/app/global/components/delete-dialog/delete-dialog.component';
 import { User } from '../../interfaces/user.interface';
 import { UsersService } from '../../services/users.service';
-import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
-import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
+import { UserFormDialogComponent } from '../user-form-dialog/user-form-dialog.component';
 
 @Component({
   selector: 'app-user-table',
@@ -76,7 +75,7 @@ export class UserTableComponent {
   }
 
   showEditUserDialog(user: User): void {
-    const dialogRef = this.dialog.open(EditUserDialogComponent, { data: { user: user } });
+    const dialogRef = this.dialog.open(UserFormDialogComponent, { data: { title: 'Edit user', user: user } });
 
     dialogRef.afterClosed().subscribe( updatedUser => {
       if(updatedUser) {
@@ -86,7 +85,7 @@ export class UserTableComponent {
   }
 
   showAddUserDialog(): void {
-    const dialogRef = this.dialog.open(AddUserDialogComponent);
+    const dialogRef = this.dialog.open(UserFormDialogComponent, { data: { title: 'New user', user: undefined} });
 
     dialogRef.afterClosed().subscribe( newUser => {
       if(newUser) {
