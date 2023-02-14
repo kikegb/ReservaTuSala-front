@@ -20,26 +20,15 @@ export class UserFormDialogComponent {
   {
     this.title = data.title;
     this.user = data.user;
-    if (data.user === undefined) {
-      this.userForm = this.formBuilder.group({
-        'name': [null, Validators.required],
-        'cnif': [null, Validators.required],
-        'email': [null, Validators.required],
-        'password': [null, Validators.required],
-        'phone': [null, Validators.required],
-        'role': [null, Validators.required],
-      });
-    } else {
-      this.userForm = this.formBuilder.group({
-        'name': [data.user.name, Validators.required],
-        'cnif': [data.user.cnif, Validators.required],
-        'email': [data.user.email, Validators.required],
-        'password': [data.user.password, Validators.required],
-        'phone': [data.user.phone, Validators.required],
-        'role': [data.user.role, Validators.required],
-        'deleted': [data.user.deleted, Validators.required],
-      });
-    } 
+    this.userForm = this.formBuilder.group({
+      'name': [data.user?.name || null, Validators.required],
+      'cnif': [data.user?.cnif || null, Validators.required],
+      'email': [data.user?.email || null, Validators.required],
+      'password': [data.user?.password || null, Validators.required],
+      'phone': [data.user?.phone || null, Validators.required],
+      'role': [data.user?.role || null, Validators.required],
+      'deleted': [data.user?.deleted || null, Validators.required],
+    });
   }
 
   onCancel(): void {
@@ -47,9 +36,8 @@ export class UserFormDialogComponent {
   }
 
   onSave(): void {
-    if(this.user === undefined) {
+    if(!this.user) {
       this.dialogRef.close(<User>this.userForm.value);
-
     } else {
       let updatedUser: User = {
         ...this.user,
