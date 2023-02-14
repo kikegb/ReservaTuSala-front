@@ -7,7 +7,6 @@ import { UserTableComponent } from './components/user-table/user-table.component
 import { MaterialModule } from 'src/app/material.module';
 import { EditUserDialogComponent } from './components/edit-user-dialog/edit-user-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldControl } from '@angular/material/form-field';
 import { AddUserDialogComponent } from './components/add-user-dialog/add-user-dialog.component';
 
 
