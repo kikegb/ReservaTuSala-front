@@ -20,4 +20,8 @@ describe('HomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render "Home" as main title', () => {
+    expect(fixture.debugElement.nativeElement.textContent).toContain('Home');
+  });
 });
