@@ -27,16 +27,16 @@ describe('DeleteDialogComponent', () => {
   });
 
   it('should close and return false when calling onCancel method', () => {
-    spyOn(component.dialogRef, 'close');
+    const spyDialogRef = spyOn(component.dialogRef, 'close');
     component.onCancel();
-    expect(component.dialogRef.close).toHaveBeenCalled();
-    expect(component.dialogRef.close).toHaveBeenCalledWith(false);
+    expect(spyDialogRef).toHaveBeenCalled();
+    expect(spyDialogRef).toHaveBeenCalledWith(false);
   });
 
   it('should close and return true when calling onConfirm method', () => {
-    spyOn(component.dialogRef, 'close');
+    const spyDialogClose = spyOn(component.dialogRef, 'close');
     component.onConfirm();
-    expect(component.dialogRef.close).toHaveBeenCalled();
-    expect(component.dialogRef.close).toHaveBeenCalledWith(true);
+    expect(spyDialogClose).toHaveBeenCalled();
+    expect(spyDialogClose).toHaveBeenCalledWith(true);
   });
 });

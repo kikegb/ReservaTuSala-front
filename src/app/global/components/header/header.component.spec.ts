@@ -37,9 +37,9 @@ describe('HeaderComponent', () => {
 
   it('shoud toggle sidenav when calling toggleSidenav method', () => {
     let service = fixture.debugElement.injector.get(SidenavService);
-    spyOn(service, 'toggle');
+    const spySidenavToggle = spyOn(service, 'toggle');
     component.toggleSidenav();
-    expect(service.toggle).toHaveBeenCalled();
+    expect(spySidenavToggle).toHaveBeenCalled();
   });
 
 });
