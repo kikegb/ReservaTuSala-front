@@ -27,7 +27,7 @@ export class UserFormDialogComponent {
       'password': [data.user?.password || null, Validators.required],
       'phone': [data.user?.phone || null, Validators.required],
       'role': [data.user?.role || null, Validators.required],
-      'deleted': [data.user?.deleted || null, Validators.required],
+      'deleted': [data.user?.deleted || false, Validators.required],
     });
   }
 
