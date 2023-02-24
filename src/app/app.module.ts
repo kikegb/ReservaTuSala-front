@@ -3,16 +3,30 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './global/components/header/header.component';
+import { MaterialModule } from './material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { SidenavService } from './global/services/sidenav.service';
+import { DeleteDialogComponent } from './global/components/delete-dialog/delete-dialog.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MaterialModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [SidenavService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
