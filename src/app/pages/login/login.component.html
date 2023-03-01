@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Log in</h1>
+<form [formGroup]="userForm" >
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" name="email" formControlName="email" required>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" name="password" formControlName="password" required>
+        </mat-form-field>
+    </p>
+</form>
+<button  mat-flat-button color="primary" (click)="login()">Log in</button>
