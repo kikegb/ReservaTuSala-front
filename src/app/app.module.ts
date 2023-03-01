@@ -6,10 +6,11 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './global/components/header/header.component';
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SidenavService } from './global/services/sidenav.service';
 import { DeleteDialogComponent } from './global/components/delete-dialog/delete-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SecurityInterceptor } from './global/interceptors/security.interceptor';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [SidenavService],
+  providers: [
+    SidenavService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SecurityInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
