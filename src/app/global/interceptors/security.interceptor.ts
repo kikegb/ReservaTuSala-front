@@ -6,19 +6,18 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { LocalStorageService } from '../services/local-storage.service';
 
 @Injectable()
 export class SecurityInterceptor implements HttpInterceptor {
 
-  constructor(private storageSvc: LocalStorageService) {}
+  constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(this.addAuthToken(request));
   }
 
   addAuthToken(request: HttpRequest<unknown>) {
-    const token = <string>this.storageSvc.get('token');
+    const token = <string>localStorage.getItem('token');
 
     if (token) {
       return request.clone({
