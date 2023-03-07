@@ -1,6 +1,12 @@
 <mat-toolbar class="main-header" color="primary">
-    <button mat-icon-button (click)="toggleSidenav()">
+    <button mat-icon-button (click)="toggleSidenav()" *ngIf="!isLogin">
         <mat-icon>menu</mat-icon>
     </button>
     ReservaTuSala
+    <button mat-flat-button (click)="logIn()" class="loginButton" *ngIf="!token && !isLogin">
+        Log In
+    </button>
+    <button mat-flat-button (click)="logOut()" class="loginButton" *ngIf="token">
+        Log Out
+    </button>
 </mat-toolbar>
