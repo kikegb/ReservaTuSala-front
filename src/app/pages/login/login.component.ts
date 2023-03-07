@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
-import { LocalStorageService } from 'src/app/global/services/local-storage.service';
+import { SidenavService } from 'src/app/global/services/sidenav.service';
+import { TokenUtilsService } from 'src/app/global/services/token-utils.service';
 import { LoginService } from './services/login.service';
 
 @Component({
@@ -16,8 +17,8 @@ export class LoginComponent {
   constructor(
     private formBuilder: FormBuilder, 
     private loginSvc: LoginService,
-    private storageSvc: LocalStorageService,
-    private router: Router)
+    private router: Router,
+    private tokenSvc: TokenUtilsService)
   {
     this.userForm = this.formBuilder.group({
       'email': [null, Validators.required],
@@ -28,7 +29,8 @@ export class LoginComponent {
   login(): void {
     this.loginSvc.login(this.userForm.value.email, this.userForm.value.password)
     .subscribe((response: any) => {
-      this.storageSvc.set('token', response.Authorization);
+      localStorage.setItem('token', response.Authorization);
+      this.tokenSvc.setToken(response.Authorization);
       const decodedToken = <any>jwtDecode(response.Authorization);
       const role = decodedToken.role;
       if (role == 'ADMIN') {

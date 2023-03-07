@@ -11,6 +11,7 @@ import { SidenavService } from './global/services/sidenav.service';
 import { DeleteDialogComponent } from './global/components/delete-dialog/delete-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SecurityInterceptor } from './global/interceptors/security.interceptor';
+import { TokenUtilsService } from './global/services/token-utils.service';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { SecurityInterceptor } from './global/interceptors/security.interceptor'
   ],
   providers: [
     SidenavService,
+    TokenUtilsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: SecurityInterceptor,

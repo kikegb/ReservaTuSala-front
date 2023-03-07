@@ -6,7 +6,6 @@ import { LoginComponent } from './login.component';
 import { MaterialModule } from 'src/app/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from './services/login.service';
-import { LocalStorageService } from 'src/app/global/services/local-storage.service';
 
 
 @NgModule({
@@ -21,8 +20,7 @@ import { LocalStorageService } from 'src/app/global/services/local-storage.servi
     ReactiveFormsModule
   ],
   providers: [
-    LoginService,
-    LocalStorageService
+    LoginService
   ]
 })
 export class LoginModule { }
