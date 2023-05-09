@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterEvent } from '@angular/router';
+import { NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { SidenavService } from '../../services/sidenav.service';
 import { TokenUtilsService } from '../../services/token-utils.service';
 
@@ -20,14 +20,12 @@ export class HeaderComponent implements OnInit {
     private tokenSvc: TokenUtilsService) {}
   
   ngOnInit(): void {
-    this.tokenSvc.getToken().subscribe((token) => {
-      this.token = token;
-      this.isLogin = (this.location.path() == '/login')
-    });
-
     this.router.events.subscribe((event: any) => {
       if (event && event.url) {
         this.isLogin = (event.url == '/login');
+      }
+      if (event instanceof NavigationEnd) {
+        this.token = localStorage.getItem('token') || "";
       }
     });
   }
