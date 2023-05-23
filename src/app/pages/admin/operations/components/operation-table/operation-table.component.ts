@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { Operation } from '../../interfaces/operation.interface';
+import { Operation } from 'src/app/global/interfaces/operation.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { tap } from 'rxjs';
 import { DeleteDialogComponent } from 'src/app/global/components/delete-dialog/delete-dialog.component';
-import { OperationsService } from '../../services/operations.service';
+import { OperationsService } from 'src/app/global/services/operations.service';
 import { OperationFormDialogComponent } from '../operation-form-dialog/operation-form-dialog.component';
 
 @Component({
@@ -14,7 +14,7 @@ import { OperationFormDialogComponent } from '../operation-form-dialog/operation
 })
 export class OperationTableComponent {
   operations: Operation[] = []
-  columnsToDisplay = ['start', 'end', 'cost', 'status', 'deleted', 'actions'];
+  columnsToDisplay = ['customer', 'business', 'room', 'start', 'end', 'cost', 'status', 'deleted', 'actions'];
   @ViewChild(MatTable) table!: MatTable<any>;
 
   constructor(private operationSvc: OperationsService, public dialog: MatDialog) {}

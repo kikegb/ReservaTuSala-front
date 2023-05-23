@@ -3,8 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { tap } from 'rxjs';
 import { DeleteDialogComponent } from 'src/app/global/components/delete-dialog/delete-dialog.component';
-import { User } from '../../interfaces/user.interface';
-import { UsersService } from '../../services/users.service';
+import { User } from 'src/app/global/interfaces/user.interface'
+import { UsersService } from 'src/app/global/services/users.service';
 import { UserFormDialogComponent } from '../user-form-dialog/user-form-dialog.component';
 
 @Component({

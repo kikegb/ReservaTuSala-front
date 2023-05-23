@@ -1,7 +1,12 @@
 import { Component, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Operation } from '../../interfaces/operation.interface';
+import { Operation } from 'src/app/global/interfaces/operation.interface';
+import { UsersService } from 'src/app/global/services/users.service';
+import { User } from 'src/app/global/interfaces/user.interface';
+import { tap } from 'rxjs';
+import { RoomsService } from 'src/app/global/services/rooms.service';
+import { Room } from 'src/app/global/interfaces/room.interface';
 
 @Component({
   selector: 'app-operation-form-dialog',
@@ -14,16 +19,23 @@ export class OperationFormDialogComponent {
   operationForm: FormGroup;
   hours = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00'];
   today = new Date();
+  customers: User[] = [];
+  businesses: User[] = [];
+  rooms: Room[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<OperationFormDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { title: string, operation: Operation },
-    private formBuilder: FormBuilder)
+    private formBuilder: FormBuilder,
+    private usersSvc: UsersService,
+    private roomsSvc: RoomsService)
   {
     this.title = data.title;
     this.operation = data.operation;
     this.operationForm = this.formBuilder.group({
-      'startDate': [data.operation?.start.getDate() || null, Validators.required],
+      'customer': [data.operation?.customer || null, Validators.required],
+      'business': [data.operation?.business || null, Validators.required],
+      'room': [data.operation?.room || null, Validators.required],
       'startTime': ['0'+data.operation?.start.getHours()+':00' || null, Validators.required],
       'endDate': [data.operation?.end.getDate() || null, Validators.required],
       'endTime': ['0'+data.operation?.end.getHours()+':00' || null, Validators.required],
@@ -32,6 +44,29 @@ export class OperationFormDialogComponent {
       'deleted': [data.operation?.deleted || false, Validators.required],
     });
   }
+
+  ngOnInit(): void {
+    this.usersSvc.getUsers()
+    .pipe(
+        tap( (users: User[]) => {
+          for (let user of users) {
+            if (user.role === "CUSTOMER") {
+              this.customers.push(user)
+            } else if (user.role === "BUSINESS") {
+              this.businesses.push(user)
+            }
+          }
+        } )
+    )
+    .subscribe();
+
+    this.roomsSvc.getRooms()
+    .pipe(
+        tap( (rooms: Room[]) => this.rooms = rooms )
+    )
+    .subscribe();
+  }
+
 
   isBeforeOrSame(): boolean {
     const startDate = new Date(this.operationForm.value.startDate);
@@ -54,6 +89,9 @@ export class OperationFormDialogComponent {
     if(!this.operation) {
       let newOperation: Operation = {
         id: this.operationForm.value.id,
+        customer: this.operationForm.value.customer,
+        business: this.operationForm.value.business,
+        room: this.operationForm.value.room,
         start: startDateTime,
         end: endDateTime,
         cost: this.operationForm.value.cost,
@@ -64,6 +102,9 @@ export class OperationFormDialogComponent {
     } else {
       let updatedOperation: Operation = {
         ...this.operation,
+        customer: this.operationForm.value.customer,
+        business: this.operationForm.value.business,
+        room: this.operationForm.value.room,
         start: startDateTime,
         end: endDateTime,
         cost: this.operationForm.value.cost,

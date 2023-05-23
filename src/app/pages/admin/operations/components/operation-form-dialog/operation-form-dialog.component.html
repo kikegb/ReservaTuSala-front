@@ -2,6 +2,36 @@
 <div mat-dialog-content>
     <form [formGroup]="operationForm" >
         <p>
+            <mat-form-field>
+                <mat-label>Customer</mat-label>
+                <mat-select formControlName="customer">
+                    <mat-option *ngFor="let customer of customers" [value]="customer">
+                        {{ customer.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <mat-label>Business</mat-label>
+                <mat-select formControlName="business">
+                    <mat-option *ngFor="let business of businesses" [value]="business">
+                        {{ business.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <mat-label>Room</mat-label>
+                <mat-select formControlName="room">
+                    <mat-option *ngFor="let room of rooms" [value]="room">
+                        {{ room.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </p>
+        <p>
             Start
             <br/>
             <mat-form-field>
