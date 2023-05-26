@@ -1,0 +1,57 @@
+<h1 mat-dialog-title>{{ title }}</h1>
+<div mat-dialog-content>
+    <form [formGroup]="roomForm" >
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput name="name" formControlName="name" required>
+            </mat-form-field> 
+        </p>
+        <p>
+            <mat-form-field>
+                <mat-label>Business</mat-label>
+                <mat-select formControlName="business">
+                    <mat-option *ngFor="let business of businesses" [value]="business">
+                        {{ business.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <mat-label>Location</mat-label>
+                <mat-select formControlName="location">
+                    <mat-option *ngFor="let location of locations" [value]="location">
+                        {{room.location.street}}, {{room.location.number}}, {{room.location.postcode}}, 
+                        {{room.location.town}}, {{room.location.province}}, {{room.location.country}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Size</mat-label>
+                <input matInput type="number" step="0.5" min="0.5" name="size" formControlName="size" required>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Capacity</mat-label>
+                <input matInput type="number"  min="1" name="capacity" formControlName="capacity" required>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Price</mat-label>
+                <input matInput type="number"  step="0.5" min="0.5" name="price" formControlName="price" required>
+            </mat-form-field>
+        </p>
+        <p *ngIf="room">
+            <mat-slide-toggle formControlName="deleted" name="deleted"> Deleted </mat-slide-toggle>
+        </p>
+    </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onCancel()">Cancel</button>
+  <button mat-button mat-dialog-close (click)="onSave()" cdkFocusInitial>Save</button>
+</div>

@@ -9,6 +9,8 @@ const routes: Routes = [
   { path: 'admin/users', canActivate: [AdminGuard], loadChildren: () => import('./pages/admin/users/users.module').then(m => m.UsersModule) },
   
   { path: 'admin/operations', canActivate: [AdminGuard], loadChildren: () => import('./pages/admin/operations/operations.module').then(m => m.OperationsModule) },
+  
+  { path: 'admin/rooms', canActivate: [AdminGuard], loadChildren: () => import('./pages/admin/rooms/rooms.module').then(m => m.RoomsModule) },
 
   { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule) },
   

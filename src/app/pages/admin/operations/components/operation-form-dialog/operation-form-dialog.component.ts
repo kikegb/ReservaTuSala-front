@@ -36,6 +36,7 @@ export class OperationFormDialogComponent {
       'customer': [data.operation?.customer || null, Validators.required],
       'business': [data.operation?.business || null, Validators.required],
       'room': [data.operation?.room || null, Validators.required],
+      'startDate': [data.operation?.start.getDate() || null, Validators.required],
       'startTime': ['0'+data.operation?.start.getHours()+':00' || null, Validators.required],
       'endDate': [data.operation?.end.getDate() || null, Validators.required],
       'endTime': ['0'+data.operation?.end.getHours()+':00' || null, Validators.required],
