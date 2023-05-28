@@ -4,7 +4,7 @@
         <p>
             <mat-form-field>
                 <mat-label>Customer</mat-label>
-                <mat-select formControlName="customer">
+                <mat-select formControlName="customer" required>
                     <mat-option *ngFor="let customer of customers" [value]="customer">
                         {{ customer.name }}
                     </mat-option>
@@ -14,7 +14,7 @@
         <p>
             <mat-form-field>
                 <mat-label>Business</mat-label>
-                <mat-select formControlName="business">
+                <mat-select formControlName="business" required>
                     <mat-option *ngFor="let business of businesses" [value]="business">
                         {{ business.name }}
                     </mat-option>
@@ -24,7 +24,7 @@
         <p>
             <mat-form-field>
                 <mat-label>Room</mat-label>
-                <mat-select formControlName="room">
+                <mat-select formControlName="room" required>
                     <mat-option *ngFor="let room of rooms" [value]="room">
                         {{ room.name }}
                     </mat-option>
@@ -36,7 +36,7 @@
             <br/>
             <mat-form-field>
                 <mat-label>Choose a date</mat-label>
-                <input matInput [matDatepicker]="startPicker" [min]="today" formControlName="startDate">
+                <input matInput [matDatepicker]="startPicker" [min]="today" formControlName="startDate" required>
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
                 <mat-datepicker #startPicker></mat-datepicker>
@@ -44,7 +44,7 @@
             <br/>
             <mat-form-field>
                 <mat-label>Choose an hour</mat-label>
-                <mat-select formControlName="startTime">
+                <mat-select formControlName="startTime" required>
                     <mat-option *ngFor="let hour of hours" [value]="hour">
                         {{ hour }}
                     </mat-option>
@@ -56,7 +56,7 @@
             <br/>
             <mat-form-field>
                 <mat-label>Choose a date</mat-label>
-                <input matInput [matDatepicker]="endPicker" [min]="today" formControlName="endDate">
+                <input matInput [matDatepicker]="endPicker" [min]="today" formControlName="endDate" required>
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
                 <mat-datepicker #endPicker></mat-datepicker>
@@ -64,7 +64,7 @@
             <br/>
             <mat-form-field>
                 <mat-label>Choose an hour</mat-label>
-                <mat-select formControlName="endTime">
+                <mat-select formControlName="endTime" required>
                     <mat-option *ngFor="let hour of hours" [value]="hour">
                         {{ hour }}
                     </mat-option>

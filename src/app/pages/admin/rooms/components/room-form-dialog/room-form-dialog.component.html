@@ -10,7 +10,7 @@
         <p>
             <mat-form-field>
                 <mat-label>Business</mat-label>
-                <mat-select formControlName="business">
+                <mat-select formControlName="business" required>
                     <mat-option *ngFor="let business of businesses" [value]="business">
                         {{ business.name }}
                     </mat-option>
@@ -20,10 +20,10 @@
         <p>
             <mat-form-field>
                 <mat-label>Location</mat-label>
-                <mat-select formControlName="location">
+                <mat-select formControlName="location" required>
                     <mat-option *ngFor="let location of locations" [value]="location">
-                        {{room.location.street}}, {{room.location.number}}, {{room.location.postcode}}, 
-                        {{room.location.town}}, {{room.location.province}}, {{room.location.country}}
+                        {{location.street}}, {{location.number}}, {{location.postcode}}, 
+                        {{location.town}}, {{location.province}}, {{location.country}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

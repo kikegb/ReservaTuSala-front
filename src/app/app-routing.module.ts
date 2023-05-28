@@ -12,6 +12,8 @@ const routes: Routes = [
   
   { path: 'admin/rooms', canActivate: [AdminGuard], loadChildren: () => import('./pages/admin/rooms/rooms.module').then(m => m.RoomsModule) },
 
+  { path: 'admin/locations', canActivate: [AdminGuard], loadChildren: () => import('./pages/admin/locations/locations.module').then(m => m.LocationsModule) },
+
   { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule) },
   
   { path: 'unauthorized', loadChildren: () => import('./pages/unauthorized/unauthorized.module').then(m => m.UnauthorizedModule) },
