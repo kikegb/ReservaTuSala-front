@@ -1,22 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard } from './global/guards/admin.guard';
+import { AdminModule } from './pages/admin/admin.module';
+import { LoginModule } from './pages/login/login.module';
+import { UnauthorizedModule } from './pages/unauthorized/unauthorized.module';
 
 const routes: Routes = [
-  
-  { path: 'admin/home', canActivate: [AdminGuard], loadChildren: () => import('./pages/admin/home/home.module').then(m => m.HomeModule) },
-  
-  { path: 'admin/users', canActivate: [AdminGuard], loadChildren: () => import('./pages/admin/users/users.module').then(m => m.UsersModule) },
-  
-  { path: 'admin/operations', canActivate: [AdminGuard], loadChildren: () => import('./pages/admin/operations/operations.module').then(m => m.OperationsModule) },
-  
-  { path: 'admin/rooms', canActivate: [AdminGuard], loadChildren: () => import('./pages/admin/rooms/rooms.module').then(m => m.RoomsModule) },
 
-  { path: 'admin/locations', canActivate: [AdminGuard], loadChildren: () => import('./pages/admin/locations/locations.module').then(m => m.LocationsModule) },
-
-  { path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule) },
+  { path: 'admin', canActivate: [AdminGuard], loadChildren: () => AdminModule },
   
-  { path: 'unauthorized', loadChildren: () => import('./pages/unauthorized/unauthorized.module').then(m => m.UnauthorizedModule) },
+  { path: 'login', loadChildren: () => LoginModule },
+  
+  { path: 'unauthorized', loadChildren: () => UnauthorizedModule },
    
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
