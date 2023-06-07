@@ -6,5 +6,4 @@ export interface Location {
     town: String;
     province: String;
     country: String;
-    deleted: boolean;
 }

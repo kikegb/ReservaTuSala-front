@@ -27,7 +27,6 @@ export class LocationFormDialogComponent {
       'town': [data.location?.town || null, Validators.required],
       'province': [data.location?.province || null, Validators.required],
       'country': [data.location?.country || null, Validators.required],
-      'deleted': [data.location?.deleted || false, Validators.required],
     });
   }
 
@@ -46,8 +45,7 @@ export class LocationFormDialogComponent {
         postcode: this.locationForm.value.postcode,
         town: this.locationForm.value.town,
         province: this.locationForm.value.province,
-        country: this.locationForm.value.country,
-        deleted: this.locationForm.value.deleted
+        country: this.locationForm.value.country
       };
       this.dialogRef.close(updatedLocation);
     }

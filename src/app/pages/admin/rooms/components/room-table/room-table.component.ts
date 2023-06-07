@@ -14,7 +14,7 @@ import { RoomFormDialogComponent } from '../room-form-dialog/room-form-dialog.co
 })
 export class RoomTableComponent {
   rooms: Room[] = [];
-  columnsToDisplay = ['business', 'location', 'name', 'size', 'capacity', 'price', 'deleted', 'actions'];
+  columnsToDisplay = ['business', 'location', 'name', 'size', 'capacity', 'price', 'actions'];
   @ViewChild(MatTable) table!: MatTable<any>;
 
   constructor(private roomSvc: RoomsService, public dialog: MatDialog) {}
@@ -56,8 +56,7 @@ export class RoomTableComponent {
     .pipe(
       tap( () => {
         let index = this.rooms.findIndex( room => room.id == id );
-        this.rooms[index] = {...this.rooms[index], deleted: true};
-        this.rooms = [...this.rooms];
+        this.rooms.splice(index, 1);
       })
     )
     .subscribe();

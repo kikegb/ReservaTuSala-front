@@ -42,7 +42,6 @@ export class OperationFormDialogComponent {
       'endTime': ['0'+data.operation?.end.getHours()+':00' || null, Validators.required],
       'cost': [data.operation?.cost || null, Validators.required],
       'status': [data.operation?.status || null, Validators.required],
-      'deleted': [data.operation?.deleted || false, Validators.required],
     });
   }
 
@@ -96,8 +95,7 @@ export class OperationFormDialogComponent {
         start: startDateTime,
         end: endDateTime,
         cost: this.operationForm.value.cost,
-        status: this.operationForm.value.status,
-        deleted: this.operationForm.value.deleted
+        status: this.operationForm.value.status
       };
       this.dialogRef.close(newOperation);
     } else {
@@ -109,8 +107,7 @@ export class OperationFormDialogComponent {
         start: startDateTime,
         end: endDateTime,
         cost: this.operationForm.value.cost,
-        status: this.operationForm.value.status,
-        deleted: this.operationForm.value.deleted
+        status: this.operationForm.value.status
       };
       this.dialogRef.close(updatedOperation);
     }

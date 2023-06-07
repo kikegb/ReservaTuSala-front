@@ -14,7 +14,7 @@ import { LocationFormDialogComponent } from '../location-form-dialog/location-fo
 })
 export class LocationTableComponent {
   locations: Location[] = [];
-  columnsToDisplay = ['street', 'number', 'postcode', 'town', 'province', 'country', 'deleted', 'actions'];
+  columnsToDisplay = ['street', 'number', 'postcode', 'town', 'province', 'country', 'actions'];
   @ViewChild(MatTable) table!: MatTable<any>;
 
   constructor(private locationSvc: LocationsService, public dialog: MatDialog) {}
@@ -56,8 +56,7 @@ export class LocationTableComponent {
     .pipe(
       tap( () => {
         let index = this.locations.findIndex( location => location.id == id );
-        this.locations[index] = {...this.locations[index], deleted: true};
-        this.locations = [...this.locations];
+        this.locations.splice(index, 1);
       })
     )
     .subscribe();

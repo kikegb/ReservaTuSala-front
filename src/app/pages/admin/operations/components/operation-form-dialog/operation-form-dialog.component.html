@@ -85,9 +85,6 @@
                 <mat-radio-button value="CANCELLED">Cancelled</mat-radio-button>
             </mat-radio-group>
         </p>
-        <p *ngIf="operation">
-            <mat-slide-toggle formControlName="deleted" name="deleted"> Deleted </mat-slide-toggle>
-        </p>
     </form>
 </div>
 <div *ngIf="isBeforeOrSame()">

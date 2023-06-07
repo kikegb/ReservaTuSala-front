@@ -14,7 +14,7 @@ import { UserFormDialogComponent } from '../user-form-dialog/user-form-dialog.co
 })
 export class UserTableComponent {
   users: User[] = []
-  columnsToDisplay = ['name', 'cnif', 'email', 'phone', 'role', 'deleted', 'actions'];
+  columnsToDisplay = ['name', 'cnif', 'email', 'phone', 'role', 'actions'];
   @ViewChild(MatTable) table!: MatTable<any>;
 
   constructor(private userSvc: UsersService, public dialog: MatDialog) {}
@@ -56,8 +56,7 @@ export class UserTableComponent {
     .pipe(
       tap( () => {
         let index = this.users.findIndex( user => user.id == id );
-        this.users[index] = {...this.users[index], deleted: true};
-        this.users = [...this.users];
+        this.users.splice(index, 1);
       })
     )
     .subscribe();

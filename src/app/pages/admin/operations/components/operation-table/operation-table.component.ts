@@ -14,7 +14,7 @@ import { OperationFormDialogComponent } from '../operation-form-dialog/operation
 })
 export class OperationTableComponent {
   operations: Operation[] = []
-  columnsToDisplay = ['customer', 'business', 'room', 'start', 'end', 'cost', 'status', 'deleted', 'actions'];
+  columnsToDisplay = ['customer', 'business', 'room', 'start', 'end', 'cost', 'status', 'actions'];
   @ViewChild(MatTable) table!: MatTable<any>;
 
   constructor(private operationSvc: OperationsService, public dialog: MatDialog) {}
@@ -56,8 +56,7 @@ export class OperationTableComponent {
     .pipe(
       tap( () => {
         let index = this.operations.findIndex( operation => operation.id == id );
-        this.operations[index] = {...this.operations[index], deleted: true};
-        this.operations = [...this.operations];
+        this.operations.splice(index, 1);
       })
     )
     .subscribe();

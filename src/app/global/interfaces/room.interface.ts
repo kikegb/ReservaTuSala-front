@@ -9,5 +9,4 @@ export interface Room {
     size: number;
     capacity: number;
     price: number;
-    deleted: boolean;
 }

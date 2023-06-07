@@ -10,5 +10,4 @@ export interface Operation {
     end: Date;
     cost: number;
     status: string;
-    deleted: boolean;
 }

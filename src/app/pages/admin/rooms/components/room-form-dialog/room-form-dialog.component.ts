@@ -36,7 +36,6 @@ export class RoomFormDialogComponent {
       'size': [data.room?.size || null, Validators.required],
       'capacity': [data.room?.capacity || null, Validators.required],
       'price': [data.room?.price || null, Validators.required],
-      'deleted': [data.room?.deleted || false, Validators.required],
     });
   }
 
@@ -75,8 +74,7 @@ export class RoomFormDialogComponent {
         location: this.roomForm.value.location,
         size: this.roomForm.value.size,
         capacity: this.roomForm.value.capacity,
-        price: this.roomForm.value.price,
-        deleted: this.roomForm.value.deleted
+        price: this.roomForm.value.price
       };
       this.dialogRef.close(updatedRoom);
     }
