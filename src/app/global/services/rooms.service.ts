@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Room } from 'src/app/global/interfaces/room.interface';
 import { Material } from '../interfaces/material.interface';
@@ -14,15 +14,55 @@ export class RoomsService {
   constructor(private http: HttpClient) { }
 
   getRooms(): Observable<Room[]>{
-      return this.http.get<Room[]>(this.apiURL + '/all');
+    return this.http.get<Room[]>(this.apiURL + '/all').pipe(
+      map(rooms => rooms.map(room => ({
+        ...room,
+        operations: room.operations.map(operation => ({
+          ...operation,
+          start: new Date(operation.start),
+          end: new Date(operation.end)
+        })),
+        schedules: room.schedules.map(schedule => ({
+          ...schedule,
+          start: new Date('1970-01-01T' + schedule.start),
+          end: new Date('1970-01-01T' + schedule.end)
+        }))
+      })))
+    );
   }
 
   addRoom(room: Room): Observable<Room>{
-      return this.http.post<Room>(this.apiURL, room);
+    const formattedRoom = {
+      ...room,
+      operations: room.operations.map(operation => ({
+        ...operation,
+        start: operation.start.toISOString(),
+        end: operation.end.toISOString()
+      })),
+      schedules: room.schedules.map(schedule => ({
+        ...schedule,
+        start: schedule.start.toISOString().split('T')[1],
+        end: schedule.end.toISOString().split('T')[1]
+      }))
+    };
+    return this.http.post<Room>(this.apiURL, formattedRoom);
   }
 
   updateRoom(room: Room): Observable<Room>{
-    return this.http.put<Room>(this.apiURL, room);
+    const formattedRoom = {
+      ...room,
+      operations: room.operations.map(operation => ({
+        ...operation,
+        start: operation.start.toISOString(),
+        end: operation.end.toISOString()
+      })),
+      schedules: room.schedules.map(schedule => ({
+        ...schedule,
+        start: schedule.start.toISOString().split('T')[1],
+        end: schedule.end.toISOString().split('T')[1]
+      }))
+    };
+    return this.http.put<Room>(this.apiURL, formattedRoom);
   }
 
   deleteRoom(id: number): Observable<unknown>{
@@ -36,7 +76,12 @@ export class RoomsService {
   }
 
   addSchedule(schedule: Schedule, id: number): Observable<Schedule>{
+    const formattedSchedule = {
+      ...schedule,
+      start: schedule.start.toISOString(),
+      end: schedule.end.toISOString()
+    };
     const url = `${this.apiURL}/schedule?id=${id}`;
-    return this.http.post<Schedule>(this.apiURL, schedule);
+    return this.http.post<Schedule>(this.apiURL, formattedSchedule);
   }
 }

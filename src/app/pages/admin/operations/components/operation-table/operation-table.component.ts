@@ -30,12 +30,13 @@ export class OperationTableComponent {
   addOperation(operation: Operation): void {
     this.operationSvc.addOperation(operation)
     .pipe(
-      tap( () => {
-        this.operations = [...this.operations, operation];
+      tap( newOperation => {
+        this.operations = [...this.operations, newOperation];
       })
     )
-    .subscribe();
-    this.table.renderRows();
+    .subscribe(() => {
+      this.table.renderRows();
+    });
   }
 
   updateOperation(updatedOperation: Operation): void {
@@ -47,20 +48,21 @@ export class OperationTableComponent {
         this.operations = [...this.operations];
       })
     )
-    .subscribe();
-    this.table.renderRows();
+    .subscribe(() => {
+      this.table.renderRows();
+    });
   }
 
   deleteOperation(id: number): void {
     this.operationSvc.deleteOperation(id)
     .pipe(
       tap( () => {
-        let index = this.operations.findIndex( operation => operation.id == id );
-        this.operations.splice(index, 1);
+        this.operations = this.operations.filter(operation => operation.id !== id);
       })
     )
-    .subscribe();
-    this.table.renderRows();
+    .subscribe(() => {
+      this.table.renderRows();
+    });
   }
 
   showDeleteDialog(id: number): void {

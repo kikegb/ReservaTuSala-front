@@ -30,12 +30,13 @@ export class UserTableComponent {
   addUser(user: User): void {
     this.userSvc.addUser(user)
     .pipe(
-      tap( () => {
-        this.users = [...this.users, user];
+      tap( newUser => {
+        this.users = [...this.users, newUser];
       })
     )
-    .subscribe();
-    this.table.renderRows();
+    .subscribe(() => {
+      this.table.renderRows();
+    });
   }
 
   updateUser(updatedUser: User): void {
@@ -47,20 +48,21 @@ export class UserTableComponent {
         this.users = [...this.users];
       })
     )
-    .subscribe();
-    this.table.renderRows();
+    .subscribe(() => {
+      this.table.renderRows();
+    });
   }
 
   deleteUser(id: number): void {
     this.userSvc.deleteUser(id)
     .pipe(
       tap( () => {
-        let index = this.users.findIndex( user => user.id == id );
-        this.users.splice(index, 1);
+        this.users = this.users.filter(user => user.id !== id);
       })
     )
-    .subscribe();
-    this.table.renderRows();
+    .subscribe(() => {
+      this.table.renderRows();
+    });
   }
 
   showDeleteDialog(id: number): void {

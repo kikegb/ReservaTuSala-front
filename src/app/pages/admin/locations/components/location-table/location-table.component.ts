@@ -30,12 +30,13 @@ export class LocationTableComponent {
   addLocation(location: Location): void {
     this.locationSvc.addLocation(location)
     .pipe(
-      tap( () => {
-        this.locations = [...this.locations, location];
+      tap( newLocation => {
+        this.locations = [...this.locations, newLocation];
       })
     )
-    .subscribe();
-    this.table.renderRows();
+    .subscribe(() => {
+      this.table.renderRows();
+    });
   }
 
   updateLocation(updatedLocation: Location): void {
@@ -47,20 +48,21 @@ export class LocationTableComponent {
         this.locations = [...this.locations];
       })
     )
-    .subscribe();
-    this.table.renderRows();
+    .subscribe(() => {
+      this.table.renderRows();
+    });
   }
 
   deleteLocation(id: number): void {
     this.locationSvc.deleteLocation(id)
     .pipe(
       tap( () => {
-        let index = this.locations.findIndex( location => location.id == id );
-        this.locations.splice(index, 1);
+        this.locations = this.locations.filter(location => location.id !== id);
       })
     )
-    .subscribe();
-    this.table.renderRows();
+    .subscribe(() => {
+      this.table.renderRows();
+    });
   }
 
   showDeleteDialog(id: number): void {

@@ -30,12 +30,13 @@ export class RoomTableComponent {
   addRoom(room: Room): void {
     this.roomSvc.addRoom(room)
     .pipe(
-      tap( () => {
-        this.rooms = [...this.rooms, room];
+      tap( newRoom => {
+        this.rooms = [...this.rooms, newRoom];
       })
     )
-    .subscribe();
-    this.table.renderRows();
+    .subscribe(() => {
+      this.table.renderRows();
+    });
   }
 
   updateRoom(updatedRoom: Room): void {
@@ -47,20 +48,21 @@ export class RoomTableComponent {
         this.rooms = [...this.rooms];
       })
     )
-    .subscribe();
-    this.table.renderRows();
+    .subscribe(() => {
+      this.table.renderRows();
+    });
   }
 
   deleteRoom(id: number): void {
     this.roomSvc.deleteRoom(id)
     .pipe(
       tap( () => {
-        let index = this.rooms.findIndex( room => room.id == id );
-        this.rooms.splice(index, 1);
+        this.rooms = this.rooms.filter(room => room.id !== id);
       })
     )
-    .subscribe();
-    this.table.renderRows();
+    .subscribe(() => {
+      this.table.renderRows();
+    });
   }
 
   showDeleteDialog(id: number): void {
