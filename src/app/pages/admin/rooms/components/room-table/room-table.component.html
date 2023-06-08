@@ -23,6 +23,22 @@
         <th mat-header-cell *matHeaderCellDef> Capacity </th>
         <td mat-cell *matCellDef="let room"> {{room.capacity}} </td>
     </ng-container>
+    <ng-container matColumnDef="material">
+        <th mat-header-cell *matHeaderCellDef> Material </th>
+        <td mat-cell *matCellDef="let room"> 
+           <p *ngFor="let material of room.materials">
+                {{ material.material }} x {{ material.quantity }}
+           </p>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="schedule">
+        <th mat-header-cell *matHeaderCellDef> Schedule </th>
+        <td mat-cell *matCellDef="let room"> 
+           <p *ngFor="let schedule of room.schedules">
+                {{ week[schedule.weekDay] }}: {{ schedule.start.getHours() }}:00 - {{ schedule.end.getHours() }}:00
+           </p>
+        </td>
+    </ng-container>
     <ng-container matColumnDef="price">
         <th mat-header-cell *matHeaderCellDef> Price </th>
         <td mat-cell *matCellDef="let room"> {{room.price}} </td>

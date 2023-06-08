@@ -15,8 +15,8 @@ export class SchedulesService {
     return this.http.get<Schedule[]>(this.apiURL + '/all').pipe(
       map(schedules => schedules.map(schedule => ({
         ...schedule,
-        start: new Date(schedule.start),
-        end: new Date(schedule.end)
+        start: new Date('1970-01-01T' + schedule.start),
+        end: new Date('1970-01-01T' + schedule.end)
       })))
     );
   }
@@ -24,19 +24,33 @@ export class SchedulesService {
   addSchedule(schedule: Schedule): Observable<Schedule>{
       const formattedSchedule = {
         ...schedule,
-        start: schedule.start.toISOString(),
-        end: schedule.end.toISOString()
+        start: schedule.start.toISOString().split('T')[1].slice(0, -2),
+        end: schedule.end.toISOString().split('T')[1].slice(0, -2)
       };
-      return this.http.post<Schedule>(this.apiURL, formattedSchedule);
+      return this.http.post<Schedule>(this.apiURL, formattedSchedule)
+      .pipe(
+        map((schedule: Schedule) => ({
+          ...schedule,
+          start: new Date('1970-01-01T' + schedule.start),
+          end: new Date('1970-01-01T' + schedule.end)
+        }))
+      );
   }
 
   updateSchedule(schedule: Schedule): Observable<Schedule>{
     const formattedSchedule = {
       ...schedule,
-      start: schedule.start.toISOString(),
-      end: schedule.end.toISOString()
+      start: schedule.start.toISOString().split('T')[1].slice(0, -2),
+      end: schedule.end.toISOString().split('T')[1].slice(0, -2)
     };
-    return this.http.put<Schedule>(this.apiURL, formattedSchedule);
+    return this.http.put<Schedule>(this.apiURL, formattedSchedule)
+    .pipe(
+      map((schedule: Schedule) => ({
+        ...schedule,
+        start: new Date('1970-01-01T' + schedule.start),
+        end: new Date('1970-01-01T' + schedule.end)
+      }))
+    );
   }
 
   deleteSchedule(id: number): Observable<unknown>{

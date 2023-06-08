@@ -14,7 +14,8 @@ import { RoomFormDialogComponent } from '../room-form-dialog/room-form-dialog.co
 })
 export class RoomTableComponent {
   rooms: Room[] = [];
-  columnsToDisplay = ['business', 'location', 'name', 'size', 'capacity', 'price', 'actions'];
+  week: String[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  columnsToDisplay = ['business', 'location', 'name', 'size', 'capacity', 'material', 'schedule', 'price', 'actions'];
   @ViewChild(MatTable) table!: MatTable<any>;
 
   constructor(private roomSvc: RoomsService, public dialog: MatDialog) {}

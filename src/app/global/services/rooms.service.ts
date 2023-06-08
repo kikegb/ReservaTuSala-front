@@ -36,13 +36,13 @@ export class RoomsService {
       ...room,
       operations: room.operations.map(operation => ({
         ...operation,
-        start: operation.start.toISOString(),
-        end: operation.end.toISOString()
+        start: operation.start.toISOString().slice(0, -2),
+        end: operation.end.toISOString().slice(0, -2)
       })),
       schedules: room.schedules.map(schedule => ({
         ...schedule,
-        start: schedule.start.toISOString().split('T')[1],
-        end: schedule.end.toISOString().split('T')[1]
+        start: schedule.start.toISOString().split('T')[1].slice(0, -2),
+        end: schedule.end.toISOString().split('T')[1].slice(0, -2)
       }))
     };
     return this.http.post<Room>(this.apiURL, formattedRoom);
@@ -53,13 +53,13 @@ export class RoomsService {
       ...room,
       operations: room.operations.map(operation => ({
         ...operation,
-        start: operation.start.toISOString(),
-        end: operation.end.toISOString()
+        start: operation.start.toISOString().slice(0, -2),
+        end: operation.end.toISOString().slice(0, -2)
       })),
       schedules: room.schedules.map(schedule => ({
         ...schedule,
-        start: schedule.start.toISOString().split('T')[1],
-        end: schedule.end.toISOString().split('T')[1]
+        start: schedule.start.toISOString().split('T')[1].slice(0, -2),
+        end: schedule.end.toISOString().split('T')[1].slice(0, -2)
       }))
     };
     return this.http.put<Room>(this.apiURL, formattedRoom);
@@ -78,10 +78,17 @@ export class RoomsService {
   addSchedule(schedule: Schedule, id: number): Observable<Schedule>{
     const formattedSchedule = {
       ...schedule,
-      start: schedule.start.toISOString(),
-      end: schedule.end.toISOString()
+      start: schedule.start.toISOString().split('T')[1].slice(0, -2),
+      end: schedule.end.toISOString().split('T')[1].slice(0, -2)
     };
     const url = `${this.apiURL}/schedule?id=${id}`;
-    return this.http.post<Schedule>(this.apiURL, formattedSchedule);
+    return this.http.post<Schedule>(this.apiURL, formattedSchedule)
+    .pipe(
+      map((schedule: Schedule) => ({
+        ...schedule,
+        start: new Date('1970-01-01T' + schedule.start),
+        end: new Date('1970-01-01T' + schedule.end)
+      }))
+    );
   }
 }

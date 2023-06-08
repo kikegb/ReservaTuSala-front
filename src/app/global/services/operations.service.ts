@@ -24,8 +24,8 @@ export class OperationsService {
   addOperation(operation: Operation): Observable<Operation>{
       const formattedOperation = {
         ...operation,
-        start: operation.start.toISOString(),
-        end: operation.end.toISOString()
+        start: operation.start.toISOString().slice(0, -2),
+        end: operation.end.toISOString().slice(0, -2)
       };
       return this.http.post<Operation>(this.apiURL, formattedOperation);
   }
@@ -33,8 +33,8 @@ export class OperationsService {
   updateOperation(operation: Operation): Observable<Operation>{
     const formattedOperation = {
       ...operation,
-      start: operation.start.toISOString(),
-      end: operation.end.toISOString()
+      start: operation.start.toISOString().slice(0, -2),
+      end: operation.end.toISOString().slice(0, -2)
     };
     return this.http.put<Operation>(this.apiURL, formattedOperation);
   }
