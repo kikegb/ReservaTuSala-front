@@ -10,6 +10,8 @@ import { BusinessModule } from './pages/business/business.module';
 const routes: Routes = [
 
   { path: 'admin', canActivate: [AdminGuard], loadChildren: () => AdminModule },
+
+  { path: 'business', canActivate: [BusinessGuard], loadChildren: () => BusinessModule },
   
   { path: 'login', loadChildren: () => LoginModule },
   
