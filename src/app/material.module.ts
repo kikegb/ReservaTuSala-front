@@ -33,6 +33,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatNativeDateModule,
         MatSelectModule,
         MatGridListModule,
+        MatTooltipModule,
     ]
 })
 
