@@ -1,0 +1,131 @@
+<h1 mat-dialog-title>{{ title }}</h1>
+<div mat-dialog-content>
+    <form [formGroup]="roomForm" >
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput name="name" formControlName="name" required>
+            </mat-form-field> 
+        </p>
+        <p>
+            <mat-form-field>
+                <mat-label>Business</mat-label>
+                <mat-select formControlName="business" required>
+                    <mat-option *ngFor="let business of businesses" [value]="business">
+                        {{ business.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field>
+                <mat-label>Location</mat-label>
+                <mat-select formControlName="location" required>
+                    <mat-option *ngFor="let location of locations" [value]="location">
+                        {{location.street}}, {{location.number}}, {{location.postcode}}, 
+                        {{location.town}}, {{location.province}}, {{location.country}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Size</mat-label>
+                <input matInput type="number" step="0.5" min="0.5" name="size" formControlName="size" required>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Capacity</mat-label>
+                <input matInput type="number"  min="1" name="capacity" formControlName="capacity" required>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Price</mat-label>
+                <input matInput type="number"  step="0.5" min="0.5" name="price" formControlName="price" required>
+            </mat-form-field>
+        </p>
+        <h3>Materials</h3>
+        <table mat-table [dataSource]="materials">
+            <ng-container matColumnDef="material">
+                <th mat-header-cell *matHeaderCellDef> Material </th>
+                <td mat-cell *matCellDef="let material"> {{material.material}} </td>
+            </ng-container>
+            <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef> Quantity </th>
+                <td mat-cell *matCellDef="let material"> {{material.quantity}} </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td mat-cell *matCellDef="let material">
+                    <button mat-icon-button (click)="deleteMaterial(material.id)">
+                        <mat-icon fontIcon="delete"></mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="['material', 'quantity', 'actions']"></tr>
+            <tr mat-row *matRowDef="let myRowData; columns: ['material', 'quantity', 'actions']"></tr>
+        </table>
+        <h3>Schedules</h3>
+        <table mat-table [dataSource]="schedules">
+            <ng-container matColumnDef="weekday">
+                <th mat-header-cell *matHeaderCellDef> Weekday </th>
+                <td mat-cell *matCellDef="let schedule"> {{ week[schedule.weekDay] }} </td>
+            </ng-container>
+            <ng-container matColumnDef="start">
+                <th mat-header-cell *matHeaderCellDef> Start </th>
+                <td mat-cell *matCellDef="let schedule"> {{ schedule.start.getHours() }}:00 </td>
+            </ng-container>
+            <ng-container matColumnDef="end">
+                <th mat-header-cell *matHeaderCellDef> End </th>
+                <td mat-cell *matCellDef="let schedule"> {{ schedule.end.getHours() }}:00 </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td mat-cell *matCellDef="let schedule">
+                    <button mat-icon-button (click)="deleteSchedule(schedule.id)">
+                        <mat-icon fontIcon="delete"></mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="['weekday', 'start', 'end', 'actions']"></tr>
+            <tr mat-row *matRowDef="let myRowData; columns: ['weekday', 'start', 'end', 'actions']"></tr>
+        </table>
+        <p>
+            <mat-form-field>
+                <mat-label>Weekday</mat-label>
+                <mat-select formControlName="weekday">
+                    <mat-option *ngFor="let day of week; let i = index" [value]="i">
+                        {{ day }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Start</mat-label>
+                <mat-select formControlName="start">
+                    <mat-option *ngFor="let hour of hours" [value]="hour">
+                        {{ hour }}:00
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>End</mat-label>
+                <mat-select formControlName="end">
+                    <mat-option *ngFor="let hour of hours" [value]="hour">
+                        {{ hour }}:00
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-flat-button color="primary" class="add-button" (click)="addNewSchedule()">
+                Add
+            </button>
+        </p>
+    </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onCancel()">Cancel</button>
+  <button mat-button mat-dialog-close (click)="onSave()" cdkFocusInitial>Save</button>
+</div>

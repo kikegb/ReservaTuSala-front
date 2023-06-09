@@ -1,3 +1,6 @@
 <div>
     <h1>Home</h1>
+      <button mat-button *ngFor="let page of pages" (click)="navigateTo(page)">
+        {{ page }}
+      </button>
 </div>

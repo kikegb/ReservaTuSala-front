@@ -5,7 +5,7 @@ import { DeleteDialogComponent } from 'src/app/global/components/delete-dialog/d
 import { MaterialModule } from 'src/app/material.module';
 import { MatDialogRefMock } from 'src/test-helpers/mocks/mat-dialog-ref-mock';
 import { UsersServiceMock } from 'src/test-helpers/mocks/users-service-mock';
-import { User } from '../../interfaces/user.interface';
+import { User } from 'src/app/global/interfaces/user.interface';
 import { UsersService } from '../../services/users.service';
 import { UserFormDialogComponent } from '../user-form-dialog/user-form-dialog.component';
 

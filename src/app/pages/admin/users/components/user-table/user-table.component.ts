@@ -3,8 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
 import { tap } from 'rxjs';
 import { DeleteDialogComponent } from 'src/app/global/components/delete-dialog/delete-dialog.component';
-import { User } from '../../interfaces/user.interface';
-import { UsersService } from '../../services/users.service';
+import { User } from 'src/app/global/interfaces/user.interface'
+import { UsersService } from 'src/app/global/services/users.service';
 import { UserFormDialogComponent } from '../user-form-dialog/user-form-dialog.component';
 
 @Component({
@@ -14,7 +14,7 @@ import { UserFormDialogComponent } from '../user-form-dialog/user-form-dialog.co
 })
 export class UserTableComponent {
   users: User[] = []
-  columnsToDisplay = ['name', 'cnif', 'email', 'phone', 'role', 'deleted', 'actions'];
+  columnsToDisplay = ['name', 'cnif', 'email', 'phone', 'role', 'actions'];
   @ViewChild(MatTable) table!: MatTable<any>;
 
   constructor(private userSvc: UsersService, public dialog: MatDialog) {}
@@ -30,12 +30,13 @@ export class UserTableComponent {
   addUser(user: User): void {
     this.userSvc.addUser(user)
     .pipe(
-      tap( () => {
-        this.users = [...this.users, user];
+      tap( newUser => {
+        this.users = [...this.users, newUser];
       })
     )
-    .subscribe();
-    this.table.renderRows();
+    .subscribe(() => {
+      this.table.renderRows();
+    });
   }
 
   updateUser(updatedUser: User): void {
@@ -47,21 +48,21 @@ export class UserTableComponent {
         this.users = [...this.users];
       })
     )
-    .subscribe();
-    this.table.renderRows();
+    .subscribe(() => {
+      this.table.renderRows();
+    });
   }
 
   deleteUser(id: number): void {
     this.userSvc.deleteUser(id)
     .pipe(
       tap( () => {
-        let index = this.users.findIndex( user => user.id == id );
-        this.users[index] = {...this.users[index], deleted: true};
-        this.users = [...this.users];
+        this.users = this.users.filter(user => user.id !== id);
       })
     )
-    .subscribe();
-    this.table.renderRows();
+    .subscribe(() => {
+      this.table.renderRows();
+    });
   }
 
   showDeleteDialog(id: number): void {
