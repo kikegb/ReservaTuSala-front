@@ -4,6 +4,8 @@ import { AdminGuard } from './global/guards/admin.guard';
 import { AdminModule } from './pages/admin/admin.module';
 import { LoginModule } from './pages/login/login.module';
 import { UnauthorizedModule } from './pages/unauthorized/unauthorized.module';
+import { BusinessGuard } from './global/guards/business.guard';
+import { BusinessModule } from './pages/business/business.module';
 
 const routes: Routes = [
 

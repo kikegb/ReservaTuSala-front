@@ -9,16 +9,6 @@
         </p>
         <p>
             <mat-form-field>
-                <mat-label>Business</mat-label>
-                <mat-select formControlName="business" [compareWith]="compareById" required>
-                    <mat-option *ngFor="let business of businesses" [value]="business">
-                        {{ business.name }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </p>
-        <p>
-            <mat-form-field>
                 <mat-label>Location</mat-label>
                 <mat-select formControlName="location" [compareWith]="compareById" required>
                     <mat-option *ngFor="let location of locations" [value]="location">
@@ -27,6 +17,7 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
+            <button mat-flat-button color="primary" (click)="showAddLocationDialog()">Add location</button>
         </p>
         <p>
             <mat-form-field appearance="outline">

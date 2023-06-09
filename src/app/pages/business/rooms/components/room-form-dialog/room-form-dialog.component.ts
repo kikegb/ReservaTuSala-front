@@ -1,6 +1,6 @@
 import { Component, Inject, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { tap } from 'rxjs';
 import { Room } from 'src/app/global/interfaces/room.interface';
 import { User } from 'src/app/global/interfaces/user.interface';
@@ -12,6 +12,7 @@ import { MatTable } from '@angular/material/table';
 import { MaterialsService } from 'src/app/global/services/materials.service';
 import { Schedule } from 'src/app/global/interfaces/schedule.interface';
 import { SchedulesService } from 'src/app/global/services/schedules.service';
+import { LocationFormDialogComponent } from '../location-form-dialog/location-form-dialog.component';
 
 @Component({
   selector: 'app-room-form-dialog',
@@ -22,7 +23,6 @@ export class RoomFormDialogComponent {
   title: string;
   room: Room;
   roomForm: FormGroup;
-  businesses: User[] = [];
   locations: Location[] = [];
   materials: Material[] = [];
   schedules: Schedule[] = [];
@@ -37,7 +37,8 @@ export class RoomFormDialogComponent {
     private usersSvc: UsersService,
     private locationSvc: LocationsService,
     private materialSvc: MaterialsService,
-    private scheduleSvc: SchedulesService)
+    private scheduleSvc: SchedulesService,
+    public dialog: MatDialog)
   {
     this.title = data.title;
     this.room = data.room;
@@ -47,7 +48,6 @@ export class RoomFormDialogComponent {
     }
     this.roomForm = this.formBuilder.group({
       'name': [data.room?.name || null, Validators.required],
-      'business': [data.room?.business || null, Validators.required],
       'location': [data.room?.location || null, Validators.required],
       'size': [data.room?.size || null, Validators.required],
       'capacity': [data.room?.capacity || null, Validators.required],
@@ -61,18 +61,6 @@ export class RoomFormDialogComponent {
   }
 
   ngOnInit(): void {
-    this.usersSvc.getUsers()
-    .pipe(
-        tap( (users: User[]) => {
-          for (let user of users) {
-             if (user.role === "BUSINESS") {
-              this.businesses.push(user)
-            }
-          }
-        } )
-    )
-    .subscribe();
-
     this.locationSvc.getLocations()
     .pipe(
         tap( (locations: Location[]) => this.locations = locations )
@@ -152,6 +140,17 @@ export class RoomFormDialogComponent {
     return a && b ? a.id === b.id : a === b;
   }
 
+  addLocation(location: Location): void {
+    this.locationSvc.addLocation(location)
+    .pipe(
+      tap( newLocation => {
+        this.locations = [...this.locations, newLocation];
+      })
+    )
+    .subscribe(() => {
+      this.table.renderRows();
+    });
+  }
 
   onCancel(): void {
     this.dialogRef.close(undefined);
@@ -169,7 +168,6 @@ export class RoomFormDialogComponent {
       let updatedRoom: Room = {
         ...this.room,
         name: this.roomForm.value.name,
-        business: this.roomForm.value.business,
         location: this.roomForm.value.location,
         size: this.roomForm.value.size,
         capacity: this.roomForm.value.capacity,
@@ -179,5 +177,15 @@ export class RoomFormDialogComponent {
       };
       this.dialogRef.close(updatedRoom);
     }
+  }
+
+  showAddLocationDialog(): void {
+    const dialogRef = this.dialog.open(LocationFormDialogComponent, { data: { title: 'New location', location: undefined} });
+
+    dialogRef.afterClosed().subscribe( newLocation => {
+      if(newLocation) {
+        this.addLocation(newLocation);
+      }
+    });
   }
 }

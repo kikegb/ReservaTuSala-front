@@ -1,3 +1,5 @@
+import { Operation } from "./operation.interface";
+
 export interface User {
     id: number;
     cnif: string;
@@ -6,4 +8,6 @@ export interface User {
     email: string;
     password: string;
     role: string;
+    businessOperations: Operation[],
+    customerOperations: Operation[]
 }

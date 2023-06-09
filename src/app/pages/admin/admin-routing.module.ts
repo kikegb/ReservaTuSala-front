@@ -4,7 +4,7 @@ import { AdminGuard } from 'src/app/global/guards/admin.guard';
 
 const routes: Routes = [
   
-  { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+  { path: 'home', canActivate: [AdminGuard], loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
   
   { path: 'users', canActivate: [AdminGuard], loadChildren: () => import('./users/users.module').then(m => m.UsersModule) },
   
