@@ -15,6 +15,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
     exports: [
@@ -34,6 +36,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatSelectModule,
         MatGridListModule,
         MatTooltipModule,
+        MatMenuModule,
+        MatCardModule,
     ]
 })
 

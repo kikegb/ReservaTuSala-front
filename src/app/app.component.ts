@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { SidenavService } from './global/services/sidenav.service';
 import jwtDecode from 'jwt-decode';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,9 @@ export class AppComponent {
 
   @ViewChild('sidenav') public sidenav!: MatSidenav;
 
-  constructor(private sidenavService: SidenavService) {
+  constructor(
+    private sidenavService: SidenavService,
+    private router: Router) {
     const token = localStorage.getItem('token');
     if (token) {
       const decodedToken = <any>jwtDecode(token);
@@ -40,6 +43,30 @@ export class AppComponent {
         this.refs = this.customerRefs;
       }
     }
+  }
+
+  ngOnInit(): void {
+    this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationEnd) {
+        const token = localStorage.getItem('token');
+        if (token) {
+          const decodedToken = <any>jwtDecode(token);
+          const role = decodedToken.role;
+          if (role == "ADMIN") {
+            this.pages = this.adminPages;
+            this.refs = this.adminRefs;
+          }
+          if (role == "BUSINESS") {
+            this.pages = this.businessPages;
+            this.refs = this.businessRefs;
+          }
+          if (role == "CUSTOMER") {
+            this.pages = this.customerPages;
+            this.refs = this.customerRefs;
+          }
+        }
+      }
+    });
   }
 
   ngAfterViewInit(): void {
