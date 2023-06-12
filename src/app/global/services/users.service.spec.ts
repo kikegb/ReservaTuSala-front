@@ -10,7 +10,6 @@ describe('UsersService', () => {
 
   const usersList = <User[]>[
     {
-        "deleted": false,
         "id": 1,
         "cnif": "87654321X",
         "name": "Business S.A.",
@@ -20,7 +19,6 @@ describe('UsersService', () => {
         "role": "BUSINESS",
     },
     {
-        "deleted": true,
         "id": 2,
         "cnif": "12345678Y",
         "name": "Custo Mer",

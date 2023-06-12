@@ -148,6 +148,11 @@ export class RoomFormDialogComponent {
     });
   }
 
+  compareById(a: any, b: any): boolean {
+    return a && b ? a.id === b.id : a === b;
+  }
+
+
   onCancel(): void {
     this.dialogRef.close(undefined);
   }

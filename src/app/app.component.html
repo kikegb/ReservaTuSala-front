@@ -3,38 +3,10 @@
   <mat-sidenav-container class="side-menu-container" fullscreen>
     <mat-sidenav #sidenav mode="side">
       <mat-list>
-        <mat-list-item>
-          <a href="admin/home">
+        <mat-list-item *ngFor="let page of pages; let i = index">
+          <a [href]="refs[i]">
             <button mat-button>
-              Home
-            </button>
-          </a>
-        </mat-list-item>
-        <mat-list-item>
-          <a routerLink="admin/users">
-            <button mat-button>
-              Users
-            </button>
-          </a>
-        </mat-list-item>
-        <mat-list-item>
-          <a href="admin/operations">
-            <button mat-button>
-              Operations
-            </button>
-          </a>
-        </mat-list-item>
-        <mat-list-item>
-          <a href="admin/rooms">
-            <button mat-button>
-              Rooms
-            </button>
-          </a>
-        </mat-list-item>
-        <mat-list-item>
-          <a href="admin/locations">
-            <button mat-button>
-              Locations
+              {{ page }}
             </button>
           </a>
         </mat-list-item>

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { SidenavService } from '../../services/sidenav.service';
 import { TokenUtilsService } from '../../services/token-utils.service';
+import jwtDecode from 'jwt-decode';
 
 @Component({
   selector: 'app-header',
@@ -12,11 +13,12 @@ import { TokenUtilsService } from '../../services/token-utils.service';
 export class HeaderComponent implements OnInit {     
   token?: string;
   isLogin = false;
+  userName = '';
+  userEmail = '';
 
   constructor(
     private sidenav: SidenavService,
     private router: Router,
-    private location: Location,
     private tokenSvc: TokenUtilsService) {}
   
   ngOnInit(): void {
@@ -26,6 +28,11 @@ export class HeaderComponent implements OnInit {
       }
       if (event instanceof NavigationEnd) {
         this.token = localStorage.getItem('token') || "";
+        if (this.token) {
+          const decodedToken = <any>jwtDecode(this.token);
+          this.userName = decodedToken.name;
+          this.userEmail = decodedToken.sub;
+        }
       }
     });
   }
