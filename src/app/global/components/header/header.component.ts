@@ -4,6 +4,9 @@ import { NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { SidenavService } from '../../services/sidenav.service';
 import { TokenUtilsService } from '../../services/token-utils.service';
 import jwtDecode from 'jwt-decode';
+import { UsersService } from '../../services/users.service';
+import { tap } from 'rxjs';
+import { User } from '../../interfaces/user.interface';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +22,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private sidenav: SidenavService,
     private router: Router,
-    private tokenSvc: TokenUtilsService) {}
+    private tokenSvc: TokenUtilsService,
+    private userSvc: UsersService) {}
   
   ngOnInit(): void {
     this.router.events.subscribe((event: any) => {
@@ -30,8 +34,14 @@ export class HeaderComponent implements OnInit {
         this.token = localStorage.getItem('token') || "";
         if (this.token) {
           const decodedToken = <any>jwtDecode(this.token);
-          this.userName = decodedToken.name;
-          this.userEmail = decodedToken.sub;
+          this.userSvc.getById(decodedToken.id)
+          .pipe(
+              tap( (user: User) => {
+                this.userName = user.name;
+                this.userEmail = user.email;;
+              })
+          )
+          .subscribe();
         }
       }
     });
@@ -49,5 +59,9 @@ export class HeaderComponent implements OnInit {
 
   logIn() {
     this.router.navigate(['/login']);
+  }
+
+  editUser() {
+    this.router.navigate(['/edit-user']);
   }
 }

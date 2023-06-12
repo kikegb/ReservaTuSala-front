@@ -8,6 +8,7 @@ import { BusinessGuard } from './global/guards/business.guard';
 import { BusinessModule } from './pages/business/business.module';
 import { CustomerGuard } from './global/guards/customer.guard';
 import { CustomerModule } from './pages/customer/customer.module';
+import { EditUserModule } from './pages/edit-user/edit-user.module';
 
 const routes: Routes = [
 
@@ -16,6 +17,8 @@ const routes: Routes = [
   { path: 'business', canActivate: [BusinessGuard], loadChildren: () => BusinessModule },
 
   { path: 'customer', canActivate: [CustomerGuard], loadChildren: () => CustomerModule },
+
+  { path: 'edit-user', loadChildren: () => EditUserModule },
   
   { path: 'login', loadChildren: () => LoginModule },
   

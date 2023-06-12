@@ -62,7 +62,7 @@ export class UsersService {
         end: operation.end.toISOString().slice(0, -2)
       }))
     };
-      return this.http.post<User>(this.apiURL, user);
+      return this.http.post<User>(this.apiURL, formattedUser);
   }
 
   updateUser(user: User): Observable<User>{
@@ -79,7 +79,7 @@ export class UsersService {
         end: operation.end.toISOString().slice(0, -2)
       }))
     };
-    return this.http.put<User>(this.apiURL, user);
+    return this.http.put<User>(this.apiURL, formattedUser);
   }
 
   deleteUser(id: number): Observable<unknown>{

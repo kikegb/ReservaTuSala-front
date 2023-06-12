@@ -16,7 +16,7 @@
               <mat-card-subtitle>{{ userEmail }}</mat-card-subtitle>
             </mat-card-header>
         </mat-card>
-        <button mat-menu-item>User settings</button>
+        <button mat-menu-item (click)="editUser()">Edit user</button>
         <button mat-menu-item (click)="logOut()">
             Log Out
         </button>
