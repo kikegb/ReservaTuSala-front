@@ -5,6 +5,8 @@ import jwtDecode from 'jwt-decode';
 import { TokenUtilsService } from 'src/app/global/services/token-utils.service';
 import { LoginService } from './services/login.service';
 import { SidenavService } from 'src/app/global/services/sidenav.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +21,8 @@ export class LoginComponent {
     private loginSvc: LoginService,
     private router: Router,
     private tokenSvc: TokenUtilsService,
-    private sidenav: SidenavService,)
+    private sidenav: SidenavService,
+    private _snackBar: MatSnackBar)
   {
     this.userForm = this.formBuilder.group({
       'email': [null, Validators.required],
@@ -31,6 +34,10 @@ export class LoginComponent {
   login(): void {
     this.loginSvc.login(this.userForm.value.email, this.userForm.value.password)
     .subscribe((response: any) => {
+      this._snackBar.open('Successful Login.', 'close', {
+        duration: 5000,
+        panelClass: ['success-snackbar'],
+      });
       localStorage.setItem('token', response.Authorization);
       this.tokenSvc.setToken(response.Authorization);
       const decodedToken = <any>jwtDecode(response.Authorization);
@@ -44,6 +51,12 @@ export class LoginComponent {
       if (role == 'BUSINESS') {
         this.router.navigate(['business/home']);
       }
+    }, (e: HttpErrorResponse) => {
+      console.log(e.status);
+      this._snackBar.open('Login error: invalid email or password.', 'close', {
+        duration: 5000,
+        panelClass: ['error-snackbar'],
+        });
     });
   }
 

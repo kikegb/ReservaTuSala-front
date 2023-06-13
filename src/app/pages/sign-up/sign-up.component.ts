@@ -8,6 +8,8 @@ import { LoginService } from '../login/services/login.service';
 import { TokenUtilsService } from 'src/app/global/services/token-utils.service';
 import jwtDecode from 'jwt-decode';
 import { Operation } from 'src/app/global/interfaces/operation.interface';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sign-up',
@@ -22,7 +24,8 @@ export class SignUpComponent {
     private userSvc: UsersService,
     private loginSvc: LoginService,
     private tokenSvc: TokenUtilsService,
-    private router: Router)
+    private router: Router,
+    private _snackBar: MatSnackBar)
   {
     this.userForm = this.userForm = this.formBuilder.group({
       'name': [null, Validators.required],
@@ -46,6 +49,10 @@ export class SignUpComponent {
   login(): void {
     this.loginSvc.login(this.userForm.value.email, this.userForm.value.password)
     .subscribe((response: any) => {
+      this._snackBar.open('Successful Login.', 'close', {
+        duration: 5000,
+        panelClass: ['success-snackbar'],
+      });
       localStorage.setItem('token', response.Authorization);
       this.tokenSvc.setToken(response.Authorization);
       const decodedToken = <any>jwtDecode(response.Authorization);
@@ -59,6 +66,12 @@ export class SignUpComponent {
       if (role == 'BUSINESS') {
         this.router.navigate(['business/home']);
       }
+    }, (e: HttpErrorResponse) => {
+      console.log(e.status);
+      this._snackBar.open('Login error: invalid email or password.', 'close', {
+        duration: 5000,
+        panelClass: ['error-snackbar'],
+        });
     });
   }
 

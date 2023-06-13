@@ -18,6 +18,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
     exports: [
@@ -39,7 +40,8 @@ import { MatSliderModule } from '@angular/material/slider';
         MatTooltipModule,
         MatMenuModule,
         MatCardModule,
-        MatSliderModule
+        MatSliderModule,
+        MatSnackBarModule
     ]
 })
 

@@ -18,4 +18,17 @@ body {
     color: red;
     font-size: 14px;
     margin-top: 5px;
-  }
+}
+
+.mat-mdc-snack-bar-container {
+    &.error-snackbar {
+        --mdc-snackbar-container-color: rgb(184, 50, 50);
+        --mat-mdc-snack-bar-button-color: white;
+        --mdc-snackbar-supporting-text-color: white;
+    }
+    &.success-snackbar {
+        --mdc-snackbar-container-color: rgb(49, 114, 49);
+        --mat-mdc-snack-bar-button-color: white;
+        --mdc-snackbar-supporting-text-color: white;
+    }
+}
