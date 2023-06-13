@@ -5,11 +5,13 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { MaterialModule } from 'src/app/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FilterDialogComponent } from './components/filter-dialog/filter-dialog.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    FilterDialogComponent
   ],
   imports: [
     CommonModule,

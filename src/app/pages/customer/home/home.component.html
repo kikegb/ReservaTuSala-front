@@ -6,6 +6,12 @@
                 <mat-label>Search by room or business name</mat-label>
                 <input matInput type="text" name="search" formControlName="search">
             </mat-form-field>
+            <button mat-icon-button (click)="search()">
+                <mat-icon fontIcon="search"></mat-icon>
+            </button>
+            <button mat-button (click)="showFilterDialog()">
+                Filter
+            </button>
         </p>
     </form>
     <div *ngIf="rooms.length">
