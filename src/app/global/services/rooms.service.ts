@@ -31,6 +31,25 @@ export class RoomsService {
     );
   }
 
+  getById(id: number): Observable<Room>{
+    const url = `${this.apiURL}?id=${id}`;
+    return this.http.get<Room>(url).pipe(
+      map(room => ({
+        ...room,
+        operations: room.operations.map(operation => ({
+          ...operation,
+          start: new Date(operation.start),
+          end: new Date(operation.end)
+        })),
+        schedules: room.schedules.map(schedule => ({
+          ...schedule,
+          start: new Date('1970-01-01T' + schedule.start),
+          end: new Date('1970-01-01T' + schedule.end)
+        }))
+      }))
+    );
+  }
+
   addRoom(room: Room): Observable<Room>{
     const formattedRoom = {
       ...room,

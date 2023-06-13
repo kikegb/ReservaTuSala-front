@@ -1,0 +1,78 @@
+<div class="container">
+    <div class="content-left">
+        <div *ngIf="room">
+            <h1>{{ room.name }}</h1>
+            <h2 *ngIf="room.business">
+                {{ room.business.name }}
+                <button mat-button (click)="navigateDetails(room.business.id)">More information</button>
+            </h2>
+            <h3>Details:</h3>
+            <p *ngIf="room.location">
+                Location:  {{room.location.street}}, {{room.location.number}}, {{room.location.postcode}}, 
+                {{room.location.town}}, {{room.location.province}}, {{room.location.country}} 
+            </p>
+            <p>Size: {{room.size}} m2</p>
+            <p>Capacity: {{room.capacity}}</p>
+            <p>Material:</p>
+            <p *ngFor="let material of room.materials">
+                - {{ material.material }} x {{ material.quantity }}
+            </p>
+            <p>Schedule:</p>
+            <p *ngFor="let schedule of room.schedules">
+                - {{ week[schedule.weekDay] }}: {{ schedule.start.getHours() }}:00 - {{ schedule.end.getHours() }}:00
+            </p>
+            <p>Price: {{room.price}} €/h</p>
+        </div>
+        <div *ngIf="!room">
+            <p>This room is not available.</p>
+        </div>
+    </div>
+    <div class="content-right">
+        <h2>Make a reservation</h2>
+        <form [formGroup]="operationForm" >
+            <p>
+                <mat-form-field>
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput 
+                        [matDatepicker]="datePicker" 
+                        [min]="today"
+                        formControlName="date" required>
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #datePicker></mat-datepicker>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field>
+                    <mat-label>Choose start hour</mat-label>
+                    <mat-select formControlName="startHour" required>
+                        <mat-option *ngFor="let hour of hours" [value]="hour">
+                            {{ hour }}:00
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Choose end hour</mat-label>
+                    <mat-select formControlName="endHour" required>
+                        <mat-option *ngFor="let hour of hours" [value]="hour">
+                            {{ hour }}:00
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </p>
+            <p>
+                Num. hours: {{ nHours }}
+            </p>
+            <p>
+                Cost: {{ cost }}
+            </p>
+        </form>
+        <div *ngIf="isBeforeOrSame()">
+            <p class="error-message">Start date must be before end date.</p>
+        </div>
+        <div *ngIf="isUnavailable()">
+            <p class="error-message">There are unavailable hours in this interval.</p>
+        </div>
+        <button mat-button (click)="createOperation()" [disabled]="isBeforeOrSame() || isUnavailable()" cdkFocusInitial>Accept</button>
+    </div>
+</div>

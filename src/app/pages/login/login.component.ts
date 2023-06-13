@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
 import { TokenUtilsService } from 'src/app/global/services/token-utils.service';
 import { LoginService } from './services/login.service';
+import { SidenavService } from 'src/app/global/services/sidenav.service';
 
 @Component({
   selector: 'app-login',
@@ -17,12 +18,14 @@ export class LoginComponent {
     private formBuilder: FormBuilder, 
     private loginSvc: LoginService,
     private router: Router,
-    private tokenSvc: TokenUtilsService)
+    private tokenSvc: TokenUtilsService,
+    private sidenav: SidenavService,)
   {
     this.userForm = this.formBuilder.group({
       'email': [null, Validators.required],
       'password': [null, Validators.required]
     });
+    this.sidenav.close();
   }
 
   login(): void {

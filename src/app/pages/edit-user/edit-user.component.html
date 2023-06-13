@@ -1,5 +1,5 @@
-<h1 mat-dialog-title>Edit user</h1>
-<div mat-dialog-content>
+<h1>Edit user</h1>
+<div>
     <form [formGroup]="userForm" >
         <p>
             <mat-form-field appearance="outline">
@@ -42,7 +42,7 @@
 <div *ngIf="confirmPassword()">
     <p class="error-message">Passwords don't match.</p>
 </div>
-<div mat-dialog-actions>
+<div>
   <button mat-button (click)="onCancel()">Cancel</button>
   <button mat-button (click)="onSave()" [disabled]="confirmPassword()" cdkFocusInitial>Save</button>
 </div>

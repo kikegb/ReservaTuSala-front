@@ -1,0 +1,12 @@
+<div *ngIf="business">
+    <h1>{{ business.name }}</h1>
+    <h3>Contact:</h3>
+    <p>Email: {{ business.email }}</p>
+    <p>Phone: {{ business.phone }}</p>
+</div>
+
+<div *ngIf="!business">
+    <p>This room is not aviable.</p>
+</div>
+
+
