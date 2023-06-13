@@ -47,4 +47,7 @@ export class LoginComponent {
     });
   }
 
+  navigateSignup(): void {
+    this.router.navigate(['/signup']);
+  }
 }

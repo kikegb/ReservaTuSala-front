@@ -1,6 +1,13 @@
-<h1 mat-dialog-title>{{ title }}</h1>
-<div mat-dialog-content>
+<h1>Sign up</h1>
+<div>
     <form [formGroup]="userForm" >
+        <p>
+            <label>Register as: </label>
+            <mat-radio-group formControlName="role" required>
+                <mat-radio-button value="CUSTOMER">Customer</mat-radio-button>
+                <mat-radio-button value="BUSINESS">Business</mat-radio-button>
+            </mat-radio-group>
+        </p>
         <p>
             <mat-form-field appearance="outline">
                 <mat-label>Name</mat-label>
@@ -27,21 +34,25 @@
         </p>
         <p>
             <mat-form-field appearance="outline">
+                <mat-label>Confirm password</mat-label>
+                <input matInput type="password" name="passwordConf" formControlName="passwordConf" required>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
                 <mat-label>Phone</mat-label>
                 <input matInput type="tel" name="phone" formControlName="phone" required>
             </mat-form-field>
         </p>
-        <p>
-            <label>Role: </label>
-            <mat-radio-group formControlName="role">
-                <mat-radio-button value="CUSTOMER">Customer</mat-radio-button>
-                <mat-radio-button value="BUSINESS">Business</mat-radio-button>
-                <mat-radio-button value="ADMIN">Business</mat-radio-button>
-            </mat-radio-group>
-        </p>
     </form>
 </div>
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)="onCancel()">Cancel</button>
-  <button mat-button mat-dialog-close (click)="onSave()" cdkFocusInitial>Save</button>
+<div *ngIf="confirmPassword()">
+    <p class="error-message">Passwords don't match.</p>
+</div>
+<div>
+    <button mat-button (click)="signUp()" [disabled]="confirmPassword()" cdkFocusInitial>Sign up</button>
+    <p>
+        Already have an account? 
+        <button mat-button (click)="navigateLogin()">Log in</button>
+    </p>
 </div>
