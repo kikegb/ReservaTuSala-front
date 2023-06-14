@@ -53,11 +53,6 @@ export class RoomsService {
   addRoom(room: Room): Observable<Room>{
     const formattedRoom = {
       ...room,
-      operations: room.operations.map(operation => ({
-        ...operation,
-        start: operation.start.toISOString().slice(0, -2),
-        end: operation.end.toISOString().slice(0, -2)
-      })),
       schedules: room.schedules.map(schedule => ({
         ...schedule,
         start: schedule.start.toISOString().split('T')[1].slice(0, -2),
