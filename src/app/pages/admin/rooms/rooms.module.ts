@@ -6,6 +6,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RoomTableComponent } from './components/room-table/room-table.component';
 import { RoomFormDialogComponent } from './components/room-form-dialog/room-form-dialog.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -20,7 +21,8 @@ import { RoomFormDialogComponent } from './components/room-form-dialog/room-form
     RoomsRoutingModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ]
 })
 export class RoomsModule { }

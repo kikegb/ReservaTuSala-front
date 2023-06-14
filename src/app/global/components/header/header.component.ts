@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { SidenavService } from '../../services/sidenav.service';
@@ -68,7 +67,7 @@ export class HeaderComponent implements OnInit {
   }
 
   setLanguage(lang: string) {
-    this.translate.use(lang);
     localStorage.setItem('language', lang);
+    window.location.reload();
   }
 }

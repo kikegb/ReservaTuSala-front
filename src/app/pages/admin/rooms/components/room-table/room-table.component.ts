@@ -6,6 +6,7 @@ import { DeleteDialogComponent } from 'src/app/global/components/delete-dialog/d
 import { Room } from 'src/app/global/interfaces/room.interface';
 import { RoomsService } from 'src/app/global/services/rooms.service';
 import { RoomFormDialogComponent } from '../room-form-dialog/room-form-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-room-table',
@@ -14,11 +15,18 @@ import { RoomFormDialogComponent } from '../room-form-dialog/room-form-dialog.co
 })
 export class RoomTableComponent {
   rooms: Room[] = [];
-  week: String[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  week: string[] = [];
   columnsToDisplay = ['business', 'location', 'name', 'size', 'capacity', 'material', 'schedule', 'price', 'actions'];
   @ViewChild(MatTable) table!: MatTable<any>;
 
-  constructor(private roomSvc: RoomsService, public dialog: MatDialog) {}
+  constructor(private roomSvc: RoomsService, 
+    public dialog: MatDialog,
+    private translate: TranslateService) 
+    {
+      this.translate.get(['weekDays']).subscribe(translations => {
+        this.week = <string[]>translations['weekDays'];
+      });
+    }
   
   ngOnInit(): void {
     this.roomSvc.getRooms()
@@ -67,7 +75,7 @@ export class RoomTableComponent {
   }
 
   showDeleteDialog(id: number): void {
-    const dialogRef = this.dialog.open(DeleteDialogComponent, { data: { elementName: 'room' } });
+    const dialogRef = this.dialog.open(DeleteDialogComponent, { data: { elementName: this.translate.instant('elements.room') } });
 
     dialogRef.afterClosed().subscribe( result => {
       if(result) {
@@ -77,7 +85,7 @@ export class RoomTableComponent {
   }
 
   showEditRoomDialog(room: Room): void {
-    const dialogRef = this.dialog.open(RoomFormDialogComponent, { data: { title: 'Edit room', room: room } });
+    const dialogRef = this.dialog.open(RoomFormDialogComponent, { data: { title: this.translate.instant('edit.room'), room: room } });
 
     dialogRef.afterClosed().subscribe( updatedRoom => {
       if(updatedRoom) {
@@ -87,7 +95,7 @@ export class RoomTableComponent {
   }
 
   showAddRoomDialog(): void {
-    const dialogRef = this.dialog.open(RoomFormDialogComponent, { data: { title: 'New room', room: undefined} });
+    const dialogRef = this.dialog.open(RoomFormDialogComponent, { data: { title: this.translate.instant('new.room'), room: undefined} });
 
     dialogRef.afterClosed().subscribe( newRoom => {
       if(newRoom) {

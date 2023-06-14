@@ -11,7 +11,11 @@
     },
     "tableHeaders": {
         "location": ["Carrer", "Número", "Codi postal", "Ciutat", "Província", "País", "Accions"],
-        "operation": ["Client", "Empresa", "Sala", "Inici", "Final", "Cost", "Stat", "Accions"]
+        "operation": ["Client", "Empresa", "Sala", "Inici", "Final", "Cost", "Stat", "Accions"],
+        "room": ["Empresa", "Ubicació", "Nom", "Tamany", "Aforament", "Material", "Horari", "Preu", "Accions"],
+        "material": ["Material", "Quantitat", "Accions"],
+        "schedule": ["Dia de la setmana", "Inici", "Final", "Accions"],
+        "user": ["Nom", "CIF/NIF", "Correu electrònic", "Contrasenya", "Telèfon", "Rol", "Accions"]
     },
     "new": {
         "location": "Nova ubicació",
@@ -50,7 +54,8 @@
         "save": "Desar",
         "login": "Iniciar sessió",
         "logout": "Tancar sessió",
-        "confirm": "Confirmar"
+        "confirm": "Confirmar",
+        "add": "Afegir"
     },
     "status": {
         "PENDING": "Pendent",
@@ -66,5 +71,11 @@
         "spanish": "Espanyol",
         "english": "Anglés",
         "catalan": "Català"
+    },
+    "weekDays": ["Diumenge", "Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres", "Dissabte"],
+    "role": {
+        "customer": "Client",
+        "business": "Empresa",
+        "admin": "Administrador"
     }
 }

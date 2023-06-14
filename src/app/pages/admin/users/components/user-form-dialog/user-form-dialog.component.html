@@ -3,45 +3,45 @@
     <form [formGroup]="userForm" >
         <p>
             <mat-form-field appearance="outline">
-                <mat-label>Name</mat-label>
+                <mat-label>{{ 'tableHeaders.user.0' | translate }}</mat-label>
                 <input matInput name="name" formControlName="name" required>
             </mat-form-field> 
         </p>
         <p>
             <mat-form-field appearance="outline">
-                <mat-label>CIF/NIF</mat-label>
+                <mat-label>{{ 'tableHeaders.user.1' | translate }}</mat-label>
                 <input matInput name="cnif" formControlName="cnif" required>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field appearance="outline">
-                <mat-label>Email</mat-label>
+                <mat-label>{{ 'tableHeaders.user.2' | translate }}</mat-label>
                 <input matInput type="email" name="email" formControlName="email" required>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field appearance="outline">
-                <mat-label>Password</mat-label>
+                <mat-label>{{ 'tableHeaders.user.3' | translate }}</mat-label>
                 <input matInput type="password" name="password" formControlName="password" required>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field appearance="outline">
-                <mat-label>Phone</mat-label>
+                <mat-label>{{ 'tableHeaders.user.4' | translate }}</mat-label>
                 <input matInput type="tel" name="phone" formControlName="phone" required>
             </mat-form-field>
         </p>
         <p>
-            <label>Role: </label>
+            <label>{{ 'tableHeaders.user.5' | translate }}: </label>
             <mat-radio-group formControlName="role">
-                <mat-radio-button value="CUSTOMER">Customer</mat-radio-button>
-                <mat-radio-button value="BUSINESS">Business</mat-radio-button>
-                <mat-radio-button value="ADMIN">Business</mat-radio-button>
+                <mat-radio-button value="CUSTOMER">{{ 'role.customer' | translate }}</mat-radio-button>
+                <mat-radio-button value="BUSINESS">{{ 'role.business' | translate }}</mat-radio-button>
+                <mat-radio-button value="ADMIN">{{ 'role.admin' | translate }}</mat-radio-button>
             </mat-radio-group>
         </p>
     </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)="onCancel()">Cancel</button>
-  <button mat-button mat-dialog-close (click)="onSave()" cdkFocusInitial>Save</button>
+  <button mat-button mat-dialog-close (click)="onCancel()">{{ 'actions.cancel' | translate }}</button>
+  <button mat-button mat-dialog-close (click)="onSave()" cdkFocusInitial>{{ 'actions.save' | translate }}</button>
 </div>

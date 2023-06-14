@@ -11,7 +11,11 @@
     },
     "tableHeaders": {
         "location": ["Calle", "Número", "Código postal", "Ciudad", "Provincia", "País", "Acciones"],
-        "operation": ["Cliente", "Empresa", "Sala", "Inicio", "Final", "Coste", "Stado", "Acciones"]
+        "operation": ["Cliente", "Empresa", "Sala", "Inicio", "Final", "Coste", "Stado", "Acciones"],
+        "room": ["Empresa", "Ubicación", "Nombre", "Tamaño", "Aforo", "Material", "Horario", "Precio", "Acciones"],
+        "material": ["Material", "Cantidad", "Acciones"],
+        "schedule": ["Día de la semana", "Inicio", "Final", "Acciones"],
+        "user": ["Nombre", "CIF/NIF", "Correo electrónico", "Contraseña", "Teléfono", "Rol", "Acciones"]
     },
     "new": {
         "location": "Nueva ubicación",
@@ -50,7 +54,8 @@
         "save": "Guardar",
         "login": "Iniciar sesión",
         "logout": "Cerrar sesión",
-        "confirm": "Confirmar"
+        "confirm": "Confirmar",
+        "add": "Añadir"
     },
     "status": {
         "PENDING": "Pendiente",
@@ -66,5 +71,11 @@
         "spanish": "Español",
         "english": "Inglés",
         "catalan": "Catalán"
+    },
+    "weekDays": ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+    "role": {
+        "customer": "Cliente",
+        "business": "Empresa",
+        "admin": "Administrador"
     }
 }
