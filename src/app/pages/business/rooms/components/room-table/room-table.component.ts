@@ -6,6 +6,7 @@ import { DeleteDialogComponent } from 'src/app/global/components/delete-dialog/d
 import { Room } from 'src/app/global/interfaces/room.interface';
 import { RoomsService } from 'src/app/global/services/rooms.service';
 import { RoomFormDialogComponent } from '../room-form-dialog/room-form-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-room-table',
@@ -14,11 +15,18 @@ import { RoomFormDialogComponent } from '../room-form-dialog/room-form-dialog.co
 })
 export class RoomTableComponent {
   rooms: Room[] = [];
-  week: String[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  week: string[] = [];
   columnsToDisplay = ['name', 'location', 'size', 'capacity', 'material', 'schedule', 'price', 'actions'];
   @ViewChild(MatTable) table!: MatTable<any>;
 
-  constructor(private roomSvc: RoomsService, public dialog: MatDialog) {}
+  constructor(private roomSvc: RoomsService, 
+    public dialog: MatDialog,
+    private translate: TranslateService) 
+    {
+      this.translate.get(['weekDays']).subscribe(translations => {
+        this.week = <string[]>translations['weekDays'];
+      });
+    }
   
   ngOnInit(): void {
     this.roomSvc.getRooms()

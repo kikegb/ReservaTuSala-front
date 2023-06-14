@@ -27,6 +27,7 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
+            <button mat-flat-button color="primary" (click)="showAddLocationDialog()">{{ 'new.location' | translate }}</button>
         </p>
         <p>
             <mat-form-field appearance="outline">
@@ -42,7 +43,7 @@
         </p>
         <p>
             <mat-form-field appearance="outline">
-                <mat-label>{{ 'tableHeaders.room.5' | translate }}</mat-label>
+                <mat-label>{{ 'tableHeaders.room.7' | translate }}</mat-label>
                 <input matInput type="number"  step="0.5" min="0.5" name="price" formControlName="price" required>
             </mat-form-field>
         </p>

@@ -45,7 +45,9 @@
         "noElementsToShow": "No hi ha elements per mostrar.",
         "wouldLikeToDelete": "Vols eliminar aquest element?",
         "startBeforeEnd": "La data d'inici ha de ser anterior a la data de conclusió.",
-        "unavailableHours": "Hi ha hores no disponibles en aquest interval."
+        "unavailableHours": "Hi ha hores no disponibles en aquest interval.",
+        "noReservationsToday": "No hi ha reserves per avui.",
+        "noPendingOperations": "No hi ha reserves pendents d'aprovació."
     },
     "actions": {
         "edit": "Editar",
@@ -55,7 +57,8 @@
         "login": "Iniciar sessió",
         "logout": "Tancar sessió",
         "confirm": "Confirmar",
-        "add": "Afegir"
+        "add": "Afegir",
+        "approve": "Aprovar"
     },
     "status": {
         "PENDING": "Pendent",
@@ -77,5 +80,6 @@
         "customer": "Client",
         "business": "Empresa",
         "admin": "Administrador"
-    }
+    },
+    "today": "Avui"
 }

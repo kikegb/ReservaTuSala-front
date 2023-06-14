@@ -1,6 +1,6 @@
 import { Component, Inject, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { tap } from 'rxjs';
 import { Room } from 'src/app/global/interfaces/room.interface';
 import { User } from 'src/app/global/interfaces/user.interface';
@@ -12,6 +12,8 @@ import { MatTable } from '@angular/material/table';
 import { MaterialsService } from 'src/app/global/services/materials.service';
 import { Schedule } from 'src/app/global/interfaces/schedule.interface';
 import { SchedulesService } from 'src/app/global/services/schedules.service';
+import { LocationFormDialogComponent } from '../../../locations/components/location-form-dialog/location-form-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-room-form-dialog',
@@ -27,7 +29,7 @@ export class RoomFormDialogComponent {
   materials: Material[] = [];
   schedules: Schedule[] = [];
   @ViewChild(MatTable) table!: MatTable<any>;
-  week: String[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  week: string[] = [];
   hours = Array.from({ length: 24 }, (_, index) => index + 1);
 
   constructor(
@@ -37,7 +39,9 @@ export class RoomFormDialogComponent {
     private usersSvc: UsersService,
     private locationSvc: LocationsService,
     private materialSvc: MaterialsService,
-    private scheduleSvc: SchedulesService)
+    private scheduleSvc: SchedulesService,
+    public dialog: MatDialog,
+    private translate: TranslateService)
   {
     this.title = data.title;
     this.room = data.room;
@@ -57,6 +61,10 @@ export class RoomFormDialogComponent {
       'weekday': [null],
       'start': [null],
       'end': [null],
+    });
+
+    this.translate.get(['weekDays']).subscribe(translations => {
+      this.week = <string[]>translations['weekDays'];
     });
   }
 
@@ -179,5 +187,27 @@ export class RoomFormDialogComponent {
       };
       this.dialogRef.close(updatedRoom);
     }
+  }
+
+  addLocation(location: Location): void {
+    this.locationSvc.addLocation(location)
+    .pipe(
+      tap( newLocation => {
+        this.locations = [...this.locations, newLocation];
+      })
+    )
+    .subscribe(() => {
+      this.table.renderRows();
+    });
+  }
+
+  showAddLocationDialog(): void {
+    const dialogRef = this.dialog.open(LocationFormDialogComponent, { data: { title: 'New location', location: undefined} });
+
+    dialogRef.afterClosed().subscribe( newLocation => {
+      if(newLocation) {
+        this.addLocation(newLocation);
+      }
+    });
   }
 }

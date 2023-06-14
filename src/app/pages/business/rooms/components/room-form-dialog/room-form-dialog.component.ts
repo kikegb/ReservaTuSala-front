@@ -12,7 +12,8 @@ import { MatTable } from '@angular/material/table';
 import { MaterialsService } from 'src/app/global/services/materials.service';
 import { Schedule } from 'src/app/global/interfaces/schedule.interface';
 import { SchedulesService } from 'src/app/global/services/schedules.service';
-import { LocationFormDialogComponent } from '../location-form-dialog/location-form-dialog.component';
+import { LocationFormDialogComponent } from 'src/app/pages/admin/locations/components/location-form-dialog/location-form-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-room-form-dialog',
@@ -27,7 +28,7 @@ export class RoomFormDialogComponent {
   materials: Material[] = [];
   schedules: Schedule[] = [];
   @ViewChild(MatTable) table!: MatTable<any>;
-  week: String[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  week: string[] = [];
   hours = Array.from({ length: 24 }, (_, index) => index + 1);
 
   constructor(
@@ -38,7 +39,8 @@ export class RoomFormDialogComponent {
     private locationSvc: LocationsService,
     private materialSvc: MaterialsService,
     private scheduleSvc: SchedulesService,
-    public dialog: MatDialog)
+    public dialog: MatDialog,
+    private translate: TranslateService)
   {
     this.title = data.title;
     this.room = data.room;
@@ -57,6 +59,10 @@ export class RoomFormDialogComponent {
       'weekday': [null],
       'start': [null],
       'end': [null],
+    });
+    
+    this.translate.get(['weekDays']).subscribe(translations => {
+      this.week = <string[]>translations['weekDays'];
     });
   }
 

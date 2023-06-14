@@ -45,7 +45,9 @@
         "noElementsToShow": "No hay elementos para mostrar.",
         "wouldLikeToDelete": "¿Quieres eliminar este elemento?",
         "startBeforeEnd": "La fecha de inicio debe ser anterior a la fecha final.",
-        "unavailableHours": "Hay hora no disponibles en este intervalo."
+        "unavailableHours": "Hay hora no disponibles en este intervalo.",
+        "noReservationsToday": "No hay reservas para hoy.",
+        "noPendingOperations": "No hay reservas pendientes de aprobación."
     },
     "actions": {
         "edit": "Editar",
@@ -55,7 +57,8 @@
         "login": "Iniciar sesión",
         "logout": "Cerrar sesión",
         "confirm": "Confirmar",
-        "add": "Añadir"
+        "add": "Añadir",
+        "approve": "Aprobar"
     },
     "status": {
         "PENDING": "Pendiente",
@@ -77,5 +80,6 @@
         "customer": "Cliente",
         "business": "Empresa",
         "admin": "Administrador"
-    }
+    },
+    "today": "Hoy"
 }

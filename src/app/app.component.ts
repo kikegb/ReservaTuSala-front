@@ -42,25 +42,25 @@ export class AppComponent {
       this.adminPages = <String[]>translations['adminPages'];
       this.businessPages = <String[]>translations['businessPages'];
       this.customerPages = <String[]>translations['customerPages'];
-    });
 
-    const token = localStorage.getItem('token');
-    if (token) {
-      const decodedToken = <any>jwtDecode(token);
-      const role = decodedToken.role;
-      if (role == "ADMIN") {
-        this.pages = this.adminPages;
-        this.refs = this.adminRefs;
+      const token = localStorage.getItem('token');
+      if (token) {
+        const decodedToken = <any>jwtDecode(token);
+        const role = decodedToken.role;
+        if (role == "ADMIN") {
+          this.pages = this.adminPages;
+          this.refs = this.adminRefs;
+        }
+        if (role == "BUSINESS") {
+          this.pages = this.businessPages;
+          this.refs = this.businessRefs;
+        }
+        if (role == "CUSTOMER") {
+          this.pages = this.customerPages;
+          this.refs = this.customerRefs;
+        }
       }
-      if (role == "BUSINESS") {
-        this.pages = this.businessPages;
-        this.refs = this.businessRefs;
-      }
-      if (role == "CUSTOMER") {
-        this.pages = this.customerPages;
-        this.refs = this.customerRefs;
-      }
-    }
+    });
   }
 
   ngOnInit(): void {

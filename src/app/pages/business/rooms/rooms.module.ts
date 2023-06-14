@@ -7,22 +7,22 @@ import { MaterialModule } from 'src/app/material.module';
 import { RoomFormDialogComponent } from './components/room-form-dialog/room-form-dialog.component';
 import { RoomTableComponent } from './components/room-table/room-table.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LocationFormDialogComponent } from './components/location-form-dialog/location-form-dialog.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
   declarations: [
     RoomsComponent,
     RoomFormDialogComponent,
-    RoomTableComponent,
-    LocationFormDialogComponent
+    RoomTableComponent
   ],
   imports: [
     CommonModule,
     RoomsRoutingModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ]
 })
 export class RoomsModule { }
