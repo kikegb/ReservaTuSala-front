@@ -7,6 +7,7 @@ import jwtDecode from 'jwt-decode';
 import { UsersService } from '../../services/users.service';
 import { tap } from 'rxjs';
 import { User } from '../../interfaces/user.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -23,7 +24,8 @@ export class HeaderComponent implements OnInit {
     private sidenav: SidenavService,
     private router: Router,
     private tokenSvc: TokenUtilsService,
-    private userSvc: UsersService) {}
+    private userSvc: UsersService,
+    private translate: TranslateService) {}
   
   ngOnInit(): void {
     this.router.events.subscribe((event: any) => {
@@ -63,5 +65,10 @@ export class HeaderComponent implements OnInit {
 
   editUser() {
     this.router.navigate(['/edit-user']);
+  }
+
+  setLanguage(lang: string) {
+    this.translate.use(lang);
+    localStorage.setItem('language', lang);
   }
 }

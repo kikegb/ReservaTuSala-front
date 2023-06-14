@@ -11,7 +11,7 @@ export interface DialogData {
   styleUrls: ['./delete-dialog.component.scss']
 })
 export class DeleteDialogComponent {
-  elementName: string = 'object';
+  elementName: string = 'element';
 
   constructor(
     public dialogRef: MatDialogRef<DeleteDialogComponent>,

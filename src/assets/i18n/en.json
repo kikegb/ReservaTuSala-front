@@ -1,0 +1,71 @@
+{
+    "adminPages": ["Home", "Users", "Operations", "Rooms", "Locations"],
+    "businessPages": ["Home", "Operations", "Rooms"],
+    "customerPages": ["Home", "Operations"],
+    "title": {
+        "home": "Home",
+        "users": "Users",
+        "operations": "Operations",
+        "rooms": "Rooms",
+        "locations": "Locations"
+    },
+    "tableHeaders": {
+        "location": ["Street", "Number", "Postcode", "Town", "Province", "Country", "Actions"],
+        "operation": ["Customer", "Business", "Room", "Start", "End", "Cost", "Status", "Actions"]
+    },
+    "new": {
+        "location": "New location",
+        "operation": "New operation",
+        "room": "New room",
+        "material": "New material",
+        "schedule": "New schedule",
+        "user": "New user"
+    },
+    "edit": {
+        "location": "Edit location",
+        "operation": "Edit operation",
+        "room": "Edit room",
+        "material": "Edit material",
+        "schedule": "Edit schedule",
+        "user": "Edit user"
+    },
+    "elements": {
+        "location": "Location",
+        "operation": "Operation",
+        "room": "Room",
+        "material": "Material",
+        "schedule": "Schedule",
+        "user": "User"
+    },
+    "messages": {
+        "noElementsToShow": "No elements to show.",
+        "wouldLikeToDelete": "Would you like to delete this element?",
+        "startBeforeEnd": "Start date must be before end date.",
+        "unavailableHours": "There are unavailable hours in this interval."
+    },
+    "actions": {
+        "edit": "Edit",
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "save": "Save",
+        "login": "Log in",
+        "logout": "Log out",
+        "confirm": "Confirm"
+    },
+    "status": {
+        "PENDING": "Pending",
+        "APPROVED": "Approved",
+        "CANCELLED": "Cancelled"
+    },
+    "userSettings": "User settings",
+    "chooseDate": "Choose a date",
+    "chooseStartHour": "Choose start hour",
+    "chooseEndHour": "Choose end hour",
+    "language": "Language",
+    "languages": {
+        "spanish": "Spanish",
+        "english": "English",
+        "catalan": "Catalan"
+    }
+
+}

@@ -1,0 +1,70 @@
+{
+    "adminPages": ["Inici", "Usuaris", "Operacions", "Sales", "Ubicacions"],
+    "businessPages": ["Inici", "Operacions", "Sales"],
+    "customerPages": ["Inici", "Operacions"],
+    "title": {
+        "home": "Inici",
+        "users": "Usuaris",
+        "operations": "Operacions",
+        "rooms": "Sales",
+        "locations": "Ubicacions"
+    },
+    "tableHeaders": {
+        "location": ["Carrer", "Número", "Codi postal", "Ciutat", "Província", "País", "Accions"],
+        "operation": ["Client", "Empresa", "Sala", "Inici", "Final", "Cost", "Stat", "Accions"]
+    },
+    "new": {
+        "location": "Nova ubicació",
+        "operation": "Nova operació",
+        "room": "Nova sala",
+        "material": "Nou material",
+        "schedule": "Nou horari",
+        "user": "Nou usuari"
+    },
+    "edit": {
+        "location": "Editar ubicació",
+        "operation": "Editar operació",
+        "room": "Editar sala",
+        "material": "Editar material",
+        "schedule": "Editar horari",
+        "user": "Editar usuari"
+    },
+    "elements": {
+        "location": "Ubicació",
+        "operation": "Operació",
+        "room": "Sala",
+        "material": "Material",
+        "schedule": "Horari",
+        "user": "Usuari"
+    },
+    "messages": {
+        "noElementsToShow": "No hi ha elements per mostrar.",
+        "wouldLikeToDelete": "Vols eliminar aquest element?",
+        "startBeforeEnd": "La data d'inici ha de ser anterior a la data de conclusió.",
+        "unavailableHours": "Hi ha hores no disponibles en aquest interval."
+    },
+    "actions": {
+        "edit": "Editar",
+        "delete": "Eliminar",
+        "cancel": "Cancel·lar",
+        "save": "Desar",
+        "login": "Iniciar sessió",
+        "logout": "Tancar sessió",
+        "confirm": "Confirmar"
+    },
+    "status": {
+        "PENDING": "Pendent",
+        "APPROVED": "Aprovada",
+        "CANCELLED": "Cancel·lada"
+    },
+    "userSettings": "Configuracions d'usuari",
+    "chooseDate": "Selecciona una data",
+    "chooseStartHour": "Selecciona hora d'inici",
+    "chooseEndHour": "Selecciona hora final",
+    "language": "Idioma",
+    "languages": {
+        "spanish": "Espanyol",
+        "english": "Anglés",
+        "catalan": "Català"
+    }
+}

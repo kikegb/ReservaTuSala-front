@@ -1,0 +1,70 @@
+{
+    "adminPages": ["Inicio", "Usuarios", "Operaciones", "Salas", "Ubicaciones"],
+    "businessPages": ["Inicio", "Operaciones", "Salas"],
+    "customerPages": ["Inicio", "Operaciones"],
+    "title": {
+        "home": "Inicio",
+        "users": "Usuarios",
+        "operations": "Operaciones",
+        "rooms": "Salas",
+        "locations": "Ubicaciones"
+    },
+    "tableHeaders": {
+        "location": ["Calle", "Número", "Código postal", "Ciudad", "Provincia", "País", "Acciones"],
+        "operation": ["Cliente", "Empresa", "Sala", "Inicio", "Final", "Coste", "Stado", "Acciones"]
+    },
+    "new": {
+        "location": "Nueva ubicación",
+        "operation": "Nueva operación",
+        "room": "Nueva sala",
+        "material": "Nuevo material",
+        "schedule": "Nuevo horario",
+        "user": "Nuevo usuario"
+    },
+    "edit": {
+        "location": "Editar ubicación",
+        "operation": "Editar operación",
+        "room": "Editar sala",
+        "material": "Editar material",
+        "schedule": "Editar horario",
+        "user": "Editar usuario"
+    },
+    "elements": {
+        "location": "Ubicación",
+        "operation": "Operación",
+        "room": "Sala",
+        "material": "Material",
+        "schedule": "Horario",
+        "user": "Usuario"
+    },
+    "messages": {
+        "noElementsToShow": "No hay elementos para mostrar.",
+        "wouldLikeToDelete": "¿Quieres eliminar este elemento?",
+        "startBeforeEnd": "La fecha de inicio debe ser anterior a la fecha final.",
+        "unavailableHours": "Hay hora no disponibles en este intervalo."
+    },
+    "actions": {
+        "edit": "Editar",
+        "delete": "Eliminar",
+        "cancel": "Cancelar",
+        "save": "Guardar",
+        "login": "Iniciar sesión",
+        "logout": "Cerrar sesión",
+        "confirm": "Confirmar"
+    },
+    "status": {
+        "PENDING": "Pendiente",
+        "APPROVED": "Aprobada",
+        "CANCELLED": "Cancelada"
+    },
+    "userSettings": "Ajustes de usuario",
+    "chooseDate": "Selecciona una fecha",
+    "chooseStartHour": "Selecciona hora de inicio",
+    "chooseEndHour": "Selecciona hora final",
+    "language": "Idioma",
+    "languages": {
+        "spanish": "Español",
+        "english": "Inglés",
+        "catalan": "Catalán"
+    }
+}

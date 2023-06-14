@@ -6,6 +6,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { OperationTableComponent } from './components/operation-table/operation-table.component';
 import { OperationFormDialogComponent } from './components/operation-form-dialog/operation-form-dialog.component';
 import { OperationsRoutingModule } from './operations-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -20,7 +21,8 @@ import { OperationsRoutingModule } from './operations-routing.module';
     OperationsRoutingModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ]
 })
 export class OperationsModule { }

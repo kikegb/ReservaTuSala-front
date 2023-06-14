@@ -6,6 +6,7 @@ import { tap } from 'rxjs';
 import { DeleteDialogComponent } from 'src/app/global/components/delete-dialog/delete-dialog.component';
 import { OperationsService } from 'src/app/global/services/operations.service';
 import { OperationFormDialogComponent } from '../operation-form-dialog/operation-form-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-operation-table',
@@ -17,7 +18,10 @@ export class OperationTableComponent {
   columnsToDisplay = ['customer', 'business', 'room', 'start', 'end', 'cost', 'status', 'actions'];
   @ViewChild(MatTable) table!: MatTable<any>;
 
-  constructor(private operationSvc: OperationsService, public dialog: MatDialog) {}
+  constructor(private operationSvc: OperationsService, 
+    public dialog: MatDialog,
+    private translate: TranslateService
+    ) {}
   
   ngOnInit(): void {
     this.operationSvc.getOperations()
@@ -66,7 +70,7 @@ export class OperationTableComponent {
   }
 
   showDeleteDialog(id: number): void {
-    const dialogRef = this.dialog.open(DeleteDialogComponent, { data: { elementName: 'operation' } });
+    const dialogRef = this.dialog.open(DeleteDialogComponent, { data: { elementName: this.translate.instant('elements.operation') } });
 
     dialogRef.afterClosed().subscribe( result => {
       if(result) {
@@ -76,7 +80,7 @@ export class OperationTableComponent {
   }
 
   showEditOperationDialog(operation: Operation): void {
-    const dialogRef = this.dialog.open(OperationFormDialogComponent, { data: { title: 'Edit operation', operation: operation } });
+    const dialogRef = this.dialog.open(OperationFormDialogComponent, { data: { title: this.translate.instant('edit.operation'), operation: operation } });
 
     dialogRef.afterClosed().subscribe( updatedOperation => {
       if(updatedOperation) {
@@ -86,7 +90,7 @@ export class OperationTableComponent {
   }
 
   showAddOperationDialog(): void {
-    const dialogRef = this.dialog.open(OperationFormDialogComponent, { data: { title: 'New operation', operation: undefined} });
+    const dialogRef = this.dialog.open(OperationFormDialogComponent, { data: { title: this.translate.instant('new.operation'), operation: undefined} });
 
     dialogRef.afterClosed().subscribe( newOperation => {
       if(newOperation) {
