@@ -1,13 +1,16 @@
 <mat-toolbar class="main-header" color="primary">
-    <button mat-icon-button (click)="toggleSidenav()" *ngIf="!isLogin">
+    <button mat-icon-button (click)="toggleSidenav()" *ngIf="!isLogin || !isSignup">
         <mat-icon>menu</mat-icon>
     </button>
     ReservaTuSala
     <button mat-flat-button (click)="logIn()" class="loginButton" *ngIf="!token && !isLogin">
         {{ 'actions.login' | translate }}
     </button>
-    <div class="loginButton">
-        <button mat-icon-button matTooltip="{{ 'language' | translate }}" [matMenuTriggerFor]="langMenu" *ngIf="token">
+    <button mat-flat-button (click)="signUp()" class="loginButton" *ngIf="!token && !isSignup">
+        {{ 'actions.signup' | translate }}
+    </button>
+    <div class="loginButton" *ngIf="token">
+        <button mat-icon-button matTooltip="{{ 'language' | translate }}" [matMenuTriggerFor]="langMenu">
             <mat-icon fontIcon="language"></mat-icon>
         </button>
         <mat-menu #langMenu="matMenu">
@@ -21,7 +24,7 @@
                 {{ 'languages.catalan' | translate }}
             </button>
         </mat-menu>
-        <button mat-icon-button matTooltip="{{ 'userSettings' | translate }}" [matMenuTriggerFor]="menu"  *ngIf="token">
+        <button mat-icon-button matTooltip="{{ 'userSettings' | translate }}" [matMenuTriggerFor]="menu" >
             <mat-icon fontIcon="person"></mat-icon>
         </button>
         <mat-menu #menu="matMenu">

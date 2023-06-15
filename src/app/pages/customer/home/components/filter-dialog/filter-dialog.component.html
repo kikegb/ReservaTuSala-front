@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>{{ title }}</h1>
 <div mat-dialog-content>
     <form [formGroup]="filterForm" >
-        <h3>Size</h3>
+        <h3>{{ "tableHeaders.room.3" | translate }}</h3>
         <p>
             <mat-slider min="0" max="500">
                 <input formControlName="minSize" matSliderStartThumb>
@@ -9,7 +9,7 @@
             </mat-slider>
             {{filterForm.value.minSize}} - {{filterForm.value.maxSize}}
         </p>
-        <h3>Capacity</h3>
+        <h3>{{ "tableHeaders.room.4" | translate }}</h3>
         <p>
             <mat-slider min="0" max="100">
                 <input formControlName="minCapacity" value="0" matSliderStartThumb>
@@ -17,7 +17,7 @@
             </mat-slider>
             {{filterForm.value.minCapacity}} - {{filterForm.value.maxCapacity}}
         </p>
-        <h3>Price per hour</h3>
+        <h3>{{ "tableHeaders.room.7" | translate }}</h3>
         <p>
             <mat-slider min="0" max="500">
                 <input formControlName="minPrice" matSliderStartThumb>
@@ -28,8 +28,8 @@
     </form>
 </div>
 <div mat-dialog-actions>
-    <button mat-button mat-dialog-close (click)="resetFilters()">Reset filters</button>
-    <button mat-button mat-dialog-close (click)="onCancel()">Cancel</button>
-    <button mat-button mat-dialog-close (click)="onSave()" cdkFocusInitial>Save</button>
+    <button mat-button mat-dialog-close (click)="resetFilters()">{{ "actions.resetFilters" | translate }}</button>
+    <button mat-button mat-dialog-close (click)="onCancel()">{{ "actions.cancel" | translate }}</button>
+    <button mat-button mat-dialog-close (click)="onSave()" cdkFocusInitial>{{ "actions.save" | translate }}</button>
 </div>
 

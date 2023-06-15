@@ -7,7 +7,9 @@
         "users": "Users",
         "operations": "Operations",
         "rooms": "Rooms",
-        "locations": "Locations"
+        "locations": "Locations",
+        "details": "Details",
+        "makeReservation": "Make a reservation"
     },
     "tableHeaders": {
         "location": ["Street", "Number", "Postcode", "Town", "Province", "Country", "Actions"],
@@ -47,7 +49,16 @@
         "startBeforeEnd": "Start date must be before end date.",
         "unavailableHours": "There are unavailable hours in this interval.",
         "noReservationsToday": "There's no reservations for today.",
-        "noPendingOperations": "There's no reservations pending approval."
+        "noPendingOperations": "There's no reservations pending approval.",
+        "businessNotAvailable": "Business not available.",
+        "roomNotAvailable": "Room not available.",
+        "noResults": "No results found!",
+        "passwordsNotMatch": "Passwords don't match.",
+        "dontHaveAccount": "Don't have an account?",
+        "alreadyHaveAccount": "Already have an account? ",
+        "loginError": "Login error: invalid email or password.",
+        "loginSuccessful": "Successful Login.",
+        "unauthorizedPage": "You're not allowed to see this page."
     },
     "actions": {
         "edit": "Edit",
@@ -58,7 +69,14 @@
         "logout": "Log out",
         "confirm": "Confirm",
         "add": "Add",
-        "approve": "Approve"
+        "approve": "Approve",
+        "filter": "Filter",
+        "seeDetails": "See details",
+        "resetFilters": "Reset filters",
+        "moreInfo": "More information",
+        "accept": "Accept",
+        "close": "Close",
+        "signup": "Sign up"
     },
     "status": {
         "PENDING": "Pending",
@@ -81,5 +99,10 @@
         "business": "Business",
         "admin": "Administrator"
     },
-    "today": "Today"
+    "today": "Today",
+    "contact": "Contact",
+    "searchBy": "Search by room or business name",
+    "nHours": "Num. hours",
+    "confirmPassword": "Confirm password",
+    "registerAs": "Register as"
 }

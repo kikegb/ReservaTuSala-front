@@ -7,11 +7,13 @@
         "users": "Usuarios",
         "operations": "Operaciones",
         "rooms": "Salas",
-        "locations": "Ubicaciones"
+        "locations": "Ubicaciones",
+        "details": "Detalles",
+        "makeReservation": "Haga una reserva"
     },
     "tableHeaders": {
         "location": ["Calle", "Número", "Código postal", "Ciudad", "Provincia", "País", "Acciones"],
-        "operation": ["Cliente", "Empresa", "Sala", "Inicio", "Final", "Coste", "Stado", "Acciones"],
+        "operation": ["Cliente", "Empresa", "Sala", "Inicio", "Final", "Coste", "Estado", "Acciones"],
         "room": ["Empresa", "Ubicación", "Nombre", "Tamaño", "Aforo", "Material", "Horario", "Precio", "Acciones"],
         "material": ["Material", "Cantidad", "Acciones"],
         "schedule": ["Día de la semana", "Inicio", "Final", "Acciones"],
@@ -47,7 +49,16 @@
         "startBeforeEnd": "La fecha de inicio debe ser anterior a la fecha final.",
         "unavailableHours": "Hay hora no disponibles en este intervalo.",
         "noReservationsToday": "No hay reservas para hoy.",
-        "noPendingOperations": "No hay reservas pendientes de aprobación."
+        "noPendingOperations": "No hay reservas pendientes de aprobación.",
+        "businessNotAvailable": "Empresa no disponible.",
+        "roomNotAvailable": "Sala no disponible.",
+        "noResults": "No se han encontrado resultados!",
+        "passwordsNotMatch": "Las contraseñas no coinciden.",
+        "dontHaveAccount": "¿No tienes una cuenta?",
+        "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+        "loginError": "Error al iniciar sesión: correo electrónico o contraseña incorrectos.",
+        "loginSuccessful": "Inicio de sesión correcto.",
+        "unauthorizedPage": "No tienes permitido acceder a esta página."
     },
     "actions": {
         "edit": "Editar",
@@ -58,7 +69,14 @@
         "logout": "Cerrar sesión",
         "confirm": "Confirmar",
         "add": "Añadir",
-        "approve": "Aprobar"
+        "approve": "Aprobar",
+        "filter": "Filtrar",
+        "seeDetails": "Ver detalles",
+        "resetFilters": "Reiniciar filtros",
+        "moreInfo": "Más información",
+        "accept": "Aceptar",
+        "close": "Cerrar",
+        "signup": "Registrarse"
     },
     "status": {
         "PENDING": "Pendiente",
@@ -81,5 +99,10 @@
         "business": "Empresa",
         "admin": "Administrador"
     },
-    "today": "Hoy"
+    "today": "Hoy",
+    "contact": "Contacto",
+    "searchBy": "Busca por nombre de sala o empresa",
+    "nHours": "Núm. horas",
+    "confirmPassword": "Confirmar contraseña",
+    "registerAs": "Registrarse como"
 }

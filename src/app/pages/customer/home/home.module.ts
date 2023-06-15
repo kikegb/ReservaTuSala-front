@@ -6,6 +6,7 @@ import { HomeComponent } from './home.component';
 import { MaterialModule } from 'src/app/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterDialogComponent } from './components/filter-dialog/filter-dialog.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FilterDialogComponent } from './components/filter-dialog/filter-dialog.
     HomeRoutingModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ]
 })
 export class HomeModule { }

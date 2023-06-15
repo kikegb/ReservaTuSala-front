@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import jwtDecode from 'jwt-decode';
 import { tap } from 'rxjs';
 import { Operation } from 'src/app/global/interfaces/operation.interface';
@@ -19,7 +20,7 @@ export class RoomDetailComponent {
   room: Room;
   nHours: number = 0;
   cost: number = 0;
-  week: String[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  week: string[] = [];
   operationForm: FormGroup;
   hours: number[] = [];
   today = new Date();
@@ -31,7 +32,8 @@ export class RoomDetailComponent {
     private roomSvc: RoomsService,
     private formBuilder: FormBuilder,
     private operationSvc: OperationsService,
-    private router: Router)
+    private router: Router,
+    private translate: TranslateService)
   {
     this.id = parseInt(this.route.snapshot.paramMap.get('id') as string);  
     this.room = {} as Room;
@@ -39,6 +41,10 @@ export class RoomDetailComponent {
       'date': [null, Validators.required],
       'startHour': [null, Validators.required],
       'endHour': [null, Validators.required],
+    });
+
+    this.translate.get(['weekDays']).subscribe(translations => {
+      this.week = <string[]>translations['weekDays'];
     });
   }
 

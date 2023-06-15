@@ -38,4 +38,21 @@ export class OperationTableComponent {
     }
   }
 
+  updateStatus(operation: Operation, status: string): void {
+    const updatedOperation: Operation = {
+      ...operation,
+      status: status
+    }
+    this.operationSvc.updateOperation(updatedOperation)
+    .pipe(
+      tap( () => {
+        let index = this.operations.findIndex( operation => operation.id == updatedOperation.id );
+        this.operations[index] = updatedOperation;
+        this.operations = [...this.operations];
+      })
+    )
+    .subscribe(() => {
+      this.table.renderRows();
+    });
+  }
 }

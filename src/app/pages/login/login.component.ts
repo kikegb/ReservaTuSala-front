@@ -7,6 +7,7 @@ import { LoginService } from './services/login.service';
 import { SidenavService } from 'src/app/global/services/sidenav.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent {
     private router: Router,
     private tokenSvc: TokenUtilsService,
     private sidenav: SidenavService,
-    private _snackBar: MatSnackBar)
+    private _snackBar: MatSnackBar,
+    private translate: TranslateService)
   {
     this.userForm = this.formBuilder.group({
       'email': [null, Validators.required],
@@ -34,7 +36,7 @@ export class LoginComponent {
   login(): void {
     this.loginSvc.login(this.userForm.value.email, this.userForm.value.password)
     .subscribe((response: any) => {
-      this._snackBar.open('Successful Login.', 'close', {
+      this._snackBar.open(this.translate.instant('loginSuccessful'), this.translate.instant('actions.close'), {
         duration: 5000,
         panelClass: ['success-snackbar'],
       });
@@ -53,7 +55,7 @@ export class LoginComponent {
       }
     }, (e: HttpErrorResponse) => {
       console.log(e.status);
-      this._snackBar.open('Login error: invalid email or password.', 'close', {
+      this._snackBar.open(this.translate.instant('loginError'), this.translate.instant('actions.close'), {
         duration: 5000,
         panelClass: ['error-snackbar'],
         });

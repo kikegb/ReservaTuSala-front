@@ -16,6 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class HeaderComponent implements OnInit {     
   token?: string;
   isLogin = false;
+  isSignup = false;
   userName = '';
   userEmail = '';
 
@@ -30,6 +31,7 @@ export class HeaderComponent implements OnInit {
     this.router.events.subscribe((event: any) => {
       if (event && event.url) {
         this.isLogin = (event.url == '/login');
+        this.isSignup = (event.url == '/signup');
       }
       if (event instanceof NavigationEnd) {
         this.token = localStorage.getItem('token') || "";
@@ -60,6 +62,10 @@ export class HeaderComponent implements OnInit {
 
   logIn() {
     this.router.navigate(['/login']);
+  }
+
+  signUp() {
+    this.router.navigate(['/signup']);
   }
 
   editUser() {

@@ -7,11 +7,13 @@
         "users": "Usuaris",
         "operations": "Operacions",
         "rooms": "Sales",
-        "locations": "Ubicacions"
+        "locations": "Ubicacions",
+        "details": "Detalls",
+        "makeReservation": "Feu una reserva"
     },
     "tableHeaders": {
         "location": ["Carrer", "Número", "Codi postal", "Ciutat", "Província", "País", "Accions"],
-        "operation": ["Client", "Empresa", "Sala", "Inici", "Final", "Cost", "Stat", "Accions"],
+        "operation": ["Client", "Empresa", "Sala", "Inici", "Final", "Cost", "Estat", "Accions"],
         "room": ["Empresa", "Ubicació", "Nom", "Tamany", "Aforament", "Material", "Horari", "Preu", "Accions"],
         "material": ["Material", "Quantitat", "Accions"],
         "schedule": ["Dia de la setmana", "Inici", "Final", "Accions"],
@@ -47,7 +49,16 @@
         "startBeforeEnd": "La data d'inici ha de ser anterior a la data de conclusió.",
         "unavailableHours": "Hi ha hores no disponibles en aquest interval.",
         "noReservationsToday": "No hi ha reserves per avui.",
-        "noPendingOperations": "No hi ha reserves pendents d'aprovació."
+        "noPendingOperations": "No hi ha reserves pendents d'aprovació.",
+        "businessNotAvailable": "Empresa no disponible.",
+        "roomNotAvailable": "Sala no disponible.",
+        "noResults": "No s'han trobat resultats!",
+        "passwordsNotMatch": "Les contrasenyes no coincideixen.",
+        "dontHaveAccount": "No tens un compte?",
+        "alreadyHaveAccount": "Ja tens un compte? ",
+        "loginError": "Error en iniciar sessió: correu electrònic o contrasenya incorrectes.",
+        "loginSuccessful": "Inici de sessió correcte.",
+        "unauthorizedPage": "No tens permés accedir a aquesta pàgina."
     },
     "actions": {
         "edit": "Editar",
@@ -58,7 +69,14 @@
         "logout": "Tancar sessió",
         "confirm": "Confirmar",
         "add": "Afegir",
-        "approve": "Aprovar"
+        "approve": "Aprovar",
+        "filter": "Filtrar",
+        "seeDetails": "Veure detalls",
+        "resetFilters": "Restablir filtres",
+        "moreInfo": "Més informació",
+        "accept": "Acceptar",
+        "close": "Tancar",
+        "signup": "Registrar-se"
     },
     "status": {
         "PENDING": "Pendent",
@@ -81,5 +99,10 @@
         "business": "Empresa",
         "admin": "Administrador"
     },
-    "today": "Avui"
+    "today": "Avui",
+    "contact": "Contacte",
+    "searchBy": "Cerca per nom de sala o empresa",
+    "nHours": "Núm. hores",
+    "confirmPassword": "Confirmar contrasenya",
+    "registerAs": "Registrar-se com"
 }
