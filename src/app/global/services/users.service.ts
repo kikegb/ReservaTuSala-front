@@ -15,6 +15,19 @@ export class UsersService {
       return this.http.get<User[]>(this.apiURL + '/all').pipe(
         map(users => users.map(user => ({
           ...user,
+          rooms: user.rooms.map(room => ({
+            ...room,
+            operations: room.operations.map(operation => ({
+              ...operation,
+              start: new Date(operation.start),
+              end: new Date(operation.end)
+            })),
+            schedules: room.schedules.map(schedule => ({
+              ...schedule,
+              start: new Date('1970-01-01T' + schedule.start),
+              end: new Date('1970-01-01T' + schedule.end)
+            }))
+          })),
           businessOperations: user.businessOperations.map(operation => ({
             ...operation,
             start: new Date(operation.start),
@@ -34,6 +47,19 @@ export class UsersService {
     return this.http.get<User>(url).pipe(
       map(user => ({
         ...user,
+        rooms: user.rooms.map(room => ({
+          ...room,
+          operations: room.operations.map(operation => ({
+            ...operation,
+            start: new Date(operation.start),
+            end: new Date(operation.end)
+          })),
+          schedules: room.schedules.map(schedule => ({
+            ...schedule,
+            start: new Date('1970-01-01T' + schedule.start),
+            end: new Date('1970-01-01T' + schedule.end)
+          }))
+        })),
         businessOperations: user.businessOperations.map(operation => ({
           ...operation,
           start: new Date(operation.start),
@@ -49,34 +75,20 @@ export class UsersService {
   }
 
   addUser(user: User): Observable<User>{
-    const formattedUser = {
-      ...user,
-      businessOperations: user.businessOperations.map(operation => ({
-        ...operation,
-        start: operation.start.toISOString().slice(0, -2),
-        end: operation.end.toISOString().slice(0, -2)
-      })),
-      customerOperations: user.customerOperations.map(operation => ({
-        ...operation,
-        start: operation.start.toISOString().slice(0, -2),
-        end: operation.end.toISOString().slice(0, -2)
-      }))
-    };
-      return this.http.post<User>(this.apiURL, formattedUser);
+      return this.http.post<User>(this.apiURL, user);
   }
 
   updateUser(user: User): Observable<User>{
     const formattedUser = {
       ...user,
+      rooms: user.rooms.map(room => ({
+        id: room.id
+      })),
       businessOperations: user.businessOperations.map(operation => ({
-        ...operation,
-        start: operation.start.toISOString().slice(0, -2),
-        end: operation.end.toISOString().slice(0, -2)
+        id: operation.id
       })),
       customerOperations: user.customerOperations.map(operation => ({
-        ...operation,
-        start: operation.start.toISOString().slice(0, -2),
-        end: operation.end.toISOString().slice(0, -2)
+        id: operation.id
       }))
     };
     return this.http.put<User>(this.apiURL, formattedUser);

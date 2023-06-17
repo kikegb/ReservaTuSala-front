@@ -34,7 +34,10 @@ export class OperationsService {
     const formattedOperation = {
       ...operation,
       start: operation.start.toISOString().slice(0, -2),
-      end: operation.end.toISOString().slice(0, -2)
+      end: operation.end.toISOString().slice(0, -2),
+      customer: {id: operation.customer.id},
+      business: {id: operation.business.id},
+      room: {id: operation.room.id}
     };
     return this.http.put<Operation>(this.apiURL, formattedOperation);
   }

@@ -65,10 +65,10 @@ export class RoomsService {
   updateRoom(room: Room): Observable<Room>{
     const formattedRoom = {
       ...room,
+      business: {id: room.business.id},
+      location: {id: room.location.id},
       operations: room.operations.map(operation => ({
-        ...operation,
-        start: operation.start.toISOString().slice(0, -2),
-        end: operation.end.toISOString().slice(0, -2)
+        id: operation.id
       })),
       schedules: room.schedules.map(schedule => ({
         ...schedule,
