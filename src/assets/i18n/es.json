@@ -46,8 +46,8 @@
     "messages": {
         "noElementsToShow": "No hay elementos para mostrar.",
         "wouldLikeToDelete": "¿Quieres eliminar este elemento?",
-        "startBeforeEnd": "La fecha de inicio debe ser anterior a la fecha final.",
-        "unavailableHours": "Hay hora no disponibles en este intervalo.",
+        "startBeforeEnd": "La hora de inicio debe ser anterior a la hora final.",
+        "unavailableHours": "Hay horas no disponibles en este intervalo.",
         "noReservationsToday": "No hay reservas para hoy.",
         "noPendingOperations": "No hay reservas pendientes de aprobación.",
         "businessNotAvailable": "Empresa no disponible.",

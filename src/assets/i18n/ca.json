@@ -46,7 +46,7 @@
     "messages": {
         "noElementsToShow": "No hi ha elements per mostrar.",
         "wouldLikeToDelete": "Vols eliminar aquest element?",
-        "startBeforeEnd": "La data d'inici ha de ser anterior a la data de conclusió.",
+        "startBeforeEnd": "L'hora d'inici ha de ser anterior a l'hora final.",
         "unavailableHours": "Hi ha hores no disponibles en aquest interval.",
         "noReservationsToday": "No hi ha reserves per avui.",
         "noPendingOperations": "No hi ha reserves pendents d'aprovació.",

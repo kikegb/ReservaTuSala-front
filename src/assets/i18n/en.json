@@ -46,7 +46,7 @@
     "messages": {
         "noElementsToShow": "No elements to show.",
         "wouldLikeToDelete": "Would you like to delete this element?",
-        "startBeforeEnd": "Start date must be before end date.",
+        "startBeforeEnd": "Start time must be before end time.",
         "unavailableHours": "There are unavailable hours in this interval.",
         "noReservationsToday": "There's no reservations for today.",
         "noPendingOperations": "There's no reservations pending approval.",
