@@ -31,7 +31,7 @@ export class OperationFormDialogComponent {
     public dialogRef: MatDialogRef<OperationFormDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { title: string, operation: Operation },
     private formBuilder: FormBuilder,
-    private usersSvc: UsersService,
+    private userSvc: UsersService,
     private roomsSvc: RoomsService,
     private operationSvc: OperationsService)
   {
@@ -51,7 +51,7 @@ export class OperationFormDialogComponent {
   }
 
   ngOnInit(): void {
-    this.usersSvc.getUsers()
+    this.userSvc.getUsers()
     .pipe(
         tap( (users: User[]) => {
           for (let user of users) {
@@ -79,8 +79,8 @@ export class OperationFormDialogComponent {
     )
     .subscribe();
 
-    this.operationForm.get("date")?.valueChanges.subscribe(newValue => {
-      this.getHours(newValue);
+    this.operationForm.get("business")?.valueChanges.subscribe(newValue => {
+      this.getRooms(newValue);
     });
 
     this.operationForm.get("date")?.valueChanges.subscribe(newValue => {
@@ -134,6 +134,18 @@ export class OperationFormDialogComponent {
         }
 
       }
+    }
+  }
+
+  getRooms(business: User): void {
+    if (business) {
+      this.userSvc.getById(business.id)
+      .pipe(
+          tap( (user: User) => {
+            this.rooms = user.rooms;
+          })
+      )
+      .subscribe();
     }
   }
 
