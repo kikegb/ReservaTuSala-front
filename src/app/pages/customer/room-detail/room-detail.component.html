@@ -73,6 +73,9 @@
         <div *ngIf="isUnavailable()">
             <p class="error-message">{{ 'messages.unavailableHours' | translate }}</p>
         </div>
-        <button mat-button (click)="createOperation()" [disabled]="isBeforeOrSame() || isUnavailable()" cdkFocusInitial>{{ 'actions.accept' | translate }}</button>
+        <div *ngIf="operationForm.invalid">
+            <p class="error-message">{{ 'messages.emptyRequiredFields' | translate }}</p>
+        </div>
+        <button mat-button (click)="createOperation()" [disabled]="isBeforeOrSame() || isUnavailable() || !operationForm.valid" cdkFocusInitial>{{ 'actions.accept' | translate }}</button>
     </div>
 </div>
