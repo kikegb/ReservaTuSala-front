@@ -7,6 +7,9 @@ import { Room } from 'src/app/global/interfaces/room.interface';
 import { RoomsService } from 'src/app/global/services/rooms.service';
 import { RoomFormDialogComponent } from '../room-form-dialog/room-form-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
+import jwtDecode from 'jwt-decode';
+import { UsersService } from 'src/app/global/services/users.service';
+import { User } from 'src/app/global/interfaces/user.interface';
 
 @Component({
   selector: 'app-room-table',
@@ -21,7 +24,8 @@ export class RoomTableComponent {
 
   constructor(private roomSvc: RoomsService, 
     public dialog: MatDialog,
-    private translate: TranslateService) 
+    private translate: TranslateService,
+    private userSvc: UsersService) 
     {
       this.translate.get(['weekDays']).subscribe(translations => {
         this.week = <string[]>translations['weekDays'];
@@ -29,11 +33,18 @@ export class RoomTableComponent {
     }
   
   ngOnInit(): void {
-    this.roomSvc.getRooms()
-    .pipe(
-        tap( (rooms: Room[]) => this.rooms = rooms )
-    )
-    .subscribe();
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = <any>jwtDecode(token);
+      const id = decodedToken.id;
+      this.userSvc.getById(id)
+      .pipe(
+          tap( (user: User) => {
+            this.rooms = user.rooms;
+          })
+      )
+      .subscribe();
+    }
   }
 
   addRoom(room: Room): void {
