@@ -21,6 +21,9 @@
               <mat-card-subtitle>{{ room.business.name }}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
+                <p>{{ "tableHeaders.room.1" | translate }}:  
+                    {{room.location.street}}, {{room.location.number}}, {{room.location.postcode}}, 
+                    {{room.location.town}}, {{room.location.province}}, {{room.location.country}}</p>
                 <p>{{ "tableHeaders.room.3" | translate }}: {{room.size}} m2</p>
                 <p>{{ "tableHeaders.room.4" | translate }}: {{room.capacity}}</p>
                 <p>{{ "tableHeaders.room.7" | translate }}: {{room.price}} €/h</p>

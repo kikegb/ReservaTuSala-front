@@ -49,7 +49,8 @@ export class HomeComponent {
           this.rooms = rooms;
           if (this.searchForm.value.search) {
             this.rooms = rooms.filter((room: Room) => room.name.toLowerCase().includes(this.searchForm.value.search) 
-            || room.business.name.toLowerCase().includes(this.searchForm.value.search));
+            || room.business.name.toLowerCase().includes(this.searchForm.value.search)
+            || room.location.town.toLowerCase().includes(this.searchForm.value.search));
           }
           if (this.filters) {
             this.rooms = this.rooms.filter(room => room.size >= this.filters?.minSize);
