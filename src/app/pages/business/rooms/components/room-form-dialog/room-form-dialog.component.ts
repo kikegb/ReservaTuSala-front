@@ -155,6 +155,7 @@ export class RoomFormDialogComponent {
     .pipe(
       tap( newLocation => {
         this.locations = [...this.locations, newLocation];
+        this.roomForm.get('location')?.setValue(newLocation);
       })
     )
     .subscribe(() => {
