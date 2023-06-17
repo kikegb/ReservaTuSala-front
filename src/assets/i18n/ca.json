@@ -58,7 +58,8 @@
         "alreadyHaveAccount": "Ja tens un compte? ",
         "loginError": "Error en iniciar sessió: correu electrònic o contrasenya incorrectes.",
         "loginSuccessful": "Inici de sessió correcte.",
-        "unauthorizedPage": "No tens permés accedir a aquesta pàgina."
+        "unauthorizedPage": "No tens permés accedir a aquesta pàgina.",
+        "emptyRequiredFields": "Existeixen camps obligatoris buits."
     },
     "actions": {
         "edit": "Editar",

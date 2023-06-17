@@ -89,20 +89,22 @@ export class RoomFormDialogComponent {
   }
 
   addNewMaterial(): void {
-    const material = {
-      material: this.roomForm.value.material,
-      quantity: this.roomForm.value.quantity
-    };
+    if (this.roomForm.value.material && this.roomForm.value.quantity) {
+      const material = {
+        material: this.roomForm.value.material,
+        quantity: this.roomForm.value.quantity
+      };
 
-    this.materialSvc.addMaterial(<Material>material)
-    .pipe(
-      tap( m => {
-        this.materials = [...this.materials, m];
-      })
-    )
-    .subscribe(() => {
-      this.table.renderRows();
-    });
+      this.materialSvc.addMaterial(<Material>material)
+      .pipe(
+        tap( m => {
+          this.materials = [...this.materials, m];
+        })
+      )
+      .subscribe(() => {
+        this.table.renderRows();
+      });
+    }
     this.roomForm.get('material')?.reset();
     this.roomForm.get('quantity')?.reset();
   }
@@ -120,25 +122,27 @@ export class RoomFormDialogComponent {
   }
 
   addNewSchedule(): void {
-    const start = new Date('1970-01-01T00:00:00');
-    start.setHours(this.roomForm.value.start);
-    const end = new Date('1970-01-01T00:00:00');
-    end.setHours(this.roomForm.value.end);
-    const schedule = {
-      weekDay: this.roomForm.value.weekday,
-      start: start,
-      end: end,
-    };
+    if (this.roomForm.value.start && this.roomForm.value.end && this.roomForm.value.weekday) {
+      const start = new Date('1970-01-01T00:00:00');
+      start.setHours(this.roomForm.value.start);
+      const end = new Date('1970-01-01T00:00:00');
+      end.setHours(this.roomForm.value.end);
+      const schedule = {
+        weekDay: this.roomForm.value.weekday,
+        start: start,
+        end: end,
+      };
 
-    this.scheduleSvc.addSchedule(<Schedule>schedule)
-    .pipe(
-      tap( s => {
-        this.schedules = [...this.schedules, s];
-      })
-    )
-    .subscribe(() => {
-      this.table.renderRows();
-    });
+      this.scheduleSvc.addSchedule(<Schedule>schedule)
+      .pipe(
+        tap( s => {
+          this.schedules = [...this.schedules, s];
+        })
+      )
+      .subscribe(() => {
+        this.table.renderRows();
+      });
+    }
     this.roomForm.get('weekday')?.reset();
     this.roomForm.get('start')?.reset();
     this.roomForm.get('end')?.reset();

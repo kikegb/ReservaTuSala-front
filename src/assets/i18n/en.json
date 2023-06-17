@@ -58,7 +58,8 @@
         "alreadyHaveAccount": "Already have an account? ",
         "loginError": "Login error: invalid email or password.",
         "loginSuccessful": "Successful Login.",
-        "unauthorizedPage": "You're not allowed to see this page."
+        "unauthorizedPage": "You're not allowed to see this page.",
+        "emptyRequiredFields": "There are empty required fields."
     },
     "actions": {
         "edit": "Edit",

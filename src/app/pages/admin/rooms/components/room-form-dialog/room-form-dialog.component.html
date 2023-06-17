@@ -139,7 +139,10 @@
         </p>
     </form>
 </div>
+<div *ngIf="roomForm.invalid">
+    <p class="error-message">{{ 'messages.emptyRequiredFields' | translate }}</p>
+</div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close (click)="onCancel()">{{ 'actions.cancel' | translate }}</button>
-  <button mat-button mat-dialog-close (click)="onSave()" cdkFocusInitial>{{ 'actions.save' | translate }}</button>
+  <button mat-button mat-dialog-close [disabled]="!roomForm.valid" (click)="onSave()" cdkFocusInitial>{{ 'actions.save' | translate }}</button>
 </div>

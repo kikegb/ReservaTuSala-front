@@ -58,7 +58,8 @@
         "alreadyHaveAccount": "¿Ya tienes una cuenta?",
         "loginError": "Error al iniciar sesión: correo electrónico o contraseña incorrectos.",
         "loginSuccessful": "Inicio de sesión correcto.",
-        "unauthorizedPage": "No tienes permitido acceder a esta página."
+        "unauthorizedPage": "No tienes permitido acceder a esta página.",
+        "emptyRequiredFields": "Existen campos obligatiorios vacíos."
     },
     "actions": {
         "edit": "Editar",
