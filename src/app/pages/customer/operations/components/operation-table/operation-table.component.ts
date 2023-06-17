@@ -15,7 +15,7 @@ import jwtDecode from 'jwt-decode';
 })
 export class OperationTableComponent {
   operations: Operation[] = []
-  columnsToDisplay = ['room', 'start', 'end', 'cost', 'status'];
+  columnsToDisplay = ['room', 'start', 'end', 'cost', 'status', 'actions'];
   @ViewChild(MatTable) table!: MatTable<any>;
 
   constructor(
