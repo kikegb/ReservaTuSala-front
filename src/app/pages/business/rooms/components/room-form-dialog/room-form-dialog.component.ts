@@ -29,7 +29,7 @@ export class RoomFormDialogComponent {
   schedules: Schedule[] = [];
   @ViewChild(MatTable) table!: MatTable<any>;
   week: string[] = [];
-  hours = Array.from({ length: 24 }, (_, index) => index + 1);
+  hours = [...Array(24).keys()]
 
   constructor(
     public dialogRef: MatDialogRef<RoomFormDialogComponent>,

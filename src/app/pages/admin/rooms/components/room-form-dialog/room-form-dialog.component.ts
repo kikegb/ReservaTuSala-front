@@ -30,7 +30,7 @@ export class RoomFormDialogComponent {
   schedules: Schedule[] = [];
   @ViewChild(MatTable) table!: MatTable<any>;
   week: string[] = [];
-  hours = Array.from({ length: 24 }, (_, index) => index + 1);
+  hours = [...Array(24).keys()]
 
   constructor(
     public dialogRef: MatDialogRef<RoomFormDialogComponent>,
@@ -198,6 +198,7 @@ export class RoomFormDialogComponent {
     .pipe(
       tap( newLocation => {
         this.locations = [...this.locations, newLocation];
+        this.roomForm.get('location')?.setValue(newLocation);
       })
     )
     .subscribe(() => {
