@@ -55,8 +55,8 @@ export class RoomsService {
       ...room,
       schedules: room.schedules.map(schedule => ({
         ...schedule,
-        start: schedule.start.toISOString().split('T')[1].slice(0, -2),
-        end: schedule.end.toISOString().split('T')[1].slice(0, -2)
+        start: new Date(schedule.start.getTime() - (schedule.start.getTimezoneOffset() * 60000)).toISOString().split('T')[1].slice(0, -5),
+        end: new Date(schedule.end.getTime() - (schedule.end.getTimezoneOffset() * 60000)).toISOString().split('T')[1].slice(0, -5)
       }))
     };
     return this.http.post<Room>(this.apiURL, formattedRoom);
@@ -72,8 +72,8 @@ export class RoomsService {
       })),
       schedules: room.schedules.map(schedule => ({
         ...schedule,
-        start: schedule.start.toISOString().split('T')[1].slice(0, -2),
-        end: schedule.end.toISOString().split('T')[1].slice(0, -2)
+        start: new Date(schedule.start.getTime() - (schedule.start.getTimezoneOffset() * 60000)).toISOString().split('T')[1].slice(0, -5),
+        end: new Date(schedule.end.getTime() - (schedule.end.getTimezoneOffset() * 60000)).toISOString().split('T')[1].slice(0, -5)
       }))
     };
     return this.http.put<Room>(this.apiURL, formattedRoom);
@@ -92,8 +92,8 @@ export class RoomsService {
   addSchedule(schedule: Schedule, id: number): Observable<Schedule>{
     const formattedSchedule = {
       ...schedule,
-      start: schedule.start.toISOString().split('T')[1].slice(0, -2),
-      end: schedule.end.toISOString().split('T')[1].slice(0, -2)
+      start: new Date(schedule.start.getTime() - (schedule.start.getTimezoneOffset() * 60000)).toISOString().split('T')[1].slice(0, -5),
+      end: new Date(schedule.end.getTime() - (schedule.end.getTimezoneOffset() * 60000)).toISOString().split('T')[1].slice(0, -5)
     };
     const url = `${this.apiURL}/schedule?id=${id}`;
     return this.http.post<Schedule>(this.apiURL, formattedSchedule)

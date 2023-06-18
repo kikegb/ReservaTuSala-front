@@ -24,8 +24,8 @@ export class OperationsService {
   addOperation(operation: Operation): Observable<Operation>{
       const formattedOperation = {
         ...operation,
-        start: operation.start.toISOString().slice(0, -2),
-        end: operation.end.toISOString().slice(0, -2)
+        start: new Date(operation.start.getTime() - (operation.start.getTimezoneOffset() * 60000)).toISOString().slice(0, -5),
+        end: new Date(operation.end.getTime() - (operation.end.getTimezoneOffset() * 60000)).toISOString().slice(0, -5)
       };
       return this.http.post<Operation>(this.apiURL, formattedOperation);
   }
@@ -33,8 +33,8 @@ export class OperationsService {
   updateOperation(operation: Operation): Observable<Operation>{
     const formattedOperation = {
       ...operation,
-      start: operation.start.toISOString().slice(0, -2),
-      end: operation.end.toISOString().slice(0, -2),
+      start: new Date(operation.start.getTime() - (operation.start.getTimezoneOffset() * 60000)).toISOString().slice(0, -5),
+      end: new Date(operation.end.getTime() - (operation.end.getTimezoneOffset() * 60000)).toISOString().slice(0, -5),
       customer: {id: operation.customer.id},
       business: {id: operation.business.id},
       room: {id: operation.room.id}
