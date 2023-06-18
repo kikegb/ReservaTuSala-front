@@ -53,20 +53,34 @@ export class RoomsService {
   addRoom(room: Room): Observable<Room>{
     const formattedRoom = {
       ...room,
+      business: {...room.business, businessOperations: [], customerOperations: [], rooms: []},
       schedules: room.schedules.map(schedule => ({
         ...schedule,
         start: new Date(schedule.start.getTime() - (schedule.start.getTimezoneOffset() * 60000)).toISOString().split('T')[1].slice(0, -5),
         end: new Date(schedule.end.getTime() - (schedule.end.getTimezoneOffset() * 60000)).toISOString().split('T')[1].slice(0, -5)
       }))
     };
-    return this.http.post<Room>(this.apiURL, formattedRoom);
+    return this.http.post<Room>(this.apiURL, formattedRoom).pipe(
+      map(room => ({
+        ...room,
+        operations: room.operations?.map(operation => ({
+          ...operation,
+          start: new Date(operation.start),
+          end: new Date(operation.end)
+        })),
+        schedules: room.schedules?.map(schedule => ({
+          ...schedule,
+          start: new Date('1970-01-01T' + schedule.start),
+          end: new Date('1970-01-01T' + schedule.end)
+        }))
+      }))
+    );
   }
 
   updateRoom(room: Room): Observable<Room>{
     const formattedRoom = {
       ...room,
-      business: {id: room.business.id},
-      location: {id: room.location.id},
+      business: {...room.business, businessOperations: [], customerOperations: [], rooms: []},
       operations: room.operations.map(operation => ({
         id: operation.id
       })),
@@ -76,7 +90,21 @@ export class RoomsService {
         end: new Date(schedule.end.getTime() - (schedule.end.getTimezoneOffset() * 60000)).toISOString().split('T')[1].slice(0, -5)
       }))
     };
-    return this.http.put<Room>(this.apiURL, formattedRoom);
+    return this.http.put<Room>(this.apiURL, formattedRoom).pipe(
+      map(room => ({
+        ...room,
+        operations: room.operations?.map(operation => ({
+          ...operation,
+          start: new Date(operation.start),
+          end: new Date(operation.end)
+        })),
+        schedules: room.schedules?.map(schedule => ({
+          ...schedule,
+          start: new Date('1970-01-01T' + schedule.start),
+          end: new Date('1970-01-01T' + schedule.end)
+        }))
+      }))
+    );
   }
 
   deleteRoom(id: number): Observable<unknown>{

@@ -172,7 +172,12 @@ export class RoomFormDialogComponent {
   onSave(): void {
     if(!this.room) {
       let newRoom = {
-        ...<Room>this.roomForm.value,
+        name: this.roomForm.value.name,
+        business: this.roomForm.value.business,
+        location: this.roomForm.value.location,
+        size: this.roomForm.value.size,
+        capacity: this.roomForm.value.capacity,
+        price: this.roomForm.value.price,
         materials: this.materials,
         schedules: this.schedules
       };

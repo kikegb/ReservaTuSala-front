@@ -37,39 +37,24 @@ export class RoomTableComponent {
   }
 
   addRoom(room: Room): void {
-    this.roomSvc.addRoom(room)
-    .pipe(
-      tap( newRoom => {
-        this.rooms = [...this.rooms, newRoom];
-      })
-    )
-    .subscribe(() => {
+    this.roomSvc.addRoom(room).subscribe(newRoom => {
+      this.rooms = [...this.rooms, newRoom];
       this.table.renderRows();
     });
   }
 
   updateRoom(updatedRoom: Room): void {
-    this.roomSvc.updateRoom(updatedRoom)
-    .pipe(
-      tap( () => {
-        let index = this.rooms.findIndex( room => room.id == updatedRoom.id );
-        this.rooms[index] = updatedRoom;
-        this.rooms = [...this.rooms];
-      })
-    )
-    .subscribe(() => {
+    this.roomSvc.updateRoom(updatedRoom).subscribe(() => {
+      let index = this.rooms.findIndex( room => room.id == updatedRoom.id );
+      this.rooms[index] = updatedRoom;
+      this.rooms = [...this.rooms];
       this.table.renderRows();
     });
   }
 
   deleteRoom(id: number): void {
-    this.roomSvc.deleteRoom(id)
-    .pipe(
-      tap( () => {
-        this.rooms = this.rooms.filter(room => room.id !== id);
-      })
-    )
-    .subscribe(() => {
+    this.roomSvc.deleteRoom(id).subscribe(() => {
+      this.rooms = this.rooms.filter(room => room.id !== id);
       this.table.renderRows();
     });
   }
