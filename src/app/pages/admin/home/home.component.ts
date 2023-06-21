@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -14,11 +14,9 @@ export class HomeComponent {
   constructor(private router: Router,
     private translate: TranslateService) 
   {
-
     this.translate.get(['adminPages']).subscribe(translations => {
       this.pages = <string[]>translations['adminPages'].slice(1);
     });
-
   }
 
   navigateTo(index: number) {

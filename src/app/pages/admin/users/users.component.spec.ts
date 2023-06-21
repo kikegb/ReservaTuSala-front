@@ -6,7 +6,7 @@ import { UsersComponent } from './users.component';
 import { UsersService } from 'src/app/global/services/users.service';
 import { TranslateModule } from '@ngx-translate/core';
 
-describe('UsersComponent', () => {
+describe('Admin UsersComponent', () => {
   let component: UsersComponent;
   let fixture: ComponentFixture<UsersComponent>;
   let service: UsersService;

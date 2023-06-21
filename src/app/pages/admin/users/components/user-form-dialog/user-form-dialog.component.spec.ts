@@ -9,12 +9,12 @@ import { UserFormDialogComponent } from './user-form-dialog.component';
 import { User } from 'src/app/global/interfaces/user.interface';
 import { TranslateModule } from '@ngx-translate/core';
 
-describe('UserFormDialogComponent', () => {
+describe('Admin UserFormDialogComponent', () => {
   let component: UserFormDialogComponent;
   let fixture: ComponentFixture<UserFormDialogComponent>;
 
   const mockDialogData = {
-    title: 'Edit user',
+    title: 'edit.user',
     user: <User>{
       id: 1,
       cnif: "12345678X",
@@ -27,7 +27,7 @@ describe('UserFormDialogComponent', () => {
   };
 
   const mockDialogDataNoUser = {
-    title: 'Add user'
+    title: 'new.user'
   };
 
   beforeEach(waitForAsync(() => {

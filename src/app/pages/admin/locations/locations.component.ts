@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-locations',
@@ -7,7 +6,5 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./locations.component.scss']
 })
 export class LocationsComponent {
-
-  constructor(private translate: TranslateService) {}
 
 }

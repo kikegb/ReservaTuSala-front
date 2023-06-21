@@ -12,7 +12,7 @@ import { UserTableComponent } from './user-table.component';
 import { UsersService } from 'src/app/global/services/users.service';
 import { TranslateModule } from '@ngx-translate/core';
 
-describe('UserTableComponent', () => {
+describe('Admin UserTableComponent', () => {
   let component: UserTableComponent;
   let fixture: ComponentFixture<UserTableComponent>;
   let service: UsersService;

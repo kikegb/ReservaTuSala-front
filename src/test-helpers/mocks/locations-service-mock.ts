@@ -23,33 +23,11 @@ const locationsList = <Location[]>[
   },
 ];
 
-const parsedLocationsList = [
-  {
-    "id": 1,
-    "customer": <Location>{},
-    "business": <Location>{},
-    "room": <Room>{},
-    "start": new Date("2023-06-01T12:00:00"),
-    "end": new Date("2023-06-01T16:00:00"),
-    "cost": 65.20,
-    "status": "APPROVED"
-  },
-  {
-    "id": 2,
-    "customer": <Location>{},
-    "business": <Location>{},
-    "room": <Room>{},
-    "start": new Date("2023-06-18T10:00:00"),
-    "end": new Date("2023-06-18T13:00:00"),
-    "cost": 42.50,
-    "status": "PENDING"
-  },
-];
 
 export const LocationsServiceMock = {
 
     getLocations: () => {
-      return of(parsedLocationsList);
+      return of(locationsList);
     },
 
     addLocation: (location: Location) => {
