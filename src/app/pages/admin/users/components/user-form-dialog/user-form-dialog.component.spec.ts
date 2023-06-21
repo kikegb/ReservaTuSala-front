@@ -7,6 +7,7 @@ import { MatDialogRefMock } from 'src/test-helpers/mocks/mat-dialog-ref-mock';
 
 import { UserFormDialogComponent } from './user-form-dialog.component';
 import { User } from 'src/app/global/interfaces/user.interface';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('UserFormDialogComponent', () => {
   let component: UserFormDialogComponent;
@@ -34,7 +35,8 @@ describe('UserFormDialogComponent', () => {
       imports: [
         MaterialModule,
         ReactiveFormsModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        TranslateModule.forRoot()
       ],
       declarations: [ UserFormDialogComponent ],
       providers: [
@@ -66,7 +68,6 @@ describe('UserFormDialogComponent', () => {
     expect(component.userForm.value.password).toBeNull();
     expect(component.userForm.value.phone).toBeNull();
     expect(component.userForm.value.role).toBeNull();
-    expect(component.userForm.value.deleted).toBeFalse();
   });
 
   it('should create form with user data provided', () => {
@@ -110,8 +111,7 @@ describe('UserFormDialogComponent', () => {
       phone: null,
       email: null,
       password: null,
-      role: null,
-      deleted: false
+      role: null
     };
 
     const spyDialogClose = spyOn(component.dialogRef, 'close');

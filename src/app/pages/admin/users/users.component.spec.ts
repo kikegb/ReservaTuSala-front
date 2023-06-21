@@ -4,6 +4,7 @@ import { UsersServiceMock } from 'src/test-helpers/mocks/users-service-mock';
 import { UserTableComponent } from './components/user-table/user-table.component';
 import { UsersComponent } from './users.component';
 import { UsersService } from 'src/app/global/services/users.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('UsersComponent', () => {
   let component: UsersComponent;
@@ -13,7 +14,8 @@ describe('UsersComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
-        MaterialModule
+        MaterialModule,
+        TranslateModule.forRoot()
       ],
       declarations: [ UsersComponent, UserTableComponent ],
       providers: [
@@ -33,6 +35,6 @@ describe('UsersComponent', () => {
   });
 
   it('should render "Users" as main title', () => {
-    expect(fixture.debugElement.nativeElement.textContent).toContain('Users');
+    expect(fixture.debugElement.nativeElement.textContent).toContain('title.users');
   });
 });
