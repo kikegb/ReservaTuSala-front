@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MaterialModule } from 'src/app/material.module';
 import { UsersServiceMock } from 'src/test-helpers/mocks/users-service-mock';
 import { UserTableComponent } from './components/user-table/user-table.component';
-import { UsersService } from './services/users.service';
 import { UsersComponent } from './users.component';
+import { UsersService } from 'src/app/global/services/users.service';
 
 describe('UsersComponent', () => {
   let component: UsersComponent;

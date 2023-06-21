@@ -6,10 +6,10 @@ import { MaterialModule } from 'src/app/material.module';
 import { MatDialogRefMock } from 'src/test-helpers/mocks/mat-dialog-ref-mock';
 import { UsersServiceMock } from 'src/test-helpers/mocks/users-service-mock';
 import { User } from 'src/app/global/interfaces/user.interface';
-import { UsersService } from '../../services/users.service';
 import { UserFormDialogComponent } from '../user-form-dialog/user-form-dialog.component';
 
 import { UserTableComponent } from './user-table.component';
+import { UsersService } from 'src/app/global/services/users.service';
 
 describe('UserTableComponent', () => {
   let component: UserTableComponent;
@@ -18,7 +18,6 @@ describe('UserTableComponent', () => {
 
   let usersList = <User[]>[
     {
-        "deleted": false,
         "id": 1,
         "cnif": "87654321X",
         "name": "Business S.A.",
@@ -28,7 +27,6 @@ describe('UserTableComponent', () => {
         "role": "BUSINESS",
     },
     {
-        "deleted": true,
         "id": 2,
         "cnif": "12345678Y",
         "name": "Custo Mer",
@@ -71,7 +69,6 @@ describe('UserTableComponent', () => {
 
   it('should add new users to the list', () => {
     let newUser = <User>{
-      "deleted": false,
       "id": 3,
       "cnif": "12345678X",
       "name": "New Customer",
@@ -102,7 +99,7 @@ describe('UserTableComponent', () => {
     let spyServiceDelete = spyOn(service, 'deleteUser').and.returnValue(of({}));
     component.deleteUser(userId);
     expect(spyServiceDelete).toHaveBeenCalled();
-    expect(component.users[0].deleted).toBeTrue();
+    expect(component.users.length).toBe(1);
   });
 
   it('should open dialog to confirm user deletion', () => {

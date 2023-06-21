@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
 import jwtDecode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenUtilsService {
+  jwtDecode = jwtDecode;
 
   constructor() { }
 
@@ -18,6 +18,6 @@ export class TokenUtilsService {
   }
 
   getDecodedToken(): any {
-    return jwtDecode(localStorage.getItem('token') || "");
+    return this.jwtDecode(localStorage.getItem('token') || "");
   }
 }
