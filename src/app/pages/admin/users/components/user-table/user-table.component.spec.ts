@@ -10,6 +10,7 @@ import { UserFormDialogComponent } from '../user-form-dialog/user-form-dialog.co
 
 import { UserTableComponent } from './user-table.component';
 import { UsersService } from 'src/app/global/services/users.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('UserTableComponent', () => {
   let component: UserTableComponent;
@@ -40,7 +41,8 @@ describe('UserTableComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
-        MaterialModule
+        MaterialModule,
+        TranslateModule.forRoot()
       ],
       declarations: [ UserTableComponent ],
       providers: [
@@ -107,7 +109,7 @@ describe('UserTableComponent', () => {
     let spyDialogOpen = spyOn(component.dialog, 'open').and.callThrough();
     component.showDeleteDialog(userId);
     expect(spyDialogOpen).toHaveBeenCalled();
-    expect(spyDialogOpen).toHaveBeenCalledWith(DeleteDialogComponent, { data: { elementName: 'user' } });
+    expect(spyDialogOpen).toHaveBeenCalledWith(DeleteDialogComponent, { data: { elementName: 'elements.user' } });
   });
 
   it('should open dialog to update a user', () => {
@@ -115,13 +117,13 @@ describe('UserTableComponent', () => {
     let spyDialogOpen = spyOn(component.dialog, 'open').and.callThrough();
     component.showEditUserDialog(user);
     expect(spyDialogOpen).toHaveBeenCalled();
-    expect(spyDialogOpen).toHaveBeenCalledWith(UserFormDialogComponent, { data: { title: 'Edit user', user: user } });
+    expect(spyDialogOpen).toHaveBeenCalledWith(UserFormDialogComponent, { data: { title: 'edit.user', user: user } });
   });
 
   it('should open dialog to add new users', () => {
     let spyDialogOpen = spyOn(component.dialog, 'open').and.callThrough();
     component.showAddUserDialog();
     expect(spyDialogOpen).toHaveBeenCalled();
-    expect(spyDialogOpen).toHaveBeenCalledWith(UserFormDialogComponent, { data: { title: 'New user', user: undefined} });
+    expect(spyDialogOpen).toHaveBeenCalledWith(UserFormDialogComponent, { data: { title: 'new.user', user: undefined} });
   });
 });

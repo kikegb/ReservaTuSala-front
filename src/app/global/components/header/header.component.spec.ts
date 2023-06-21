@@ -2,6 +2,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MaterialModule } from 'src/app/material.module';
 import { SidenavService } from '../../services/sidenav.service';
 import { HeaderComponent } from './header.component';
+import { UsersService } from '../../services/users.service';
+import { UsersServiceMock } from 'src/test-helpers/mocks/users-service-mock';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -13,10 +16,14 @@ describe('HeaderComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ MaterialModule ],
+      imports: [ 
+        MaterialModule,
+        TranslateModule.forRoot() 
+      ],
       declarations: [ HeaderComponent ],
       providers: [
-        {provide: SidenavService, useValue: SidenavServiceMock }
+        {provide: SidenavService, useValue: SidenavServiceMock },
+        {provide: UsersService, useValue: UsersServiceMock }
       ],
     })
     .compileComponents();

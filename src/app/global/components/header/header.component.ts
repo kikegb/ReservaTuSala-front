@@ -24,8 +24,7 @@ export class HeaderComponent implements OnInit {
     private sidenav: SidenavService,
     private router: Router,
     private tokenSvc: TokenUtilsService,
-    private userSvc: UsersService,
-    private translate: TranslateService) {}
+    private userSvc: UsersService) {}
   
   ngOnInit(): void {
     this.router.events.subscribe((event: any) => {

@@ -10,6 +10,9 @@ const usersList = <User[]>[
       "password": "psswd",
       "email": "email@example.com",
       "role": "BUSINESS",
+      "rooms": [],
+      "customerOperations": [],
+      "businessOperations": []
   },
   {
       "id": 2,
@@ -19,6 +22,9 @@ const usersList = <User[]>[
       "password": "p4ssw0rd",
       "email": "mail@mail.com",
       "role": "CUSTOMER",
+      "rooms": [],
+      "customerOperations": [],
+      "businessOperations": []
   }
 ];
 
@@ -26,6 +32,10 @@ export const UsersServiceMock = {
 
     getUsers: () => {
       return of(usersList);
+    },
+
+    getById: () => {
+      return of(usersList[0]);
     },
 
     addUser: (user: User) => {

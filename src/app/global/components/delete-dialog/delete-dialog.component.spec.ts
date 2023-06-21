@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRefMock } from 'src/test-helpers/mocks/mat-dialog-ref-mock';
 import { DeleteDialogComponent } from './delete-dialog.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('DeleteDialogComponent', () => {
   let component: DeleteDialogComponent;
@@ -9,6 +10,9 @@ describe('DeleteDialogComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      imports: [
+        TranslateModule.forRoot()
+      ],
       declarations: [ DeleteDialogComponent ],
       providers: [
         {provide: MatDialogRef, useValue: MatDialogRefMock},

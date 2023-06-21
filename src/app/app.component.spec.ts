@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './global/components/header/header.component';
 import { SidenavService } from './global/services/sidenav.service';
 import { MaterialModule } from './material.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { UsersService } from './global/services/users.service';
+import { UsersServiceMock } from 'src/test-helpers/mocks/users-service-mock';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -13,14 +16,16 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule,
         MaterialModule,
-        BrowserAnimationsModule 
+        BrowserAnimationsModule,
+        TranslateModule.forRoot()
       ],
       declarations: [
         AppComponent,
         HeaderComponent
       ],
       providers: [
-        {provide: SidenavService, useValue: SidenavServiceMock}
+        {provide: SidenavService, useValue: SidenavServiceMock},
+        {provide: UsersService, useValue: UsersServiceMock}
       ]
     }).compileComponents();
   });

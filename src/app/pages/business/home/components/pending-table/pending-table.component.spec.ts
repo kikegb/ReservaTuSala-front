@@ -1,6 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PendingTableComponent } from './pending-table.component';
+import { UsersService } from 'src/app/global/services/users.service';
+import { UsersServiceMock } from 'src/test-helpers/mocks/users-service-mock';
+import { OperationsService } from 'src/app/global/services/operations.service';
+import { OperationsServiceMock } from 'src/test-helpers/mocks/operations-service-mock';
+import { MaterialModule } from 'src/app/material.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('PendingTableComponent', () => {
   let component: PendingTableComponent;
@@ -8,7 +14,15 @@ describe('PendingTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PendingTableComponent ]
+      imports: [
+        MaterialModule,
+        TranslateModule.forRoot()
+      ],
+      declarations: [ PendingTableComponent ],
+      providers: [
+        { provide: UsersService, useValue: UsersServiceMock },
+        { provide: OperationsService, useValue: OperationsServiceMock }
+      ]
     })
     .compileComponents();
 

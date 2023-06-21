@@ -1,6 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RoomTableComponent } from './room-table.component';
+import { MaterialModule } from 'src/app/material.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { RoomsService } from 'src/app/global/services/rooms.service';
+import { RoomsServiceMock } from 'src/test-helpers/mocks/rooms-service-mock';
+import { MatDialog } from '@angular/material/dialog';
+import { MatDialogRefMock } from 'src/test-helpers/mocks/mat-dialog-ref-mock';
+import { UsersService } from 'src/app/global/services/users.service';
+import { UsersServiceMock } from 'src/test-helpers/mocks/users-service-mock';
 
 describe('RoomTableComponent', () => {
   let component: RoomTableComponent;
@@ -8,7 +16,16 @@ describe('RoomTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RoomTableComponent ]
+      imports: [
+        MaterialModule,
+        TranslateModule.forRoot()
+      ],
+      declarations: [ RoomTableComponent ],
+      providers: [
+        { provide: RoomsService, useValue: RoomsServiceMock },
+        { provide: UsersService, useValue: UsersServiceMock },
+        { provide: MatDialog, useValue: MatDialogRefMock }
+      ]
     })
     .compileComponents();
 
