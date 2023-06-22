@@ -21,6 +21,7 @@ export class RoomTableComponent {
   week: string[] = [];
   columnsToDisplay = ['name', 'location', 'size', 'capacity', 'material', 'schedule', 'price', 'actions'];
   @ViewChild(MatTable) table!: MatTable<any>;
+  jwtDecode = jwtDecode;
 
   constructor(private roomSvc: RoomsService, 
     public dialog: MatDialog,
@@ -35,7 +36,7 @@ export class RoomTableComponent {
   ngOnInit(): void {
     const token = localStorage.getItem('token');
     if (token) {
-      const decodedToken = <any>jwtDecode(token);
+      const decodedToken = <any>this.jwtDecode(token);
       const id = decodedToken.id;
       this.userSvc.getById(id)
       .pipe(
@@ -71,7 +72,7 @@ export class RoomTableComponent {
   }
 
   showDeleteDialog(id: number): void {
-    const dialogRef = this.dialog.open(DeleteDialogComponent, { data: { elementName: 'room' } });
+    const dialogRef = this.dialog.open(DeleteDialogComponent, { data: { elementName: this.translate.instant('elements.room') } });
 
     dialogRef.afterClosed().subscribe( result => {
       if(result) {
@@ -81,7 +82,7 @@ export class RoomTableComponent {
   }
 
   showEditRoomDialog(room: Room): void {
-    const dialogRef = this.dialog.open(RoomFormDialogComponent, { data: { title: 'Edit room', room: room } });
+    const dialogRef = this.dialog.open(RoomFormDialogComponent, { data: { title: this.translate.instant('edit.room'), room: room } });
 
     dialogRef.afterClosed().subscribe( updatedRoom => {
       if(updatedRoom) {
@@ -91,7 +92,7 @@ export class RoomTableComponent {
   }
 
   showAddRoomDialog(): void {
-    const dialogRef = this.dialog.open(RoomFormDialogComponent, { data: { title: 'New room', room: undefined} });
+    const dialogRef = this.dialog.open(RoomFormDialogComponent, { data: { title: this.translate.instant('new.room'), room: undefined} });
 
     dialogRef.afterClosed().subscribe( newRoom => {
       if(newRoom) {

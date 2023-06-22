@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateTestingModule } from 'ngx-translate-testing';
 import { Router } from '@angular/router';
 

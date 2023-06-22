@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs';
 import { User } from 'src/app/global/interfaces/user.interface';
 import { UsersService } from 'src/app/global/services/users.service';
