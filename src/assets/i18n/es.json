@@ -9,7 +9,8 @@
         "rooms": "Salas",
         "locations": "Ubicaciones",
         "details": "Detalles",
-        "makeReservation": "Haga una reserva"
+        "makeReservation": "Haga una reserva",
+        "searchFilters": "Filtros de búsqueda"
     },
     "tableHeaders": {
         "location": ["Calle", "Número", "Código postal", "Ciudad", "Provincia", "País", "Acciones"],

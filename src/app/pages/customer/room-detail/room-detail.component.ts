@@ -26,6 +26,7 @@ export class RoomDetailComponent {
   today = new Date();
   operations: Operation[] = [];
   unavailableHours: number[] = [];
+  jwtDecode = jwtDecode;
 
   constructor(
     private route: ActivatedRoute,
@@ -137,10 +138,9 @@ export class RoomDetailComponent {
     endDateTime.setHours(this.operationForm.value.endHour)
     const token = localStorage.getItem('token');
     if (token) {
-      const decodedToken = <any>jwtDecode(token);
+      const decodedToken = <any>this.jwtDecode(token);
       const userId = decodedToken.id;
-      let newOperation: Operation = {
-        id: this.operationForm.value.id,
+      let newOperation: Operation = <Operation>{
         customer: <User>{id: userId},
         business: this.room.business,
         room: this.room,
@@ -151,22 +151,13 @@ export class RoomDetailComponent {
       };
       this.operationSvc.addOperation(newOperation)
       .pipe(
-        tap( newOperation => {
-          this.operations = [...this.operations, newOperation];
+        tap( op => {
+          this.operations = [...this.operations, op];
         })
       )
       .subscribe();
 
-      const role = decodedToken.role;
-      if (role == 'ADMIN') {
-        this.router.navigate(['admin/home']);
-      }
-      if (role == 'CUSTOMER') {
-        this.router.navigate(['customer/home']);
-      }
-      if (role == 'BUSINESS') {
-        this.router.navigate(['business/home']);
-      }
+      this.router.navigate(['customer/home']);
     }
   }
 

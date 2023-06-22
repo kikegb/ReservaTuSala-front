@@ -7,6 +7,7 @@ import { tap } from 'rxjs';
 import { Room } from 'src/app/global/interfaces/room.interface';
 import { RoomsService } from 'src/app/global/services/rooms.service';
 import { FilterDialogComponent } from './components/filter-dialog/filter-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,8 @@ export class HomeComponent {
     private formBuilder: FormBuilder,
     private roomSvc: RoomsService,
     private router: Router,
-    public dialog: MatDialog) 
+    public dialog: MatDialog,
+    private translate: TranslateService) 
   {
     this.filters = null;
     this.searchForm = this.formBuilder.group({
@@ -48,9 +50,9 @@ export class HomeComponent {
         tap( (rooms: Room[]) => {
           this.rooms = rooms;
           if (this.searchForm.value.search) {
-            this.rooms = rooms.filter((room: Room) => room.name.toLowerCase().includes(this.searchForm.value.search) 
-            || room.business.name.toLowerCase().includes(this.searchForm.value.search)
-            || room.location.town.toLowerCase().includes(this.searchForm.value.search));
+            this.rooms = rooms.filter((room: Room) => room.name.toLowerCase().includes(this.searchForm.value.search.toLowerCase()) 
+            || room.business.name.toLowerCase().includes(this.searchForm.value.search.toLowerCase())
+            || room.location.town.toLowerCase().includes(this.searchForm.value.search.toLowerCase()));
           }
           if (this.filters) {
             this.rooms = this.rooms.filter(room => room.size >= this.filters?.minSize);
@@ -70,7 +72,7 @@ export class HomeComponent {
   }
 
   showFilterDialog(): void {
-    const dialogRef = this.dialog.open(FilterDialogComponent, { data: { title: 'Search filters', filters: this.filters } });
+    const dialogRef = this.dialog.open(FilterDialogComponent, { data: { title: this.translate.instant('title.searchFilters'), filters: this.filters } });
 
     dialogRef.afterClosed().subscribe( filters => {
       this.filters = filters;

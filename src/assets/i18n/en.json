@@ -9,7 +9,8 @@
         "rooms": "Rooms",
         "locations": "Locations",
         "details": "Details",
-        "makeReservation": "Make a reservation"
+        "makeReservation": "Make a reservation",
+        "searchFilters": "Search filters"
     },
     "tableHeaders": {
         "location": ["Street", "Number", "Postcode", "Town", "Province", "Country", "Actions"],
