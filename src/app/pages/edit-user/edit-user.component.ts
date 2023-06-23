@@ -14,6 +14,7 @@ import { UsersService } from 'src/app/global/services/users.service';
 export class EditUserComponent {
   user: User;
   userForm: FormGroup;
+  jwtDecode = jwtDecode;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,7 +36,7 @@ export class EditUserComponent {
   ngOnInit(): void {
     const token = localStorage.getItem('token');
     if (token) {
-      const decodedToken = <any>jwtDecode(token);
+      const decodedToken = <any>this.jwtDecode(token);
       this.userSvc.getById(decodedToken.id)
       .pipe(
           tap( (user: User) => {
@@ -63,7 +64,7 @@ export class EditUserComponent {
   onCancel(): void {
     const token = localStorage.getItem('token');
     if (token) {
-      const decodedToken = <any>jwtDecode(token);
+      const decodedToken = <any>this.jwtDecode(token);
       const role = decodedToken.role;
       if (role == 'ADMIN') {
         this.router.navigate(['admin/home']);
@@ -96,7 +97,7 @@ export class EditUserComponent {
     .subscribe(() => {});
     const token = localStorage.getItem('token');
     if (token) {
-      const decodedToken = <any>jwtDecode(token);
+      const decodedToken = <any>this.jwtDecode(token);
       const role = decodedToken.role;
       if (role == 'ADMIN') {
         this.router.navigate(['admin/home']);
