@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BusinessGuard implements CanActivate {
+  jwtDecode = jwtDecode;
   constructor(private router: Router) {}
   
   canActivate(
@@ -15,7 +16,7 @@ export class BusinessGuard implements CanActivate {
       
     const token = localStorage.getItem('token');
     if (token) {
-      const decodedToken = <any>jwtDecode(token);
+      const decodedToken = <any>this.jwtDecode(token);
       const role = decodedToken.role;
       if (role == "BUSINESS") {
         return true;

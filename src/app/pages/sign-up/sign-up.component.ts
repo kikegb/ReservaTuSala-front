@@ -17,6 +17,7 @@ import { LoginService } from 'src/app/global/services/login.service';
 })
 export class SignUpComponent {
   userForm: FormGroup;
+  jwtDecode = jwtDecode;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -52,9 +53,8 @@ export class SignUpComponent {
         duration: 5000,
         panelClass: ['success-snackbar'],
       });
-      localStorage.setItem('token', response.Authorization);
       this.tokenSvc.setToken(response.Authorization);
-      const decodedToken = <any>jwtDecode(response.Authorization);
+      const decodedToken = <any>this.jwtDecode(response.Authorization);
       const role = decodedToken.role;
       if (role == 'ADMIN') {
         this.router.navigate(['admin/home']);

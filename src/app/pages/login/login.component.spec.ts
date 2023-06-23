@@ -55,9 +55,13 @@ describe('LoginComponent', () => {
     expect(fixture.debugElement.nativeElement.textContent).toContain('actions.login');
   });
 
-  it('should save authorization token and navigate to admin home page if user is ADMIN', () => {
+  it('should save authorization token and navigate to admin home page if user is ADMIN when login', () => {
     const authToken = "Bearer T0k3nV4lue$%gdjklasfl$_39";
     const decodedToken = {id: 1, role: 'ADMIN', name: 'admin'};
+    const email = 'email@email.com';
+    const password = 'p4ssw0rd';
+    component.userForm.value.email = email;
+    component.userForm.value.password = password;
 
     spyOn(service, 'login').and.returnValue(of({Authorization: authToken}));
     spyOn(tokenUtilsSvc, 'setToken');
@@ -65,13 +69,18 @@ describe('LoginComponent', () => {
 
     component.login();
 
+    expect(service.login).toHaveBeenCalledWith(email, password);
     expect(tokenUtilsSvc.setToken).toHaveBeenCalledWith(authToken);
     expect(router.navigate).toHaveBeenCalledWith(['admin/home']);
   });
 
-  it('should save authorization token and navigate to business home page if user is BUSINESS', () => {
+  it('should save authorization token and navigate to business home page if user is BUSINESS when login', () => {
     const authToken = "Bearer T0k3nV4lue$%gdjklasfl$_39";
     const decodedToken = {id: 1, role: 'BUSINESS', name: 'Business S.L.'};
+    const email = 'email@email.com';
+    const password = 'p4ssw0rd';
+    component.userForm.value.email = email;
+    component.userForm.value.password = password;
 
     spyOn(service, 'login').and.returnValue(of({Authorization: authToken}));
     spyOn(tokenUtilsSvc, 'setToken');
@@ -79,13 +88,18 @@ describe('LoginComponent', () => {
 
     component.login();
 
+    expect(service.login).toHaveBeenCalledWith(email, password);
     expect(tokenUtilsSvc.setToken).toHaveBeenCalledWith(authToken);
     expect(router.navigate).toHaveBeenCalledWith(['business/home']);
   });
 
-  it('should save authorization token and navigate to customer home page if user is CUSTOMER', () => {
+  it('should save authorization token and navigate to customer home page if user is CUSTOMER when login', () => {
     const authToken = "Bearer T0k3nV4lue$%gdjklasfl$_39";
     const decodedToken = {id: 1, role: 'CUSTOMER', name: 'Kusto Mer'};
+    const email = 'email@email.com';
+    const password = 'p4ssw0rd';
+    component.userForm.value.email = email;
+    component.userForm.value.password = password;
 
     spyOn(service, 'login').and.returnValue(of({Authorization: authToken}));
     spyOn(tokenUtilsSvc, 'setToken');
@@ -93,6 +107,7 @@ describe('LoginComponent', () => {
 
     component.login();
 
+    expect(service.login).toHaveBeenCalledWith(email, password);
     expect(tokenUtilsSvc.setToken).toHaveBeenCalledWith(authToken);
     expect(router.navigate).toHaveBeenCalledWith(['customer/home']);
   });
