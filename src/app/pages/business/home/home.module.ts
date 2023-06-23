@@ -6,6 +6,7 @@ import { HomeComponent } from './home.component';
 import { MaterialModule } from 'src/app/material.module';
 import { TodayTableComponent } from './components/today-table/today-table.component';
 import { PendingTableComponent } from './components/pending-table/pending-table.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { PendingTableComponent } from './components/pending-table/pending-table.
     CommonModule,
     HomeRoutingModule,
     MaterialModule,
+    TranslateModule
   ]
 })
 export class HomeModule { }

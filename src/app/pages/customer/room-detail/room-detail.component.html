@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="content-left">
+        <div *ngIf="room">
+            <h1>{{ room.name }}</h1>
+            <h2 *ngIf="room.business">
+                {{ room.business.name }}
+                <button mat-button (click)="navigateDetails(room.business.id)">{{ "actions.moreInfo" | translate }}</button>
+            </h2>
+            <h3>{{ "title.details" | translate }}:</h3>
+            <p *ngIf="room.location">
+                {{ 'tableHeaders.room.1' | translate }}:  {{room.location.street}}, {{room.location.number}}, {{room.location.postcode}}, 
+                {{room.location.town}}, {{room.location.province}}, {{room.location.country}} 
+            </p>
+            <p>{{ 'tableHeaders.room.3' | translate }}: {{room.size}} m2</p>
+            <p>{{ 'tableHeaders.room.4' | translate }}: {{room.capacity}}</p>
+            <p>{{ 'tableHeaders.room.5' | translate }}:</p>
+            <p *ngFor="let material of room.materials">
+                - {{ material.material }} x {{ material.quantity }}
+            </p>
+            <p>{{ 'tableHeaders.room.6' | translate }}:</p>
+            <p *ngFor="let schedule of room.schedules">
+                - {{ week[schedule.weekDay] }}: {{ schedule.start.getHours() }}:00 - {{ schedule.end.getHours() }}:00
+            </p>
+            <p>{{ 'tableHeaders.room.7' | translate }}: {{room.price}} €/h</p>
+        </div>
+        <div *ngIf="!room">
+            <p>{{ 'messages.roomNotAvailable' | translate }}</p>
+        </div>
+    </div>
+    <div class="content-right">
+        <h2>{{ "title.makeReservation" | translate }}</h2>
+        <form [formGroup]="operationForm" >
+            <p>
+                <mat-form-field>
+                    <mat-label>{{ 'chooseDate' | translate }}</mat-label>
+                    <input matInput 
+                        [matDatepicker]="datePicker" 
+                        [min]="today"
+                        formControlName="date" required>
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #datePicker></mat-datepicker>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field>
+                    <mat-label>{{ 'chooseStartHour' | translate }}</mat-label>
+                    <mat-select formControlName="startHour" required>
+                        <mat-option *ngFor="let hour of hours" [value]="hour">
+                            {{ hour }}:00
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>{{ 'chooseEndHour' | translate }}</mat-label>
+                    <mat-select formControlName="endHour" required>
+                        <mat-option *ngFor="let hour of hours" [value]="hour">
+                            {{ hour }}:00
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </p>
+            <p>
+                {{ 'chooseEndHour' | translate }}: {{ nHours }}
+            </p>
+            <p>
+                {{ 'tableHeaders.operation.5' | translate }}: {{ cost }}
+            </p>
+        </form>
+        <div *ngIf="isBeforeOrSame()">
+            <p class="error-message">{{ 'messages.startBeforeEnd' | translate }}</p>
+        </div>
+        <div *ngIf="isUnavailable()">
+            <p class="error-message">{{ 'messages.unavailableHours' | translate }}</p>
+        </div>
+        <div *ngIf="operationForm.invalid">
+            <p class="error-message">{{ 'messages.emptyRequiredFields' | translate }}</p>
+        </div>
+        <button mat-button (click)="createOperation()" [disabled]="isBeforeOrSame() || isUnavailable() || !operationForm.valid" cdkFocusInitial>{{ 'actions.accept' | translate }}</button>
+    </div>
+</div>

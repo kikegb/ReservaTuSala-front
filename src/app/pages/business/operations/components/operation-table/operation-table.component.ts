@@ -17,6 +17,7 @@ export class OperationTableComponent {
   operations: Operation[] = []
   columnsToDisplay = ['customer', 'room', 'start', 'end', 'cost', 'status', 'actions'];
   @ViewChild(MatTable) table!: MatTable<any>;
+  jwtDecode = jwtDecode;
 
   constructor(
     private userSvc: UsersService,
@@ -26,7 +27,7 @@ export class OperationTableComponent {
   ngOnInit(): void {
     const token = localStorage.getItem('token');
     if (token) {
-      const decodedToken = <any>jwtDecode(token);
+      const decodedToken = <any>this.jwtDecode(token);
       const id = decodedToken.id;
       this.userSvc.getById(id)
       .pipe(

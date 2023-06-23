@@ -24,8 +24,8 @@ export class SchedulesService {
   addSchedule(schedule: Schedule): Observable<Schedule>{
       const formattedSchedule = {
         ...schedule,
-        start: schedule.start.toISOString().split('T')[1].slice(0, -2),
-        end: schedule.end.toISOString().split('T')[1].slice(0, -2)
+        start: new Date(schedule.start.getTime() - (schedule.start.getTimezoneOffset() * 60000)).toISOString().split('T')[1].slice(0, -5),
+        end: new Date(schedule.end.getTime() - (schedule.end.getTimezoneOffset() * 60000)).toISOString().split('T')[1].slice(0, -5)
       };
       return this.http.post<Schedule>(this.apiURL, formattedSchedule)
       .pipe(
@@ -40,8 +40,8 @@ export class SchedulesService {
   updateSchedule(schedule: Schedule): Observable<Schedule>{
     const formattedSchedule = {
       ...schedule,
-      start: schedule.start.toISOString().split('T')[1].slice(0, -2),
-      end: schedule.end.toISOString().split('T')[1].slice(0, -2)
+      start: new Date(schedule.start.getTime() - (schedule.start.getTimezoneOffset() * 60000)).toISOString().split('T')[1].slice(0, -5),
+      end: new Date(schedule.end.getTime() - (schedule.end.getTimezoneOffset() * 60000)).toISOString().split('T')[1].slice(0, -5)
     };
     return this.http.put<Schedule>(this.apiURL, formattedSchedule)
     .pipe(

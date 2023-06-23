@@ -6,6 +6,7 @@ import { LocationsService } from 'src/app/global/services/locations.service';
 import { Location } from 'src/app/global/interfaces/location.interface';
 import { DeleteDialogComponent } from 'src/app/global/components/delete-dialog/delete-dialog.component';
 import { LocationFormDialogComponent } from '../location-form-dialog/location-form-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-location-table',
@@ -17,7 +18,9 @@ export class LocationTableComponent {
   columnsToDisplay = ['street', 'number', 'postcode', 'town', 'province', 'country', 'actions'];
   @ViewChild(MatTable) table!: MatTable<any>;
 
-  constructor(private locationSvc: LocationsService, public dialog: MatDialog) {}
+  constructor(private locationSvc: LocationsService, 
+    public dialog: MatDialog,
+    private translate: TranslateService) {}
   
   ngOnInit(): void {
     this.locationSvc.getLocations()
@@ -66,7 +69,7 @@ export class LocationTableComponent {
   }
 
   showDeleteDialog(id: number): void {
-    const dialogRef = this.dialog.open(DeleteDialogComponent, { data: { elementName: 'location' } });
+    const dialogRef = this.dialog.open(DeleteDialogComponent, { data: { elementName: this.translate.instant("elements.location") } });
 
     dialogRef.afterClosed().subscribe( result => {
       if(result) {
@@ -76,7 +79,7 @@ export class LocationTableComponent {
   }
 
   showEditLocationDialog(location: Location): void {
-    const dialogRef = this.dialog.open(LocationFormDialogComponent, { data: { title: 'Edit location', location: location } });
+    const dialogRef = this.dialog.open(LocationFormDialogComponent, { data: { title: this.translate.instant("edit.location"), location: location } });
 
     dialogRef.afterClosed().subscribe( updatedLocation => {
       if(updatedLocation) {
@@ -86,7 +89,7 @@ export class LocationTableComponent {
   }
 
   showAddLocationDialog(): void {
-    const dialogRef = this.dialog.open(LocationFormDialogComponent, { data: { title: 'New location', location: undefined} });
+    const dialogRef = this.dialog.open(LocationFormDialogComponent, { data: { title: this.translate.instant("new.location"), location: undefined} });
 
     dialogRef.afterClosed().subscribe( newLocation => {
       if(newLocation) {

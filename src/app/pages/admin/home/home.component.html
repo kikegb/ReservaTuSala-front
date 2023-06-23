@@ -1,6 +1,6 @@
 <div>
-    <h1>Home</h1>
-      <button mat-button *ngFor="let page of pages" (click)="navigateTo(page)">
+    <h1>{{ "title.home" | translate }}</h1>
+      <button mat-button *ngFor="let page of pages; let i = index" (click)="navigateTo(i)">
         {{ page }}
       </button>
 </div>

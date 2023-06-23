@@ -6,6 +6,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LocationTableComponent } from './components/location-table/location-table.component';
 import { LocationFormDialogComponent } from './components/location-form-dialog/location-form-dialog.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -20,7 +21,8 @@ import { LocationFormDialogComponent } from './components/location-form-dialog/l
     LocationsRoutingModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ]
 })
 export class LocationsModule { }

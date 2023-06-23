@@ -1,0 +1,110 @@
+{
+    "adminPages": ["Inicio", "Usuarios", "Operaciones", "Salas", "Ubicaciones"],
+    "businessPages": ["Inicio", "Operaciones", "Salas"],
+    "customerPages": ["Inicio", "Operaciones"],
+    "title": {
+        "home": "Inicio",
+        "users": "Usuarios",
+        "operations": "Operaciones",
+        "rooms": "Salas",
+        "locations": "Ubicaciones",
+        "details": "Detalles",
+        "makeReservation": "Haga una reserva",
+        "searchFilters": "Filtros de búsqueda"
+    },
+    "tableHeaders": {
+        "location": ["Calle", "Número", "Código postal", "Ciudad", "Provincia", "País", "Acciones"],
+        "operation": ["Cliente", "Empresa", "Sala", "Inicio", "Final", "Coste", "Estado", "Acciones"],
+        "room": ["Empresa", "Ubicación", "Nombre", "Tamaño", "Aforo", "Material", "Horario", "Precio", "Acciones"],
+        "material": ["Material", "Cantidad", "Acciones"],
+        "schedule": ["Día de la semana", "Inicio", "Final", "Acciones"],
+        "user": ["Nombre", "CIF/NIF", "Correo electrónico", "Contraseña", "Teléfono", "Rol", "Acciones"]
+    },
+    "new": {
+        "location": "Nueva ubicación",
+        "operation": "Nueva operación",
+        "room": "Nueva sala",
+        "material": "Nuevo material",
+        "schedule": "Nuevo horario",
+        "user": "Nuevo usuario"
+    },
+    "edit": {
+        "location": "Editar ubicación",
+        "operation": "Editar operación",
+        "room": "Editar sala",
+        "material": "Editar material",
+        "schedule": "Editar horario",
+        "user": "Editar usuario"
+    },
+    "elements": {
+        "location": "Ubicación",
+        "operation": "Operación",
+        "room": "Sala",
+        "material": "Material",
+        "schedule": "Horario",
+        "user": "Usuario"
+    },
+    "messages": {
+        "noElementsToShow": "No hay elementos para mostrar.",
+        "wouldLikeToDelete": "¿Quieres eliminar este elemento?",
+        "startBeforeEnd": "La hora de inicio debe ser anterior a la hora final.",
+        "unavailableHours": "Hay horas no disponibles en este intervalo.",
+        "noReservationsToday": "No hay reservas para hoy.",
+        "noPendingOperations": "No hay reservas pendientes de aprobación.",
+        "businessNotAvailable": "Empresa no disponible.",
+        "roomNotAvailable": "Sala no disponible.",
+        "noResults": "No se han encontrado resultados!",
+        "passwordsNotMatch": "Las contraseñas no coinciden.",
+        "dontHaveAccount": "¿No tienes una cuenta?",
+        "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+        "loginError": "Error al iniciar sesión: correo electrónico o contraseña incorrectos.",
+        "loginSuccessful": "Inicio de sesión correcto.",
+        "unauthorizedPage": "No tienes permitido acceder a esta página.",
+        "emptyRequiredFields": "Existen campos obligatiorios vacíos."
+    },
+    "actions": {
+        "edit": "Editar",
+        "delete": "Eliminar",
+        "cancel": "Cancelar",
+        "save": "Guardar",
+        "login": "Iniciar sesión",
+        "logout": "Cerrar sesión",
+        "confirm": "Confirmar",
+        "add": "Añadir",
+        "approve": "Aprobar",
+        "filter": "Filtrar",
+        "seeDetails": "Ver detalles",
+        "resetFilters": "Reiniciar filtros",
+        "moreInfo": "Más información",
+        "accept": "Aceptar",
+        "close": "Cerrar",
+        "signup": "Registrarse"
+    },
+    "status": {
+        "PENDING": "Pendiente",
+        "APPROVED": "Aprobada",
+        "CANCELLED": "Cancelada"
+    },
+    "userSettings": "Ajustes de usuario",
+    "chooseDate": "Selecciona una fecha",
+    "chooseStartHour": "Selecciona hora de inicio",
+    "chooseEndHour": "Selecciona hora final",
+    "language": "Idioma",
+    "languages": {
+        "spanish": "Español",
+        "english": "Inglés",
+        "catalan": "Catalán"
+    },
+    "weekDays": ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+    "role": {
+        "customer": "Cliente",
+        "business": "Empresa",
+        "admin": "Administrador"
+    },
+    "today": "Hoy",
+    "contact": "Contacto",
+    "searchBy": "Busca por nombre de sala, empresa o ciudad",
+    "nHours": "Núm. horas",
+    "confirmPassword": "Confirmar contraseña",
+    "registerAs": "Registrarse como"
+}

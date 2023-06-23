@@ -1,0 +1,12 @@
+<div *ngIf="business">
+    <h1>{{ business.name }}</h1>
+    <h3>{{ "contact" | translate }}:</h3>
+    <p>{{ "tableHeaders.user.2" | translate }}: {{ business.email }}</p>
+    <p>{{ "tableHeaders.user.4" | translate }}: {{ business.phone }}</p>
+</div>
+
+<div *ngIf="!business">
+    <p>{{ "messages.businessNotAvailable" | translate }}</p>
+</div>
+
+

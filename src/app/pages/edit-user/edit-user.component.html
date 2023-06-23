@@ -1,0 +1,48 @@
+<h1>{{ 'edit.user' | translate }}</h1>
+<div>
+    <form [formGroup]="userForm" >
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>{{ 'tableHeaders.user.0' | translate }}</mat-label>
+                <input matInput name="name" formControlName="name" required>
+            </mat-form-field> 
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>{{ 'tableHeaders.user.1' | translate }}</mat-label>
+                <input matInput name="cnif" formControlName="cnif" required>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>{{ 'tableHeaders.user.2' | translate }}</mat-label>
+                <input matInput type="email" name="email" formControlName="email" required>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>{{ 'tableHeaders.user.3' | translate }}</mat-label>
+                <input matInput type="password" name="password" formControlName="password" required>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>{{ 'confirmPassword' | translate }}</mat-label>
+                <input matInput type="password" name="passwordConf" formControlName="passwordConf" required>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>{{ 'tableHeaders.user.4' | translate }}</mat-label>
+                <input matInput type="tel" name="phone" formControlName="phone" required>
+            </mat-form-field>
+        </p>
+    </form>
+</div>
+<div *ngIf="confirmPassword()">
+    <p class="error-message">{{ 'messages.passwordsNotMatch' | translate }}</p>
+</div>
+<div>
+    <button mat-button (click)="onCancel()">{{ 'actions.cancel' | translate }}</button>
+    <button mat-button (click)="onSave()" [disabled]="confirmPassword()" cdkFocusInitial>{{ 'actions.save' | translate }}</button>
+</div>

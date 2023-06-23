@@ -1,4 +1,5 @@
 import { Operation } from "./operation.interface";
+import { Room } from "./room.interface";
 
 export interface User {
     id: number;
@@ -8,6 +9,7 @@ export interface User {
     email: string;
     password: string;
     role: string;
+    rooms: Room[];
     businessOperations: Operation[],
     customerOperations: Operation[]
 }

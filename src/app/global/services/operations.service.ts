@@ -24,19 +24,44 @@ export class OperationsService {
   addOperation(operation: Operation): Observable<Operation>{
       const formattedOperation = {
         ...operation,
-        start: operation.start.toISOString().slice(0, -2),
-        end: operation.end.toISOString().slice(0, -2)
+        customer: {...operation.customer, businessOperations: [], customerOperations: [], rooms: []},
+        business: {...operation.business, businessOperations: [], customerOperations: [], rooms: []},
+        room: {...operation.room, operations: [], schedules: [], materials: []},
+        start: new Date(operation.start.getTime() - (operation.start.getTimezoneOffset() * 60000)).toISOString().slice(0, -5),
+        end: new Date(operation.end.getTime() - (operation.end.getTimezoneOffset() * 60000)).toISOString().slice(0, -5)
       };
-      return this.http.post<Operation>(this.apiURL, formattedOperation);
+      return this.http.post<Operation>(this.apiURL, formattedOperation).pipe(
+        map(response => {
+          const updatedOperation = {
+            ...response,
+            start: new Date(response.start),
+            end: new Date(response.end)
+          };
+          return updatedOperation;
+        })
+      );
+    
   }
 
   updateOperation(operation: Operation): Observable<Operation>{
     const formattedOperation = {
       ...operation,
-      start: operation.start.toISOString().slice(0, -2),
-      end: operation.end.toISOString().slice(0, -2)
+      customer: {...operation.customer, businessOperations: [], customerOperations: [], rooms: []},
+      business: {...operation.business, businessOperations: [], customerOperations: [], rooms: []},
+      room: {...operation.room, operations: [], schedules: [], materials: []},
+      start: new Date(operation.start.getTime() - (operation.start.getTimezoneOffset() * 60000)).toISOString().slice(0, -5),
+      end: new Date(operation.end.getTime() - (operation.end.getTimezoneOffset() * 60000)).toISOString().slice(0, -5)
     };
-    return this.http.put<Operation>(this.apiURL, formattedOperation);
+    return this.http.put<Operation>(this.apiURL, formattedOperation).pipe(
+      map(response => {
+        const updatedOperation = {
+          ...response,
+          start: new Date(response.start),
+          end: new Date(response.end)
+        };
+        return updatedOperation;
+      })
+    );  
   }
 
   deleteOperation(id: number): Observable<unknown>{

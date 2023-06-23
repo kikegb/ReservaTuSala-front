@@ -17,6 +17,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
     exports: [
@@ -38,6 +40,8 @@ import { MatCardModule } from '@angular/material/card';
         MatTooltipModule,
         MatMenuModule,
         MatCardModule,
+        MatSliderModule,
+        MatSnackBarModule
     ]
 })
 

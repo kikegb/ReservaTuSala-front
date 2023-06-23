@@ -15,8 +15,9 @@ import jwtDecode from 'jwt-decode';
 })
 export class OperationTableComponent {
   operations: Operation[] = []
-  columnsToDisplay = ['room', 'start', 'end', 'cost', 'status'];
+  columnsToDisplay = ['room', 'start', 'end', 'cost', 'status', 'actions'];
   @ViewChild(MatTable) table!: MatTable<any>;
+  jwtDecode = jwtDecode;
 
   constructor(
     private userSvc: UsersService,
@@ -26,7 +27,7 @@ export class OperationTableComponent {
   ngOnInit(): void {
     const token = localStorage.getItem('token');
     if (token) {
-      const decodedToken = <any>jwtDecode(token);
+      const decodedToken = <any>this.jwtDecode(token);
       const id = decodedToken.id;
       this.userSvc.getById(id)
       .pipe(
@@ -38,4 +39,21 @@ export class OperationTableComponent {
     }
   }
 
+  updateStatus(operation: Operation, status: string): void {
+    const updatedOperation: Operation = {
+      ...operation,
+      status: status
+    }
+    this.operationSvc.updateOperation(updatedOperation)
+    .pipe(
+      tap( () => {
+        let index = this.operations.findIndex( operation => operation.id == updatedOperation.id );
+        this.operations[index] = updatedOperation;
+        this.operations = [...this.operations];
+      })
+    )
+    .subscribe(() => {
+      this.table.renderRows();
+    });
+  }
 }

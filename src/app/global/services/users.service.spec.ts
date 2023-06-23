@@ -17,6 +17,9 @@ describe('UsersService', () => {
         "password": "psswd",
         "email": "email@example.com",
         "role": "BUSINESS",
+        "rooms": [],
+        "customerOperations": [],
+        "businessOperations": []
     },
     {
         "id": 2,
@@ -26,6 +29,9 @@ describe('UsersService', () => {
         "password": "p4ssw0rd",
         "email": "mail@mail.com",
         "role": "CUSTOMER",
+        "rooms": [],
+        "customerOperations": [],
+        "businessOperations": []
     }
   ];
 
@@ -65,6 +71,27 @@ describe('UsersService', () => {
     expect(requestWrapper.request.method).toEqual('GET');
     expect(response).toEqual(usersList);
   }));
+
+  it('should GET a user by its id with getById()', fakeAsync(() => {
+    let response: User = <User>{};
+    const user = usersList[0];
+
+    service.getById(user.id).subscribe(
+      (receivedResponse: User) => {
+        response = receivedResponse;
+      },
+      (error: any) => {}
+    );
+
+    const requestWrapper = backend.expectOne({url: 'http://localhost:8081/user?id=' + user.id});
+    requestWrapper.flush(user);
+    backend.verify();
+
+    tick();
+
+    expect(requestWrapper.request.method).toEqual('GET');
+    expect(response).toEqual(user);
+  })); 
 
   it('should POST user with addUser()', fakeAsync(() => {
     let response: User = <User>{};
@@ -108,7 +135,7 @@ describe('UsersService', () => {
     expect(response).toEqual(user);
   }));
 
-  it('should delete user with addUser()', fakeAsync(() => {
+  it('should delete user with deleteUser()', fakeAsync(() => {
     let response = {};
     const expectedResponse = {
       "code": 0,

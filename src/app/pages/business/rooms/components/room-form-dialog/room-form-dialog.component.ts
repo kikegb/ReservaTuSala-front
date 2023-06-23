@@ -12,7 +12,8 @@ import { MatTable } from '@angular/material/table';
 import { MaterialsService } from 'src/app/global/services/materials.service';
 import { Schedule } from 'src/app/global/interfaces/schedule.interface';
 import { SchedulesService } from 'src/app/global/services/schedules.service';
-import { LocationFormDialogComponent } from '../location-form-dialog/location-form-dialog.component';
+import { LocationFormDialogComponent } from 'src/app/pages/admin/locations/components/location-form-dialog/location-form-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-room-form-dialog',
@@ -27,8 +28,8 @@ export class RoomFormDialogComponent {
   materials: Material[] = [];
   schedules: Schedule[] = [];
   @ViewChild(MatTable) table!: MatTable<any>;
-  week: String[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  hours = Array.from({ length: 24 }, (_, index) => index + 1);
+  week: string[] = [];
+  hours = [...Array(24).keys()]
 
   constructor(
     public dialogRef: MatDialogRef<RoomFormDialogComponent>,
@@ -38,7 +39,8 @@ export class RoomFormDialogComponent {
     private locationSvc: LocationsService,
     private materialSvc: MaterialsService,
     private scheduleSvc: SchedulesService,
-    public dialog: MatDialog)
+    public dialog: MatDialog,
+    private translate: TranslateService)
   {
     this.title = data.title;
     this.room = data.room;
@@ -58,80 +60,64 @@ export class RoomFormDialogComponent {
       'start': [null],
       'end': [null],
     });
+    
+    this.translate.get(['weekDays']).subscribe(translations => {
+      this.week = <string[]>translations['weekDays'];
+    });
   }
 
   ngOnInit(): void {
-    this.locationSvc.getLocations()
-    .pipe(
-        tap( (locations: Location[]) => this.locations = locations )
-    )
-    .subscribe();
+    this.locationSvc.getLocations().subscribe((locations: Location[]) => this.locations = locations);
   }
 
   addNewMaterial(): void {
-    const material = {
-      material: this.roomForm.value.material,
-      quantity: this.roomForm.value.quantity
-    };
+    if (this.roomForm.value.material && this.roomForm.value.quantity) {
+      const material = {
+        material: this.roomForm.value.material,
+        quantity: this.roomForm.value.quantity
+      };
 
-    this.materialSvc.addMaterial(<Material>material)
-    .pipe(
-      tap( m => {
+      this.materialSvc.addMaterial(<Material>material).subscribe(m => {
         this.materials = [...this.materials, m];
-      })
-    )
-    .subscribe(() => {
-      this.table.renderRows();
-    });
+        this.table.renderRows();
+      });
+    }
     this.roomForm.get('material')?.reset();
     this.roomForm.get('quantity')?.reset();
   }
 
   deleteMaterial(id: number): void {
-    this.materialSvc.deleteMaterial(id)
-    .pipe(
-      tap( m => {
-        this.materials = this.materials.filter(m => m.id !== id);
-      })
-    )
-    .subscribe(() => {
+    this.materialSvc.deleteMaterial(id).subscribe(() => {
+      this.materials = this.materials.filter(m => m.id !== id);
       this.table.renderRows();
     });
   }
 
   addNewSchedule(): void {
-    const start = new Date('1970-01-01T00:00:00');
-    start.setHours(this.roomForm.value.start);
-    const end = new Date('1970-01-01T00:00:00');
-    end.setHours(this.roomForm.value.end);
-    const schedule = {
-      weekDay: this.roomForm.value.weekday,
-      start: start,
-      end: end,
-    };
+    if (this.roomForm.value.start && this.roomForm.value.end && this.roomForm.value.weekday) {
+      const start = new Date('1970-01-01T00:00:00');
+      start.setHours(this.roomForm.value.start);
+      const end = new Date('1970-01-01T00:00:00');
+      end.setHours(this.roomForm.value.end);
+      const schedule = {
+        weekDay: this.roomForm.value.weekday,
+        start: start,
+        end: end,
+      };
 
-    this.scheduleSvc.addSchedule(<Schedule>schedule)
-    .pipe(
-      tap( s => {
+      this.scheduleSvc.addSchedule(<Schedule>schedule).subscribe(s => {
         this.schedules = [...this.schedules, s];
-      })
-    )
-    .subscribe(() => {
-      this.table.renderRows();
-    });
+        this.table.renderRows();
+      });
+    }
     this.roomForm.get('weekday')?.reset();
     this.roomForm.get('start')?.reset();
     this.roomForm.get('end')?.reset();
   }
 
   deleteSchedule(id: number): void {
-    this.scheduleSvc.deleteSchedule(id)
-    .pipe(
-      tap( s => {
-        this.schedules = this.schedules.filter(s => s.id !== id);
-      })
-    )
-    .subscribe(() => {
+    this.scheduleSvc.deleteSchedule(id).subscribe(() => {
+      this.schedules = this.schedules.filter(s => s.id !== id);
       this.table.renderRows();
     });
   }
@@ -141,13 +127,9 @@ export class RoomFormDialogComponent {
   }
 
   addLocation(location: Location): void {
-    this.locationSvc.addLocation(location)
-    .pipe(
-      tap( newLocation => {
-        this.locations = [...this.locations, newLocation];
-      })
-    )
-    .subscribe(() => {
+    this.locationSvc.addLocation(location).subscribe(newLocation => {
+      this.locations = [...this.locations, newLocation];
+      this.roomForm.get('location')?.setValue(newLocation);
       this.table.renderRows();
     });
   }
@@ -159,7 +141,12 @@ export class RoomFormDialogComponent {
   onSave(): void {
     if(!this.room) {
       let newRoom = {
-        ...<Room>this.roomForm.value,
+        name: this.roomForm.value.name,
+        business: this.roomForm.value.business,
+        location: this.roomForm.value.location,
+        size: this.roomForm.value.size,
+        capacity: this.roomForm.value.capacity,
+        price: this.roomForm.value.price,
         materials: this.materials,
         schedules: this.schedules
       };

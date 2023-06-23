@@ -1,0 +1,110 @@
+{
+    "adminPages": ["Home", "Users", "Operations", "Rooms", "Locations"],
+    "businessPages": ["Home", "Operations", "Rooms"],
+    "customerPages": ["Home", "Operations"],
+    "title": {
+        "home": "Home",
+        "users": "Users",
+        "operations": "Operations",
+        "rooms": "Rooms",
+        "locations": "Locations",
+        "details": "Details",
+        "makeReservation": "Make a reservation",
+        "searchFilters": "Search filters"
+    },
+    "tableHeaders": {
+        "location": ["Street", "Number", "Postcode", "Town", "Province", "Country", "Actions"],
+        "operation": ["Customer", "Business", "Room", "Start", "End", "Cost", "Status", "Actions"],
+        "room": ["Business", "Location", "Name", "Size", "Capacity", "Material", "Schedule", "Price", "Actions"],
+        "material": ["Material", "Quantity", "Actions"],
+        "schedule": ["Weekday", "Start", "End", "Actions"],
+        "user": ["Name", "CIF/NIF", "Email", "Password", "Phone", "Role", "Actions"]
+    },
+    "new": {
+        "location": "New location",
+        "operation": "New operation",
+        "room": "New room",
+        "material": "New material",
+        "schedule": "New schedule",
+        "user": "New user"
+    },
+    "edit": {
+        "location": "Edit location",
+        "operation": "Edit operation",
+        "room": "Edit room",
+        "material": "Edit material",
+        "schedule": "Edit schedule",
+        "user": "Edit user"
+    },
+    "elements": {
+        "location": "Location",
+        "operation": "Operation",
+        "room": "Room",
+        "material": "Material",
+        "schedule": "Schedule",
+        "user": "User"
+    },
+    "messages": {
+        "noElementsToShow": "No elements to show.",
+        "wouldLikeToDelete": "Would you like to delete this element?",
+        "startBeforeEnd": "Start time must be before end time.",
+        "unavailableHours": "There are unavailable hours in this interval.",
+        "noReservationsToday": "There's no reservations for today.",
+        "noPendingOperations": "There's no reservations pending approval.",
+        "businessNotAvailable": "Business not available.",
+        "roomNotAvailable": "Room not available.",
+        "noResults": "No results found!",
+        "passwordsNotMatch": "Passwords don't match.",
+        "dontHaveAccount": "Don't have an account?",
+        "alreadyHaveAccount": "Already have an account? ",
+        "loginError": "Login error: invalid email or password.",
+        "loginSuccessful": "Successful Login.",
+        "unauthorizedPage": "You're not allowed to see this page.",
+        "emptyRequiredFields": "There are empty required fields."
+    },
+    "actions": {
+        "edit": "Edit",
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "save": "Save",
+        "login": "Log in",
+        "logout": "Log out",
+        "confirm": "Confirm",
+        "add": "Add",
+        "approve": "Approve",
+        "filter": "Filter",
+        "seeDetails": "See details",
+        "resetFilters": "Reset filters",
+        "moreInfo": "More information",
+        "accept": "Accept",
+        "close": "Close",
+        "signup": "Sign up"
+    },
+    "status": {
+        "PENDING": "Pending",
+        "APPROVED": "Approved",
+        "CANCELLED": "Cancelled"
+    },
+    "userSettings": "User settings",
+    "chooseDate": "Choose a date",
+    "chooseStartHour": "Choose start hour",
+    "chooseEndHour": "Choose end hour",
+    "language": "Language",
+    "languages": {
+        "spanish": "Spanish",
+        "english": "English",
+        "catalan": "Catalan"
+    },
+    "weekDays": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    "role": {
+        "customer": "Customer",
+        "business": "Business",
+        "admin": "Administrator"
+    },
+    "today": "Today",
+    "contact": "Contact",
+    "searchBy": "Search by room, business or town name",
+    "nHours": "Num. hours",
+    "confirmPassword": "Confirm password",
+    "registerAs": "Register as"
+}

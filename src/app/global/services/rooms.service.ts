@@ -31,38 +31,80 @@ export class RoomsService {
     );
   }
 
+  getById(id: number): Observable<Room>{
+    const url = `${this.apiURL}?id=${id}`;
+    return this.http.get<Room>(url).pipe(
+      map(room => ({
+        ...room,
+        operations: room.operations.map(operation => ({
+          ...operation,
+          start: new Date(operation.start),
+          end: new Date(operation.end)
+        })),
+        schedules: room.schedules.map(schedule => ({
+          ...schedule,
+          start: new Date('1970-01-01T' + schedule.start),
+          end: new Date('1970-01-01T' + schedule.end)
+        }))
+      }))
+    );
+  }
+
   addRoom(room: Room): Observable<Room>{
     const formattedRoom = {
       ...room,
-      operations: room.operations.map(operation => ({
-        ...operation,
-        start: operation.start.toISOString().slice(0, -2),
-        end: operation.end.toISOString().slice(0, -2)
-      })),
+      business: {...room.business, businessOperations: [], customerOperations: [], rooms: []},
       schedules: room.schedules.map(schedule => ({
         ...schedule,
-        start: schedule.start.toISOString().split('T')[1].slice(0, -2),
-        end: schedule.end.toISOString().split('T')[1].slice(0, -2)
+        start: new Date(schedule.start.getTime() - (schedule.start.getTimezoneOffset() * 60000)).toISOString().split('T')[1].slice(0, -5),
+        end: new Date(schedule.end.getTime() - (schedule.end.getTimezoneOffset() * 60000)).toISOString().split('T')[1].slice(0, -5)
       }))
     };
-    return this.http.post<Room>(this.apiURL, formattedRoom);
+    return this.http.post<Room>(this.apiURL, formattedRoom).pipe(
+      map(room => ({
+        ...room,
+        operations: room.operations?.map(operation => ({
+          ...operation,
+          start: new Date(operation.start),
+          end: new Date(operation.end)
+        })),
+        schedules: room.schedules?.map(schedule => ({
+          ...schedule,
+          start: new Date('1970-01-01T' + schedule.start),
+          end: new Date('1970-01-01T' + schedule.end)
+        }))
+      }))
+    );
   }
 
   updateRoom(room: Room): Observable<Room>{
     const formattedRoom = {
       ...room,
+      business: {...room.business, businessOperations: [], customerOperations: [], rooms: []},
       operations: room.operations.map(operation => ({
-        ...operation,
-        start: operation.start.toISOString().slice(0, -2),
-        end: operation.end.toISOString().slice(0, -2)
+        id: operation.id
       })),
       schedules: room.schedules.map(schedule => ({
         ...schedule,
-        start: schedule.start.toISOString().split('T')[1].slice(0, -2),
-        end: schedule.end.toISOString().split('T')[1].slice(0, -2)
+        start: new Date(schedule.start.getTime() - (schedule.start.getTimezoneOffset() * 60000)).toISOString().split('T')[1].slice(0, -5),
+        end: new Date(schedule.end.getTime() - (schedule.end.getTimezoneOffset() * 60000)).toISOString().split('T')[1].slice(0, -5)
       }))
     };
-    return this.http.put<Room>(this.apiURL, formattedRoom);
+    return this.http.put<Room>(this.apiURL, formattedRoom).pipe(
+      map(room => ({
+        ...room,
+        operations: room.operations?.map(operation => ({
+          ...operation,
+          start: new Date(operation.start),
+          end: new Date(operation.end)
+        })),
+        schedules: room.schedules?.map(schedule => ({
+          ...schedule,
+          start: new Date('1970-01-01T' + schedule.start),
+          end: new Date('1970-01-01T' + schedule.end)
+        }))
+      }))
+    );
   }
 
   deleteRoom(id: number): Observable<unknown>{
@@ -78,8 +120,8 @@ export class RoomsService {
   addSchedule(schedule: Schedule, id: number): Observable<Schedule>{
     const formattedSchedule = {
       ...schedule,
-      start: schedule.start.toISOString().split('T')[1].slice(0, -2),
-      end: schedule.end.toISOString().split('T')[1].slice(0, -2)
+      start: new Date(schedule.start.getTime() - (schedule.start.getTimezoneOffset() * 60000)).toISOString().split('T')[1].slice(0, -5),
+      end: new Date(schedule.end.getTime() - (schedule.end.getTimezoneOffset() * 60000)).toISOString().split('T')[1].slice(0, -5)
     };
     const url = `${this.apiURL}/schedule?id=${id}`;
     return this.http.post<Schedule>(this.apiURL, formattedSchedule)

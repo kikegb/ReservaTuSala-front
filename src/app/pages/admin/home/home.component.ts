@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -7,12 +8,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  pages = ['Users', 'Operations', 'Rooms', 'Locations'];
+  pages: string[] = [];
+  refs: string[] = ['admin/users', 'admin/operations', 'admin/rooms', 'admin/locations'];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+    private translate: TranslateService) 
+  {
+    this.translate.get(['adminPages']).subscribe(translations => {
+      this.pages = <string[]>translations['adminPages'].slice(1);
+    });
+  }
 
-  navigateTo(route: string) {
-    this.router.navigate(['/admin/' + route.toLowerCase()]);
+  navigateTo(index: number) {
+    this.router.navigate([this.refs[index]]);
   }
 
 }

@@ -4,30 +4,30 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from 'src/app/material.module';
 import { MatDialogRefMock } from 'src/test-helpers/mocks/mat-dialog-ref-mock';
-import { User } from '../../interfaces/user.interface';
 
 import { UserFormDialogComponent } from './user-form-dialog.component';
+import { User } from 'src/app/global/interfaces/user.interface';
+import { TranslateModule } from '@ngx-translate/core';
 
-describe('UserFormDialogComponent', () => {
+describe('Admin UserFormDialogComponent', () => {
   let component: UserFormDialogComponent;
   let fixture: ComponentFixture<UserFormDialogComponent>;
 
   const mockDialogData = {
-    title: 'Edit user',
-    user:{
+    title: 'edit.user',
+    user: <User>{
       id: 1,
       cnif: "12345678X",
       name: "Name",
       phone: "123456789",
       email: "mail@mail.com",
       password: "psswd123",
-      role: "CUSTOMER",
-      deleted: false
+      role: "CUSTOMER"
     }
   };
 
   const mockDialogDataNoUser = {
-    title: 'Add user'
+    title: 'new.user'
   };
 
   beforeEach(waitForAsync(() => {
@@ -35,7 +35,8 @@ describe('UserFormDialogComponent', () => {
       imports: [
         MaterialModule,
         ReactiveFormsModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        TranslateModule.forRoot()
       ],
       declarations: [ UserFormDialogComponent ],
       providers: [
@@ -67,7 +68,6 @@ describe('UserFormDialogComponent', () => {
     expect(component.userForm.value.password).toBeNull();
     expect(component.userForm.value.phone).toBeNull();
     expect(component.userForm.value.role).toBeNull();
-    expect(component.userForm.value.deleted).toBeFalse();
   });
 
   it('should create form with user data provided', () => {
@@ -83,7 +83,6 @@ describe('UserFormDialogComponent', () => {
     expect(component.userForm.value.password).toEqual(mockDialogData.user.password);
     expect(component.userForm.value.phone).toEqual(mockDialogData.user.phone);
     expect(component.userForm.value.role).toEqual(mockDialogData.user.role);
-    expect(component.userForm.value.deleted).toEqual(mockDialogData.user.deleted);
   });
 
   it('should close and return undefined when calling onCancel method', () => {
@@ -112,8 +111,7 @@ describe('UserFormDialogComponent', () => {
       phone: null,
       email: null,
       password: null,
-      role: null,
-      deleted: false
+      role: null
     };
 
     const spyDialogClose = spyOn(component.dialogRef, 'close');

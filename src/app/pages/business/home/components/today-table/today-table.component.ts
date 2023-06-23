@@ -13,6 +13,7 @@ import { UsersService } from 'src/app/global/services/users.service';
 export class TodayTableComponent {
   todayOperations: Operation[] = []
   columnsToDisplay = ['customer', 'room', 'start', 'end', 'cost', 'status'];
+  jwtDecode = jwtDecode;
 
   constructor(private userSvc: UsersService) {}
   
@@ -20,7 +21,7 @@ export class TodayTableComponent {
     const today = new Date();
     const token = localStorage.getItem('token');
     if (token) {
-      const decodedToken = <any>jwtDecode(token);
+      const decodedToken = <any>this.jwtDecode(token);
       const id = decodedToken.id;
       this.userSvc.getById(id)
       .pipe(

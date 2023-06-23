@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Delete {{ elementName }}</h1>
+<h1 mat-dialog-title>{{ "actions.delete" | translate }} {{ elementName }}</h1>
 <div mat-dialog-content>
-  Would you like to delete this {{ elementName }}?
+  {{ "messages.wouldLikeToDelete" | translate }}
 </div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)="onCancel()">Cancel</button>
-  <button mat-button mat-dialog-close (click)="onConfirm()" cdkFocusInitial>Confirm</button>
+  <button mat-button mat-dialog-close (click)="onCancel()">{{ "actions.cancel" | translate }}</button>
+  <button mat-button mat-dialog-close (click)="onConfirm()" cdkFocusInitial>{{ "actions.confirm" | translate }}</button>
 </div>

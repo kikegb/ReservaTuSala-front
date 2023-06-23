@@ -7,6 +7,7 @@ import { UserTableComponent } from './components/user-table/user-table.component
 import { MaterialModule } from 'src/app/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserFormDialogComponent } from './components/user-form-dialog/user-form-dialog.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { UserFormDialogComponent } from './components/user-form-dialog/user-form
     UsersRoutingModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ]
 })
 export class UsersModule { }

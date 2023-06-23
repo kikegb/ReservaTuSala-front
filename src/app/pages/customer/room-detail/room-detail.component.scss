@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+}
+
+.content-left {
+    flex: 1;
+    padding-right: 2rem;
+}
+
+.content-right {
+    flex: 1;
+    background-color: grey;
+    padding: 2rem;
+}

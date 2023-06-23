@@ -6,6 +6,7 @@ import { DeleteDialogComponent } from 'src/app/global/components/delete-dialog/d
 import { User } from 'src/app/global/interfaces/user.interface'
 import { UsersService } from 'src/app/global/services/users.service';
 import { UserFormDialogComponent } from '../user-form-dialog/user-form-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-table',
@@ -17,7 +18,9 @@ export class UserTableComponent {
   columnsToDisplay = ['name', 'cnif', 'email', 'phone', 'role', 'actions'];
   @ViewChild(MatTable) table!: MatTable<any>;
 
-  constructor(private userSvc: UsersService, public dialog: MatDialog) {}
+  constructor(private userSvc: UsersService, 
+    public dialog: MatDialog,
+    private translate: TranslateService) {}
   
   ngOnInit(): void {
     this.userSvc.getUsers()
@@ -66,7 +69,7 @@ export class UserTableComponent {
   }
 
   showDeleteDialog(id: number): void {
-    const dialogRef = this.dialog.open(DeleteDialogComponent, { data: { elementName: 'user' } });
+    const dialogRef = this.dialog.open(DeleteDialogComponent, { data: { elementName: this.translate.instant('elements.user') } });
 
     dialogRef.afterClosed().subscribe( result => {
       if(result) {
@@ -76,7 +79,7 @@ export class UserTableComponent {
   }
 
   showEditUserDialog(user: User): void {
-    const dialogRef = this.dialog.open(UserFormDialogComponent, { data: { title: 'Edit user', user: user } });
+    const dialogRef = this.dialog.open(UserFormDialogComponent, { data: { title: this.translate.instant('edit.user'), user: user } });
 
     dialogRef.afterClosed().subscribe( updatedUser => {
       if(updatedUser) {
@@ -86,7 +89,7 @@ export class UserTableComponent {
   }
 
   showAddUserDialog(): void {
-    const dialogRef = this.dialog.open(UserFormDialogComponent, { data: { title: 'New user', user: undefined} });
+    const dialogRef = this.dialog.open(UserFormDialogComponent, { data: { title: this.translate.instant('new.user'), user: undefined} });
 
     dialogRef.afterClosed().subscribe( newUser => {
       if(newUser) {

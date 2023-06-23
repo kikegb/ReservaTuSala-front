@@ -1,0 +1,110 @@
+{
+    "adminPages": ["Inici", "Usuaris", "Operacions", "Sales", "Ubicacions"],
+    "businessPages": ["Inici", "Operacions", "Sales"],
+    "customerPages": ["Inici", "Operacions"],
+    "title": {
+        "home": "Inici",
+        "users": "Usuaris",
+        "operations": "Operacions",
+        "rooms": "Sales",
+        "locations": "Ubicacions",
+        "details": "Detalls",
+        "makeReservation": "Feu una reserva",
+        "searchFilters": "Filtres de cerca"
+    },
+    "tableHeaders": {
+        "location": ["Carrer", "Número", "Codi postal", "Ciutat", "Província", "País", "Accions"],
+        "operation": ["Client", "Empresa", "Sala", "Inici", "Final", "Cost", "Estat", "Accions"],
+        "room": ["Empresa", "Ubicació", "Nom", "Tamany", "Aforament", "Material", "Horari", "Preu", "Accions"],
+        "material": ["Material", "Quantitat", "Accions"],
+        "schedule": ["Dia de la setmana", "Inici", "Final", "Accions"],
+        "user": ["Nom", "CIF/NIF", "Correu electrònic", "Contrasenya", "Telèfon", "Rol", "Accions"]
+    },
+    "new": {
+        "location": "Nova ubicació",
+        "operation": "Nova operació",
+        "room": "Nova sala",
+        "material": "Nou material",
+        "schedule": "Nou horari",
+        "user": "Nou usuari"
+    },
+    "edit": {
+        "location": "Editar ubicació",
+        "operation": "Editar operació",
+        "room": "Editar sala",
+        "material": "Editar material",
+        "schedule": "Editar horari",
+        "user": "Editar usuari"
+    },
+    "elements": {
+        "location": "Ubicació",
+        "operation": "Operació",
+        "room": "Sala",
+        "material": "Material",
+        "schedule": "Horari",
+        "user": "Usuari"
+    },
+    "messages": {
+        "noElementsToShow": "No hi ha elements per mostrar.",
+        "wouldLikeToDelete": "Vols eliminar aquest element?",
+        "startBeforeEnd": "L'hora d'inici ha de ser anterior a l'hora final.",
+        "unavailableHours": "Hi ha hores no disponibles en aquest interval.",
+        "noReservationsToday": "No hi ha reserves per avui.",
+        "noPendingOperations": "No hi ha reserves pendents d'aprovació.",
+        "businessNotAvailable": "Empresa no disponible.",
+        "roomNotAvailable": "Sala no disponible.",
+        "noResults": "No s'han trobat resultats!",
+        "passwordsNotMatch": "Les contrasenyes no coincideixen.",
+        "dontHaveAccount": "No tens un compte?",
+        "alreadyHaveAccount": "Ja tens un compte? ",
+        "loginError": "Error en iniciar sessió: correu electrònic o contrasenya incorrectes.",
+        "loginSuccessful": "Inici de sessió correcte.",
+        "unauthorizedPage": "No tens permés accedir a aquesta pàgina.",
+        "emptyRequiredFields": "Existeixen camps obligatoris buits."
+    },
+    "actions": {
+        "edit": "Editar",
+        "delete": "Eliminar",
+        "cancel": "Cancel·lar",
+        "save": "Desar",
+        "login": "Iniciar sessió",
+        "logout": "Tancar sessió",
+        "confirm": "Confirmar",
+        "add": "Afegir",
+        "approve": "Aprovar",
+        "filter": "Filtrar",
+        "seeDetails": "Veure detalls",
+        "resetFilters": "Restablir filtres",
+        "moreInfo": "Més informació",
+        "accept": "Acceptar",
+        "close": "Tancar",
+        "signup": "Registrar-se"
+    },
+    "status": {
+        "PENDING": "Pendent",
+        "APPROVED": "Aprovada",
+        "CANCELLED": "Cancel·lada"
+    },
+    "userSettings": "Configuracions d'usuari",
+    "chooseDate": "Selecciona una data",
+    "chooseStartHour": "Selecciona hora d'inici",
+    "chooseEndHour": "Selecciona hora final",
+    "language": "Idioma",
+    "languages": {
+        "spanish": "Espanyol",
+        "english": "Anglés",
+        "catalan": "Català"
+    },
+    "weekDays": ["Diumenge", "Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres", "Dissabte"],
+    "role": {
+        "customer": "Client",
+        "business": "Empresa",
+        "admin": "Administrador"
+    },
+    "today": "Avui",
+    "contact": "Contacte",
+    "searchBy": "Cerca per nom de sala, empresa o ciutat",
+    "nHours": "Núm. hores",
+    "confirmPassword": "Confirmar contrasenya",
+    "registerAs": "Registrar-se com"
+}

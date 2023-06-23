@@ -3,13 +3,13 @@
     <form [formGroup]="roomForm" >
         <p>
             <mat-form-field appearance="outline">
-                <mat-label>Name</mat-label>
+                <mat-label>{{ 'tableHeaders.room.2' | translate }}</mat-label>
                 <input matInput name="name" formControlName="name" required>
             </mat-form-field> 
         </p>
         <p>
             <mat-form-field>
-                <mat-label>Business</mat-label>
+                <mat-label>{{ 'tableHeaders.room.0' | translate }}</mat-label>
                 <mat-select formControlName="business" [compareWith]="compareById" required>
                     <mat-option *ngFor="let business of businesses" [value]="business">
                         {{ business.name }}
@@ -19,7 +19,7 @@
         </p>
         <p>
             <mat-form-field>
-                <mat-label>Location</mat-label>
+                <mat-label>{{ 'tableHeaders.room.1' | translate }}</mat-label>
                 <mat-select formControlName="location" [compareWith]="compareById" required>
                     <mat-option *ngFor="let location of locations" [value]="location">
                         {{location.street}}, {{location.number}}, {{location.postcode}}, 
@@ -27,37 +27,38 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
+            <button mat-flat-button color="primary" (click)="showAddLocationDialog()">{{ 'new.location' | translate }}</button>
         </p>
         <p>
             <mat-form-field appearance="outline">
-                <mat-label>Size</mat-label>
+                <mat-label>{{ 'tableHeaders.room.3' | translate }}</mat-label>
                 <input matInput type="number" step="0.5" min="0.5" name="size" formControlName="size" required>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field appearance="outline">
-                <mat-label>Capacity</mat-label>
+                <mat-label>{{ 'tableHeaders.room.4' | translate }}</mat-label>
                 <input matInput type="number"  min="1" name="capacity" formControlName="capacity" required>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field appearance="outline">
-                <mat-label>Price</mat-label>
+                <mat-label>{{ 'tableHeaders.room.7' | translate }}</mat-label>
                 <input matInput type="number"  step="0.5" min="0.5" name="price" formControlName="price" required>
             </mat-form-field>
         </p>
-        <h3>Materials</h3>
+        <h3>{{ 'tableHeaders.room.5' | translate }}</h3>
         <table mat-table [dataSource]="materials">
             <ng-container matColumnDef="material">
-                <th mat-header-cell *matHeaderCellDef> Material </th>
+                <th mat-header-cell *matHeaderCellDef> {{ 'tableHeaders.material.0' | translate }} </th>
                 <td mat-cell *matCellDef="let material"> {{material.material}} </td>
             </ng-container>
             <ng-container matColumnDef="quantity">
-                <th mat-header-cell *matHeaderCellDef> Quantity </th>
+                <th mat-header-cell *matHeaderCellDef> {{ 'tableHeaders.material.1' | translate }} </th>
                 <td mat-cell *matCellDef="let material"> {{material.quantity}} </td>
             </ng-container>
             <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <th mat-header-cell *matHeaderCellDef> {{ 'tableHeaders.material.2' | translate }} </th>
                 <td mat-cell *matCellDef="let material">
                     <button mat-icon-button (click)="deleteMaterial(material.id)">
                         <mat-icon fontIcon="delete"></mat-icon>
@@ -68,22 +69,35 @@
             <tr mat-header-row *matHeaderRowDef="['material', 'quantity', 'actions']"></tr>
             <tr mat-row *matRowDef="let myRowData; columns: ['material', 'quantity', 'actions']"></tr>
         </table>
-        <h3>Schedules</h3>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>{{ 'tableHeaders.material.0' | translate }}</mat-label>
+                <input matInput name="material" formControlName="material">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>{{ 'tableHeaders.material.1' | translate }}</mat-label>
+                <input matInput type="number" step="1" min="1" name="quantity" formControlName="quantity">
+            </mat-form-field>
+            <button mat-flat-button color="primary" class="add-button" (click)="addNewMaterial()">
+                {{ 'actions.add' | translate }}
+            </button>
+        </p>
+        <h3>{{ 'tableHeaders.room.6' | translate }}</h3>
         <table mat-table [dataSource]="schedules">
             <ng-container matColumnDef="weekday">
-                <th mat-header-cell *matHeaderCellDef> Weekday </th>
+                <th mat-header-cell *matHeaderCellDef> {{ 'tableHeaders.schedule.0' | translate }} </th>
                 <td mat-cell *matCellDef="let schedule"> {{ week[schedule.weekDay] }} </td>
             </ng-container>
             <ng-container matColumnDef="start">
-                <th mat-header-cell *matHeaderCellDef> Start </th>
+                <th mat-header-cell *matHeaderCellDef> {{ 'tableHeaders.schedule.1' | translate }} </th>
                 <td mat-cell *matCellDef="let schedule"> {{ schedule.start.getHours() }}:00 </td>
             </ng-container>
             <ng-container matColumnDef="end">
-                <th mat-header-cell *matHeaderCellDef> End </th>
+                <th mat-header-cell *matHeaderCellDef> {{ 'tableHeaders.schedule.2' | translate }} </th>
                 <td mat-cell *matCellDef="let schedule"> {{ schedule.end.getHours() }}:00 </td>
             </ng-container>
             <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <th mat-header-cell *matHeaderCellDef> {{ 'tableHeaders.schedule.3' | translate }} </th>
                 <td mat-cell *matCellDef="let schedule">
                     <button mat-icon-button (click)="deleteSchedule(schedule.id)">
                         <mat-icon fontIcon="delete"></mat-icon>
@@ -96,7 +110,7 @@
         </table>
         <p>
             <mat-form-field>
-                <mat-label>Weekday</mat-label>
+                <mat-label>{{ 'tableHeaders.schedule.0' | translate }}</mat-label>
                 <mat-select formControlName="weekday">
                     <mat-option *ngFor="let day of week; let i = index" [value]="i">
                         {{ day }}
@@ -104,7 +118,7 @@
                 </mat-select>
             </mat-form-field>
             <mat-form-field>
-                <mat-label>Start</mat-label>
+                <mat-label>{{ 'tableHeaders.schedule.1' | translate }}</mat-label>
                 <mat-select formControlName="start">
                     <mat-option *ngFor="let hour of hours" [value]="hour">
                         {{ hour }}:00
@@ -112,7 +126,7 @@
                 </mat-select>
             </mat-form-field>
             <mat-form-field>
-                <mat-label>End</mat-label>
+                <mat-label>{{ 'tableHeaders.schedule.2' | translate }}</mat-label>
                 <mat-select formControlName="end">
                     <mat-option *ngFor="let hour of hours" [value]="hour">
                         {{ hour }}:00
@@ -120,12 +134,15 @@
                 </mat-select>
             </mat-form-field>
             <button mat-flat-button color="primary" class="add-button" (click)="addNewSchedule()">
-                Add
+                {{ 'actions.add' | translate }}
             </button>
         </p>
     </form>
 </div>
+<div *ngIf="roomForm.invalid">
+    <p class="error-message">{{ 'messages.emptyRequiredFields' | translate }}</p>
+</div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)="onCancel()">Cancel</button>
-  <button mat-button mat-dialog-close (click)="onSave()" cdkFocusInitial>Save</button>
+  <button mat-button mat-dialog-close (click)="onCancel()">{{ 'actions.cancel' | translate }}</button>
+  <button mat-button mat-dialog-close [disabled]="!roomForm.valid" (click)="onSave()" cdkFocusInitial>{{ 'actions.save' | translate }}</button>
 </div>

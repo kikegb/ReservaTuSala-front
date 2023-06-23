@@ -6,12 +6,19 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './global/components/header/header.component';
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { SidenavService } from './global/services/sidenav.service';
 import { DeleteDialogComponent } from './global/components/delete-dialog/delete-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SecurityInterceptor } from './global/interceptors/security.interceptor';
 import { TokenUtilsService } from './global/services/token-utils.service';
+
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -24,9 +31,16 @@ import { TokenUtilsService } from './global/services/token-utils.service';
     AppRoutingModule,
     MaterialModule,
     BrowserAnimationsModule,
-    HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     SidenavService,

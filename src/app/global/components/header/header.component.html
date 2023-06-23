@@ -1,24 +1,48 @@
 <mat-toolbar class="main-header" color="primary">
-    <button mat-icon-button (click)="toggleSidenav()" *ngIf="!isLogin">
+    <button mat-icon-button (click)="toggleSidenav()" *ngIf="!isLogin || !isSignup">
         <mat-icon>menu</mat-icon>
     </button>
     ReservaTuSala
-    <button mat-flat-button (click)="logIn()" class="loginButton" *ngIf="!token && !isLogin">
-        Log In
-    </button>
-    <button mat-icon-button matTooltip="User menu" [matMenuTriggerFor]="menu" class="loginButton" *ngIf="token">
-        <mat-icon fontIcon="person"></mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-        <mat-card>
-            <mat-card-header>
-              <mat-card-title>{{ userName }}</mat-card-title>
-              <mat-card-subtitle>{{ userEmail }}</mat-card-subtitle>
-            </mat-card-header>
-        </mat-card>
-        <button mat-menu-item>User settings</button>
-        <button mat-menu-item (click)="logOut()">
-            Log Out
+    <div class="loginButton">
+        <button mat-icon-button matTooltip="{{ 'language' | translate }}" [matMenuTriggerFor]="langMenu">
+            <mat-icon fontIcon="language"></mat-icon>
         </button>
-    </mat-menu>
+        <mat-menu #langMenu="matMenu">
+            <button mat-menu-item (click)="setLanguage('en')">
+                {{ 'languages.english' | translate }}
+            </button>
+            <button mat-menu-item (click)="setLanguage('es')">
+                {{ 'languages.spanish' | translate }}
+            </button>
+            <button mat-menu-item (click)="setLanguage('ca')">
+                {{ 'languages.catalan' | translate }}
+            </button>
+        </mat-menu>
+
+        <button mat-flat-button (click)="logIn()" *ngIf="!token && !isLogin">
+            {{ 'actions.login' | translate }}
+        </button>
+
+        <button mat-flat-button (click)="signUp()" *ngIf="!token && !isSignup">
+            {{ 'actions.signup' | translate }}
+        </button>
+
+        <button mat-icon-button matTooltip="{{ 'userSettings' | translate }}" [matMenuTriggerFor]="menu" *ngIf="token">
+            <mat-icon fontIcon="person"></mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <mat-card>
+                <mat-card-header>
+                <mat-card-title>{{ userName }}</mat-card-title>
+                <mat-card-subtitle>{{ userEmail }}</mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+            <button mat-menu-item (click)="editUser()">
+                {{ 'edit.user' | translate }}
+            </button>
+            <button mat-menu-item (click)="logOut()">
+                {{ 'actions.logout' | translate }}
+            </button>
+        </mat-menu>
+    </div>
 </mat-toolbar>

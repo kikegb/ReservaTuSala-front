@@ -6,6 +6,7 @@ import { LoginComponent } from './login.component';
 import { MaterialModule } from 'src/app/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from './services/login.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { LoginService } from './services/login.service';
     LoginRoutingModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ],
   providers: [
     LoginService
