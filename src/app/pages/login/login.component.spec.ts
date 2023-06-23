@@ -51,6 +51,10 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should render "Log in" as main title', () => {
+    expect(fixture.debugElement.nativeElement.textContent).toContain('actions.login');
+  });
+
   it('should save authorization token and navigate to admin home page if user is ADMIN', () => {
     const authToken = "Bearer T0k3nV4lue$%gdjklasfl$_39";
     const decodedToken = {id: 1, role: 'ADMIN', name: 'admin'};
