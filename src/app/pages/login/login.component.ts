@@ -3,11 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
 import { TokenUtilsService } from 'src/app/global/services/token-utils.service';
-import { LoginService } from './services/login.service';
 import { SidenavService } from 'src/app/global/services/sidenav.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
+import { LoginService } from 'src/app/global/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class LoginComponent {
   userForm: FormGroup;
+  jwtDecode = jwtDecode;
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -40,9 +41,8 @@ export class LoginComponent {
         duration: 5000,
         panelClass: ['success-snackbar'],
       });
-      localStorage.setItem('token', response.Authorization);
       this.tokenSvc.setToken(response.Authorization);
-      const decodedToken = <any>jwtDecode(response.Authorization);
+      const decodedToken = <any>this.jwtDecode(response.Authorization);
       const role = decodedToken.role;
       if (role == 'ADMIN') {
         this.router.navigate(['admin/home']);

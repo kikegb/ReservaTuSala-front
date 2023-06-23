@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs';
 import { User } from 'src/app/global/interfaces/user.interface';
 import { UsersService } from 'src/app/global/services/users.service';
-import { LoginService } from '../login/services/login.service';
 import { TokenUtilsService } from 'src/app/global/services/token-utils.service';
 import jwtDecode from 'jwt-decode';
 import { Operation } from 'src/app/global/interfaces/operation.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginService } from 'src/app/global/services/login.service';
 
 @Component({
   selector: 'app-sign-up',
