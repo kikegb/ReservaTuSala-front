@@ -27,7 +27,7 @@ const routes: Routes = [
   
   { path: 'unauthorized', loadChildren: () => UnauthorizedModule },
    
-  { path: '**', redirectTo: '', pathMatch: 'full' },
+  { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];
 
 @NgModule({

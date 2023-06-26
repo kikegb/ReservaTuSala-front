@@ -10,7 +10,9 @@
         "locations": "Ubicacions",
         "details": "Detalls",
         "makeReservation": "Feu una reserva",
-        "searchFilters": "Filtres de cerca"
+        "searchFilters": "Filtres de cerca",
+        "unauthorized": "No autoritzat",
+        "tokenExpired": "La sessió ha caducat"
     },
     "tableHeaders": {
         "location": ["Carrer", "Número", "Codi postal", "Ciutat", "Província", "País", "Accions"],
@@ -60,7 +62,8 @@
         "loginError": "Error en iniciar sessió: correu electrònic o contrasenya incorrectes.",
         "loginSuccessful": "Inici de sessió correcte.",
         "unauthorizedPage": "No tens permés accedir a aquesta pàgina.",
-        "emptyRequiredFields": "Existeixen camps obligatoris buits."
+        "emptyRequiredFields": "Existeixen camps obligatoris buits.",
+        "tokenExpired": "Torna a iniciar sessió."
     },
     "actions": {
         "edit": "Editar",
@@ -78,7 +81,8 @@
         "moreInfo": "Més informació",
         "accept": "Acceptar",
         "close": "Tancar",
-        "signup": "Registrar-se"
+        "signup": "Registrar-se",
+        "exit": "Sortir"
     },
     "status": {
         "PENDING": "Pendent",

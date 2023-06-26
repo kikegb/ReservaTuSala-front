@@ -10,7 +10,9 @@
         "locations": "Locations",
         "details": "Details",
         "makeReservation": "Make a reservation",
-        "searchFilters": "Search filters"
+        "searchFilters": "Search filters",
+        "unauthorized": "Unautorized",
+        "tokenExpired": "Session has expired"
     },
     "tableHeaders": {
         "location": ["Street", "Number", "Postcode", "Town", "Province", "Country", "Actions"],
@@ -60,7 +62,8 @@
         "loginError": "Login error: invalid email or password.",
         "loginSuccessful": "Successful Login.",
         "unauthorizedPage": "You're not allowed to see this page.",
-        "emptyRequiredFields": "There are empty required fields."
+        "emptyRequiredFields": "There are empty required fields.",
+        "tokenExpired": "Sign in again."
     },
     "actions": {
         "edit": "Edit",
@@ -78,7 +81,8 @@
         "moreInfo": "More information",
         "accept": "Accept",
         "close": "Close",
-        "signup": "Sign up"
+        "signup": "Sign up",
+        "exit": "Exit"
     },
     "status": {
         "PENDING": "Pending",

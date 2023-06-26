@@ -33,9 +33,9 @@ export class HeaderComponent implements OnInit {
         this.isSignup = (event.url == '/signup');
       }
       if (event instanceof NavigationEnd) {
-        this.token = localStorage.getItem('token') || "";
+        this.token = this.tokenSvc.getToken() || "";
         if (this.token) {
-          const decodedToken = <any>jwtDecode(this.token);
+          const decodedToken = this.tokenSvc.getDecodedToken();
           this.userSvc.getById(decodedToken.id)
           .pipe(
               tap( (user: User) => {
@@ -47,6 +47,9 @@ export class HeaderComponent implements OnInit {
         }
       }
     });
+    if (!this.isLogin && !this.isSignup && this.token) {
+      this.tokenSvc.checkTokenExpiration();
+    }
   }
   
   toggleSidenav() {

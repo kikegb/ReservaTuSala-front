@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import jwtDecode from 'jwt-decode';
+import { TokenExpiredDialogComponent } from '../components/token-expired-dialog/token-expired-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +9,7 @@ import jwtDecode from 'jwt-decode';
 export class TokenUtilsService {
   jwtDecode = jwtDecode;
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   setToken(token: string): void {
    localStorage.setItem('token', token);
@@ -18,6 +20,25 @@ export class TokenUtilsService {
   }
 
   getDecodedToken(): any {
-    return this.jwtDecode(localStorage.getItem('token') || "");
+    return <any>this.jwtDecode(localStorage.getItem('token') || "");
   }
+
+  checkTokenExpiration(): void {  
+    const decodedToken = <any>this.jwtDecode(localStorage.getItem('token') || "");
+    if (decodedToken) {
+      const expirationTime = new Date(decodedToken.exp);
+      const currentTime = new Date();
+
+      if (expirationTime.getTime() < currentTime.getTime()) {
+        this.openTokenExpiredDialog();
+      }
+    } 
+  }
+
+  private openTokenExpiredDialog(): void {
+    this.dialog.open(TokenExpiredDialogComponent, {
+      width: '400px',
+      disableClose: true
+    });
+  } 
 }

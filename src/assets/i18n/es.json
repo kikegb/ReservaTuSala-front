@@ -10,7 +10,9 @@
         "locations": "Ubicaciones",
         "details": "Detalles",
         "makeReservation": "Haga una reserva",
-        "searchFilters": "Filtros de búsqueda"
+        "searchFilters": "Filtros de búsqueda",
+        "unauthorized": "No autorizado",
+        "tokenExpired": "La sesión ha caducado"
     },
     "tableHeaders": {
         "location": ["Calle", "Número", "Código postal", "Ciudad", "Provincia", "País", "Acciones"],
@@ -60,7 +62,8 @@
         "loginError": "Error al iniciar sesión: correo electrónico o contraseña incorrectos.",
         "loginSuccessful": "Inicio de sesión correcto.",
         "unauthorizedPage": "No tienes permitido acceder a esta página.",
-        "emptyRequiredFields": "Existen campos obligatiorios vacíos."
+        "emptyRequiredFields": "Existen campos obligatiorios vacíos.",
+        "tokenExpired": "Vuelve a iniciar sesión."
     },
     "actions": {
         "edit": "Editar",
@@ -78,7 +81,8 @@
         "moreInfo": "Más información",
         "accept": "Aceptar",
         "close": "Cerrar",
-        "signup": "Registrarse"
+        "signup": "Registrarse",
+        "exit": "Salir"
     },
     "status": {
         "PENDING": "Pendiente",
