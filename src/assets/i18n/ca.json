@@ -16,8 +16,8 @@
     },
     "tableHeaders": {
         "location": ["Carrer", "Número", "Codi postal", "Ciutat", "Província", "País", "Accions"],
-        "operation": ["Client", "Empresa", "Sala", "Inici", "Final", "Cost", "Estat", "Accions"],
-        "room": ["Empresa", "Ubicació", "Nom", "Tamany", "Aforament", "Material", "Horari", "Preu", "Accions"],
+        "operation": ["Client", "Empresa", "Sala", "Inici", "Final", "Cost (€)", "Estat", "Accions"],
+        "room": ["Empresa", "Ubicació", "Nom", "Tamany (m2)", "Aforament", "Material", "Horari", "Preu (€/h)", "Accions"],
         "material": ["Material", "Quantitat", "Accions"],
         "schedule": ["Dia de la setmana", "Inici", "Final", "Accions"],
         "user": ["Nom", "CIF/NIF", "Correu electrònic", "Contrasenya", "Telèfon", "Rol", "Accions"]

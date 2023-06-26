@@ -16,8 +16,8 @@
     },
     "tableHeaders": {
         "location": ["Street", "Number", "Postcode", "Town", "Province", "Country", "Actions"],
-        "operation": ["Customer", "Business", "Room", "Start", "End", "Cost", "Status", "Actions"],
-        "room": ["Business", "Location", "Name", "Size", "Capacity", "Material", "Schedule", "Price", "Actions"],
+        "operation": ["Customer", "Business", "Room", "Start", "End", "Cost (€)", "Status", "Actions"],
+        "room": ["Business", "Location", "Name", "Size (m2)", "Capacity", "Material", "Schedule", "Price (€/h)", "Actions"],
         "material": ["Material", "Quantity", "Actions"],
         "schedule": ["Weekday", "Start", "End", "Actions"],
         "user": ["Name", "CIF/NIF", "Email", "Password", "Phone", "Role", "Actions"]

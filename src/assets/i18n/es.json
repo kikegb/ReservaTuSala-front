@@ -16,8 +16,8 @@
     },
     "tableHeaders": {
         "location": ["Calle", "Número", "Código postal", "Ciudad", "Provincia", "País", "Acciones"],
-        "operation": ["Cliente", "Empresa", "Sala", "Inicio", "Final", "Coste", "Estado", "Acciones"],
-        "room": ["Empresa", "Ubicación", "Nombre", "Tamaño", "Aforo", "Material", "Horario", "Precio", "Acciones"],
+        "operation": ["Cliente", "Empresa", "Sala", "Inicio", "Final", "Coste (€)", "Estado", "Acciones"],
+        "room": ["Empresa", "Ubicación", "Nombre", "Tamaño (m2)", "Aforo", "Material", "Horario", "Precio (€/h)", "Acciones"],
         "material": ["Material", "Cantidad", "Acciones"],
         "schedule": ["Día de la semana", "Inicio", "Final", "Acciones"],
         "user": ["Nombre", "CIF/NIF", "Correo electrónico", "Contraseña", "Teléfono", "Rol", "Acciones"]

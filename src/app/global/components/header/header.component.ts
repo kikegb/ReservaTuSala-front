@@ -6,7 +6,6 @@ import jwtDecode from 'jwt-decode';
 import { UsersService } from '../../services/users.service';
 import { tap } from 'rxjs';
 import { User } from '../../interfaces/user.interface';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {     
-  token?: string;
+  token: string = "";
   isLogin = false;
   isSignup = false;
   userName = '';
@@ -45,11 +44,12 @@ export class HeaderComponent implements OnInit {
           )
           .subscribe();
         }
+
+        if (!this.isLogin && !this.isSignup && this.token) {
+          this.tokenSvc.checkTokenExpiration();
+        }
       }
     });
-    if (!this.isLogin && !this.isSignup && this.token) {
-      this.tokenSvc.checkTokenExpiration();
-    }
   }
   
   toggleSidenav() {

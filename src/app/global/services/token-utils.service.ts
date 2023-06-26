@@ -26,7 +26,7 @@ export class TokenUtilsService {
   checkTokenExpiration(): void {  
     const decodedToken = <any>this.jwtDecode(localStorage.getItem('token') || "");
     if (decodedToken) {
-      const expirationTime = new Date(decodedToken.exp);
+      const expirationTime = new Date(decodedToken.exp * 1000);
       const currentTime = new Date();
 
       if (expirationTime.getTime() < currentTime.getTime()) {
