@@ -49,6 +49,7 @@
     "messages": {
         "noElementsToShow": "No hi ha elements per mostrar.",
         "wouldLikeToDelete": "Vols eliminar aquest element?",
+        "wouldLikeToCancel": "¿Segur que vols cancel·lar aquesta operació?",
         "startBeforeEnd": "L'hora d'inici ha de ser anterior a l'hora final.",
         "unavailableHours": "Hi ha hores no disponibles en aquest interval.",
         "noReservationsToday": "No hi ha reserves per avui.",
@@ -61,6 +62,7 @@
         "alreadyHaveAccount": "Ja tens un compte? ",
         "loginError": "Error en iniciar sessió: correu electrònic o contrasenya incorrectes.",
         "loginSuccessful": "Inici de sessió correcte.",
+        "logoutSuccessful": "Sessió tancada correctament.",
         "unauthorizedPage": "No tens permés accedir a aquesta pàgina.",
         "emptyRequiredFields": "Existeixen camps obligatoris buits.",
         "tokenExpired": "Torna a iniciar sessió.",

@@ -9,6 +9,7 @@ import { User } from 'src/app/global/interfaces/user.interface';
 import jwtDecode from 'jwt-decode';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SnackBarService } from 'src/app/global/services/snack-bar.service';
+import { CancelDialogComponent } from 'src/app/global/components/cancel-dialog/cancel-dialog.component';
 
 @Component({
   selector: 'app-operation-table',
@@ -52,6 +53,16 @@ export class OperationTableComponent {
     }, (e: HttpErrorResponse) => {
       console.log(e.status);
       this.snackbarSvc.openError('messages.updateError');
+    });
+  }
+
+  showCancelDialog(operation: Operation): void {
+    const dialogRef = this.dialog.open(CancelDialogComponent);
+
+    dialogRef.afterClosed().subscribe( result => {
+      if(result) {
+        this.updateStatus(operation, 'CANCELLED');
+      }
     });
   }
 }

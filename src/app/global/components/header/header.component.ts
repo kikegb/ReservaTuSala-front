@@ -6,6 +6,7 @@ import jwtDecode from 'jwt-decode';
 import { UsersService } from '../../services/users.service';
 import { tap } from 'rxjs';
 import { User } from '../../interfaces/user.interface';
+import { SnackBarService } from '../../services/snack-bar.service';
 
 @Component({
   selector: 'app-header',
@@ -23,7 +24,8 @@ export class HeaderComponent implements OnInit {
     private sidenav: SidenavService,
     private router: Router,
     private tokenSvc: TokenUtilsService,
-    private userSvc: UsersService) {}
+    private userSvc: UsersService,
+    private snackbarSvc: SnackBarService) {}
   
   ngOnInit(): void {
     this.router.events.subscribe((event: any) => {
@@ -60,6 +62,7 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('token');
     this.tokenSvc.setToken('');
     this.router.navigate(['/login']);
+    this.snackbarSvc.openSuccess('messages.logoutSuccessful');
   }
 
   logIn() {

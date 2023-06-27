@@ -49,6 +49,7 @@
     "messages": {
         "noElementsToShow": "No hay elementos para mostrar.",
         "wouldLikeToDelete": "¿Quieres eliminar este elemento?",
+        "wouldLikeToCancel": "¿Seguro que quieres cancelar esta operación?",
         "startBeforeEnd": "La hora de inicio debe ser anterior a la hora final.",
         "unavailableHours": "Hay horas no disponibles en este intervalo.",
         "noReservationsToday": "No hay reservas para hoy.",
@@ -61,6 +62,7 @@
         "alreadyHaveAccount": "¿Ya tienes una cuenta?",
         "loginError": "Error al iniciar sesión: correo electrónico o contraseña incorrectos.",
         "loginSuccessful": "Inicio de sesión correcto.",
+        "logoutSuccessful": "Sesión cerrada correctamente.",
         "unauthorizedPage": "No tienes permitido acceder a esta página.",
         "emptyRequiredFields": "Existen campos obligatiorios vacíos.",
         "tokenExpired": "Vuelve a iniciar sesión.",
