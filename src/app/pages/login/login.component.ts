@@ -8,6 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { LoginService } from 'src/app/global/services/login.service';
+import { SnackBarService } from 'src/app/global/services/snack-bar.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,7 @@ export class LoginComponent {
     private router: Router,
     private tokenSvc: TokenUtilsService,
     private sidenav: SidenavService,
-    private _snackBar: MatSnackBar,
+    private snackbarSvc: SnackBarService,
     private translate: TranslateService)
   {
     this.userForm = this.formBuilder.group({
@@ -37,10 +38,7 @@ export class LoginComponent {
   login(): void {
     this.loginSvc.login(this.userForm.value.email, this.userForm.value.password)
     .subscribe((response: any) => {
-      this._snackBar.open(this.translate.instant('messages.loginSuccessful'), this.translate.instant('actions.close'), {
-        duration: 5000,
-        panelClass: ['success-snackbar'],
-      });
+      this.snackbarSvc.openSuccess('messages.loginSuccessful');
       this.tokenSvc.setToken(response.Authorization);
       const decodedToken = <any>this.jwtDecode(response.Authorization);
       const role = decodedToken.role;
@@ -55,10 +53,7 @@ export class LoginComponent {
       }
     }, (e: HttpErrorResponse) => {
       console.log(e.status);
-      this._snackBar.open(this.translate.instant('messages.loginError'), this.translate.instant('actions.close'), {
-        duration: 5000,
-        panelClass: ['error-snackbar'],
-        });
+      this.snackbarSvc.openError('messages.loginError');
     });
   }
 

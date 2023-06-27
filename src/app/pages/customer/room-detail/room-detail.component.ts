@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,6 +10,7 @@ import { Room } from 'src/app/global/interfaces/room.interface';
 import { User } from 'src/app/global/interfaces/user.interface';
 import { OperationsService } from 'src/app/global/services/operations.service';
 import { RoomsService } from 'src/app/global/services/rooms.service';
+import { SnackBarService } from 'src/app/global/services/snack-bar.service';
 
 @Component({
   selector: 'app-room-detail',
@@ -34,7 +36,8 @@ export class RoomDetailComponent {
     private formBuilder: FormBuilder,
     private operationSvc: OperationsService,
     private router: Router,
-    private translate: TranslateService)
+    private translate: TranslateService,
+    private snackbarSvc: SnackBarService)
   {
     this.id = parseInt(this.route.snapshot.paramMap.get('id') as string);  
     this.room = {} as Room;
@@ -50,19 +53,13 @@ export class RoomDetailComponent {
   }
 
   ngOnInit(): void {
-    this.roomSvc.getById(this.id)
-    .pipe(
-        tap( (room: Room) => {
-          this.room = room;
-        })
-    )
-    .subscribe();
+    this.roomSvc.getById(this.id).subscribe((room: Room) => {
+      this.room = room;
+    });
 
-    this.operationSvc.getOperations()
-    .pipe(
-        tap( (operations: Operation[]) => this.operations = operations )
-    )
-    .subscribe();
+    this.operationSvc.getOperations().subscribe(
+      (operations: Operation[]) => this.operations = operations
+    );
 
     this.operationForm.get("date")?.valueChanges.subscribe(newValue => {
       this.getHours(newValue);
@@ -149,13 +146,13 @@ export class RoomDetailComponent {
         cost: this.cost,
         status: "PENDING"
       };
-      this.operationSvc.addOperation(newOperation)
-      .pipe(
-        tap( op => {
-          this.operations = [...this.operations, op];
-        })
-      )
-      .subscribe();
+      this.operationSvc.addOperation(newOperation).subscribe( op => {
+        this.snackbarSvc.openSuccess('messages.reservationSuccess');
+        this.operations = [...this.operations, op];
+      }, (e: HttpErrorResponse) => {
+        console.log(e.status);
+        this.snackbarSvc.openError('messages.reservationError');
+      });
 
       this.router.navigate(['customer/home']);
     }

@@ -9,6 +9,7 @@ import { Operation } from 'src/app/global/interfaces/operation.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginService } from 'src/app/global/services/login.service';
+import { SnackBarService } from 'src/app/global/services/snack-bar.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -25,7 +26,7 @@ export class SignUpComponent {
     private loginSvc: LoginService,
     private tokenSvc: TokenUtilsService,
     private router: Router,
-    private _snackBar: MatSnackBar)
+    private snackbarSvc: SnackBarService)
   {
     this.userForm = this.userForm = this.formBuilder.group({
       'name': [null, Validators.required],
@@ -49,10 +50,7 @@ export class SignUpComponent {
   login(): void {
     this.loginSvc.login(this.userForm.value.email, this.userForm.value.password)
     .subscribe((response: any) => {
-      this._snackBar.open('Successful Login.', 'close', {
-        duration: 5000,
-        panelClass: ['success-snackbar'],
-      });
+      this.snackbarSvc.openSuccess('messages.loginSuccessful');
       this.tokenSvc.setToken(response.Authorization);
       const decodedToken = <any>this.jwtDecode(response.Authorization);
       const role = decodedToken.role;
@@ -67,10 +65,7 @@ export class SignUpComponent {
       }
     }, (e: HttpErrorResponse) => {
       console.log(e.status);
-      this._snackBar.open('Login error: invalid email or password.', 'close', {
-        duration: 5000,
-        panelClass: ['error-snackbar'],
-        });
+      this.snackbarSvc.openError('messages.loginError');
     });
   }
 

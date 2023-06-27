@@ -63,7 +63,15 @@
         "loginSuccessful": "Inici de sessió correcte.",
         "unauthorizedPage": "No tens permés accedir a aquesta pàgina.",
         "emptyRequiredFields": "Existeixen camps obligatoris buits.",
-        "tokenExpired": "Torna a iniciar sessió."
+        "tokenExpired": "Torna a iniciar sessió.",
+        "addError": "Error afegint el nou element.",
+        "addSuccess": "Element afegit.",
+        "updateError": "Error actualitzant l'element.",
+        "updateSuccess": "Element actualitzat.",
+        "deleteError": "Error eliminant l'element.",
+        "deleteSuccess": "Element eliminat.",
+        "reservationError": "Error en processar la reserva.",
+        "reservationSuccess": "Reserva realitzada correctament."
     },
     "actions": {
         "edit": "Editar",

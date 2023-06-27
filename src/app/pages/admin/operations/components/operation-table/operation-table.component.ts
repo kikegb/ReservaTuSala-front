@@ -7,6 +7,8 @@ import { DeleteDialogComponent } from 'src/app/global/components/delete-dialog/d
 import { OperationsService } from 'src/app/global/services/operations.service';
 import { OperationFormDialogComponent } from '../operation-form-dialog/operation-form-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { SnackBarService } from 'src/app/global/services/snack-bar.service';
 
 @Component({
   selector: 'app-operation-table',
@@ -20,52 +22,48 @@ export class OperationTableComponent {
 
   constructor(private operationSvc: OperationsService, 
     public dialog: MatDialog,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private snackbarSvc: SnackBarService
     ) {}
   
   ngOnInit(): void {
-    this.operationSvc.getOperations()
-    .pipe(
-        tap( (operations: Operation[]) => this.operations = operations )
-    )
-    .subscribe();
+    this.operationSvc.getOperations().subscribe(
+      (operations: Operation[]) => this.operations = operations
+    );
   }
 
   addOperation(operation: Operation): void {
-    this.operationSvc.addOperation(operation)
-    .pipe(
-      tap( newOperation => {
-        this.operations = [...this.operations, newOperation];
-      })
-    )
-    .subscribe(() => {
+    this.operationSvc.addOperation(operation).subscribe(newOperation => {
+      this.snackbarSvc.openSuccess('messages.addSuccess');
+      this.operations = [...this.operations, newOperation];
       this.table.renderRows();
+    }, (e: HttpErrorResponse) => {
+      console.log(e.status);
+      this.snackbarSvc.openError('messages.addError');
     });
   }
 
   updateOperation(updatedOperation: Operation): void {
-    this.operationSvc.updateOperation(updatedOperation)
-    .pipe(
-      tap( () => {
-        let index = this.operations.findIndex( operation => operation.id == updatedOperation.id );
-        this.operations[index] = updatedOperation;
-        this.operations = [...this.operations];
-      })
-    )
-    .subscribe(() => {
+    this.operationSvc.updateOperation(updatedOperation).subscribe(() => {
+      this.snackbarSvc.openSuccess('messages.updateSuccess');
+      let index = this.operations.findIndex( operation => operation.id == updatedOperation.id );
+      this.operations[index] = updatedOperation;
+      this.operations = [...this.operations];
       this.table.renderRows();
+    }, (e: HttpErrorResponse) => {
+      console.log(e.status);
+      this.snackbarSvc.openError('messages.updateError');
     });
   }
 
   deleteOperation(id: number): void {
-    this.operationSvc.deleteOperation(id)
-    .pipe(
-      tap( () => {
-        this.operations = this.operations.filter(operation => operation.id !== id);
-      })
-    )
-    .subscribe(() => {
+    this.operationSvc.deleteOperation(id).subscribe(() => {
+      this.snackbarSvc.openSuccess('messages.deleteSuccess');
+      this.operations = this.operations.filter(operation => operation.id !== id);
       this.table.renderRows();
+    }, (e: HttpErrorResponse) => {
+      console.log(e.status);
+      this.snackbarSvc.openError('messages.deleteError');
     });
   }
 

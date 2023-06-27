@@ -22,12 +22,8 @@ export class BusinessDetailComponent {
   }
 
   ngOnInit(): void {
-    this.userSvc.getById(this.id)
-    .pipe(
-        tap( (user: User) => {
-          this.business = user;
-        })
-    )
-    .subscribe();
+    this.userSvc.getById(this.id).subscribe((user: User) => {
+      this.business = user;
+    });
   }
 }

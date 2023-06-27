@@ -63,7 +63,15 @@
         "loginSuccessful": "Inicio de sesión correcto.",
         "unauthorizedPage": "No tienes permitido acceder a esta página.",
         "emptyRequiredFields": "Existen campos obligatiorios vacíos.",
-        "tokenExpired": "Vuelve a iniciar sesión."
+        "tokenExpired": "Vuelve a iniciar sesión.",
+        "addError": "Error añadiendo el nuevo elemento.",
+        "addSuccess": "Elemento añadido.",
+        "updateError": "Error actualizando el elemento.",
+        "updateSuccess": "Elemento actualizado.",
+        "deleteError": "Error eliminando el elemento.",
+        "deleteSuccess": "Elemento eliminado.",
+        "reservationError": "Error al procesar la reserva.",
+        "reservationSuccess": "Reserva realizada correctamente."
     },
     "actions": {
         "edit": "Editar",

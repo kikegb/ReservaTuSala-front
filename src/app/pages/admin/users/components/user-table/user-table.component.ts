@@ -7,6 +7,8 @@ import { User } from 'src/app/global/interfaces/user.interface'
 import { UsersService } from 'src/app/global/services/users.service';
 import { UserFormDialogComponent } from '../user-form-dialog/user-form-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { SnackBarService } from 'src/app/global/services/snack-bar.service';
 
 @Component({
   selector: 'app-user-table',
@@ -20,51 +22,47 @@ export class UserTableComponent {
 
   constructor(private userSvc: UsersService, 
     public dialog: MatDialog,
-    private translate: TranslateService) {}
+    private translate: TranslateService,
+    private snackbarSvc: SnackBarService) {}
   
   ngOnInit(): void {
-    this.userSvc.getUsers()
-    .pipe(
-        tap( (users: User[]) => this.users = users )
-    )
-    .subscribe();
+    this.userSvc.getUsers().subscribe(
+      (users: User[]) => this.users = users
+    );
   }
 
   addUser(user: User): void {
-    this.userSvc.addUser(user)
-    .pipe(
-      tap( newUser => {
-        this.users = [...this.users, newUser];
-      })
-    )
-    .subscribe(() => {
+    this.userSvc.addUser(user).subscribe( newUser => {
+      this.snackbarSvc.openSuccess('messages.addSuccess');
+      this.users = [...this.users, newUser];
       this.table.renderRows();
+    }, (e: HttpErrorResponse) => {
+      console.log(e.status);
+      this.snackbarSvc.openError('messages.addError');
     });
   }
 
   updateUser(updatedUser: User): void {
-    this.userSvc.updateUser(updatedUser)
-    .pipe(
-      tap( () => {
-        let index = this.users.findIndex( user => user.id == updatedUser.id );
-        this.users[index] = updatedUser;
-        this.users = [...this.users];
-      })
-    )
-    .subscribe(() => {
+    this.userSvc.updateUser(updatedUser).subscribe(() => {
+      this.snackbarSvc.openSuccess('messages.updateSuccess');
+      let index = this.users.findIndex( user => user.id == updatedUser.id );
+      this.users[index] = updatedUser;
+      this.users = [...this.users];
       this.table.renderRows();
+    }, (e: HttpErrorResponse) => {
+      console.log(e.status);
+      this.snackbarSvc.openError('messages.updateError');
     });
   }
 
   deleteUser(id: number): void {
-    this.userSvc.deleteUser(id)
-    .pipe(
-      tap( () => {
-        this.users = this.users.filter(user => user.id !== id);
-      })
-    )
-    .subscribe(() => {
+    this.userSvc.deleteUser(id).subscribe(() => {
+      this.snackbarSvc.openSuccess('messages.deleteSuccess');
+      this.users = this.users.filter(user => user.id !== id);
       this.table.renderRows();
+    }, (e: HttpErrorResponse) => {
+      console.log(e.status);
+      this.snackbarSvc.openError('messages.deleteError');
     });
   }
 

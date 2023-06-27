@@ -63,7 +63,15 @@
         "loginSuccessful": "Successful Login.",
         "unauthorizedPage": "You're not allowed to see this page.",
         "emptyRequiredFields": "There are empty required fields.",
-        "tokenExpired": "Sign in again."
+        "tokenExpired": "Sign in again.",
+        "addError": "Error adding the new element.",
+        "addSuccess": "Element added.",
+        "updateError": "Error updating the element.",
+        "updateSuccess": "Element updated.",
+        "deleteError": "Error deleting the element.",
+        "deleteSuccess": "Element deleted.",
+        "reservationError": "Error processing the reservation.",
+        "reservationSuccess": "Reservation made successfully."
     },
     "actions": {
         "edit": "Edit",
