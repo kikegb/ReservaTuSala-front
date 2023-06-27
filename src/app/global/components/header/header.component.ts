@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { SidenavService } from '../../services/sidenav.service';
 import { TokenUtilsService } from '../../services/token-utils.service';
-import jwtDecode from 'jwt-decode';
 import { UsersService } from '../../services/users.service';
 import { tap } from 'rxjs';
 import { User } from '../../interfaces/user.interface';
@@ -30,8 +29,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe((event: any) => {
       if (event && event.url) {
-        this.isLogin = (event.url == '/login');
-        this.isSignup = (event.url == '/signup');
+        this.isLogin = (event.url === '/login');
+        this.isSignup = (event.url === '/signup');
       }
       if (event instanceof NavigationEnd) {
         this.token = this.tokenSvc.getToken() || "";
