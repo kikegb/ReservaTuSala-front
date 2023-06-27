@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { Operation } from 'src/app/global/interfaces/operation.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
-import { tap } from 'rxjs';
 import { OperationsService } from 'src/app/global/services/operations.service';
 import { UsersService } from 'src/app/global/services/users.service';
 import { User } from 'src/app/global/interfaces/user.interface';

@@ -44,7 +44,7 @@ export class OperationFormDialogComponent {
       'date': [data.operation?.start || null, Validators.required],
       'startHour': [data.operation?.start.getHours() || null, Validators.required],
       'endHour': [data.operation?.end.getHours() || null, Validators.required],
-      'cost': [data.operation?.cost || null, Validators.required],
+      'cost': [data.operation?.cost || null, [Validators.required, Validators.min(0)]],
       'status': [data.operation?.status || null, Validators.required],
     });
 

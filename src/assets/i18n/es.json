@@ -71,7 +71,17 @@
         "deleteError": "Error eliminando el elemento.",
         "deleteSuccess": "Elemento eliminado correctamente.",
         "reservationError": "Error al procesar la reserva.",
-        "reservationSuccess": "Reserva realizada correctamente."
+        "reservationSuccess": "Reserva realizada correctamente.",
+        "postcodeLengthError": "El código postal debe ser de 5 caracteres numéricos.",
+        "costPositiveError": "El coste debe ser un valor positivo.",
+        "numberPositiveError": "El número debe ser un valor positivo.",
+        "sizePositiveError": "El tamaño debe ser un valor positivo.",
+        "pricePositiveError": "El precio debe ser un valor positivo.",
+        "capacityPositiveError": "El aforo debe ser un valor positivo.",
+        "quantityError": "La cantidad debe ser al menos 1.",
+        "cnifError": "El CIF o NIF debe ser 8 números seguidos de 1 letra mayúscula.",
+        "emailError": "Formato erróneo de correo electrónico.",
+        "phoneError": "El teléfono debe ser de 9 caracteres numéricos."
     },
     "actions": {
         "edit": "Editar",

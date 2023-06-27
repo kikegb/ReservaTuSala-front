@@ -41,8 +41,19 @@
         </p>
     </form>
 </div>
-<div *ngIf="userForm.invalid">
-    <p class="error-message">{{ 'messages.emptyRequiredFields' | translate }}</p>
+<div class="formErrors">
+    <div *ngIf="userForm.get('cnif')?.errors?.['pattern']">
+        <p class="error-message">{{ 'messages.cnifError' | translate }}</p>
+    </div>
+    <div *ngIf="userForm.get('email')?.errors?.['email']">
+        <p class="error-message">{{ 'messages.emailError' | translate }}</p>
+    </div>
+    <div *ngIf="userForm.get('phone')?.errors?.['pattern']">
+        <p class="error-message">{{ 'messages.phoneError' | translate }}</p>
+    </div>
+    <div *ngIf="userForm.invalid">
+        <p class="error-message">{{ 'messages.emptyRequiredFields' | translate }}</p>
+    </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close (click)="onCancel()">{{ 'actions.cancel' | translate }}</button>

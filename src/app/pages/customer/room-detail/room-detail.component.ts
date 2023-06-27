@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import jwtDecode from 'jwt-decode';
-import { tap } from 'rxjs';
 import { Operation } from 'src/app/global/interfaces/operation.interface';
 import { Room } from 'src/app/global/interfaces/room.interface';
 import { User } from 'src/app/global/interfaces/user.interface';

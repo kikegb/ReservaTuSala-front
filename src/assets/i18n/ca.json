@@ -71,7 +71,17 @@
         "deleteError": "Error eliminant l'element.",
         "deleteSuccess": "Element eliminat correctament.",
         "reservationError": "Error en processar la reserva.",
-        "reservationSuccess": "Reserva realitzada correctament."
+        "reservationSuccess": "Reserva realitzada correctament.",
+        "postcodeLengthError": "El codi postal ha de ser de 5 caràcters numèrics.",
+        "costPositiveError": "El cost ha de ser un valor positiu.",
+        "numberPositiveError": "El número ha de ser un valor positiu.",
+        "sizePositiveError": "El tamany ha de ser un valor positiu.",
+        "pricePositiveError": "El preu ha de ser un valor positiu.",
+        "capacityPositiveError": "L'aforament ha de ser un valor positiu.",
+        "quantityError": "La quantitat ha de ser almenys 1.",
+        "cnifError": "El CIF o NIF ha de ser 8 números seguits d'1 lletra majúscula.",
+        "emailError": "Format erroni de correu electrònic.",
+        "phoneError": "El telèfon ha de ser de 9 caràcters numèrics."
     },
     "actions": {
         "edit": "Editar",

@@ -54,9 +54,9 @@ export class RoomFormDialogComponent {
     this.roomForm = this.formBuilder.group({
       'name': [data.room?.name || null, Validators.required],
       'location': [data.room?.location || null, Validators.required],
-      'size': [data.room?.size || null, Validators.required],
-      'capacity': [data.room?.capacity || null, Validators.required],
-      'price': [data.room?.price || null, Validators.required],
+      'size': [data.room?.size || null, [Validators.required, Validators.min(0)]],
+      'capacity': [data.room?.capacity || null, [Validators.required, Validators.min(0)]],
+      'price': [data.room?.price || null, [Validators.required, Validators.min(0)]],
       'material': [null],
       'quantity': [null],
       'weekday': [null],
@@ -74,7 +74,7 @@ export class RoomFormDialogComponent {
   }
 
   addNewMaterial(): void {
-    if (this.roomForm.value.material && this.roomForm.value.quantity) {
+    if (this.roomForm.value.material && this.roomForm.value.quantity && this.roomForm.value.quantity > 0) {
       const material = {
         material: this.roomForm.value.material,
         quantity: this.roomForm.value.quantity

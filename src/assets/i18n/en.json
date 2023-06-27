@@ -71,7 +71,17 @@
         "deleteError": "Error deleting the element.",
         "deleteSuccess": "Element deleted successfully.",
         "reservationError": "Error processing the reservation.",
-        "reservationSuccess": "Reservation made successfully."
+        "reservationSuccess": "Reservation made successfully.",
+        "postcodeLengthError": "Postcode must be 5 numeric characters long.",
+        "costPositiveError": "Cost must be a positive value.",
+        "numberPositiveError": "Number must be a positive value.",
+        "sizePositiveError": "Number must be a positive value.",
+        "pricePositiveError": "Number must be a positive value.",
+        "capacityPositiveError": "Number must be a positive value.",
+        "quantityError": "Quantity must be at least 1.",
+        "cnifError": "CIF or NIF must be 8 numbers followed by 1 uppercase letter.",
+        "emailError": "Wrong email format.",
+        "phoneError": "Phone must be 9 numeric characters long."
     },
     "actions": {
         "edit": "Edit",
