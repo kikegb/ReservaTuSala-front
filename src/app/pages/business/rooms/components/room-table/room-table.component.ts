@@ -54,7 +54,11 @@ export class RoomTableComponent {
       this.table.renderRows();
     }, (e: HttpErrorResponse) => {
       console.log(e.status);
-      this.snackbarSvc.openError('messages.addError');
+      if (e.error) {
+        this.snackbarSvc.openErrorByCode(e.error.code);
+      } else {
+        this.snackbarSvc.openError('messages.addError');
+      }
     });
   }
 
@@ -67,7 +71,11 @@ export class RoomTableComponent {
       this.table.renderRows();
     }, (e: HttpErrorResponse) => {
       console.log(e.status);
-      this.snackbarSvc.openError('messages.updateError');
+      if (e.error) {
+        this.snackbarSvc.openErrorByCode(e.error.code);
+      } else {
+        this.snackbarSvc.openError('messages.updateError');
+      }
     });
   }
 
@@ -78,7 +86,11 @@ export class RoomTableComponent {
       this.table.renderRows();
     }, (e: HttpErrorResponse) => {
       console.log(e.status);
-      this.snackbarSvc.openError('messages.deleteError');
+      if (e.error) {
+        this.snackbarSvc.openErrorByCode(e.error.code);
+      } else {
+        this.snackbarSvc.openError('messages.deleteError');
+      }
     });
   }
 

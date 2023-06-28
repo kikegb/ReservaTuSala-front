@@ -150,7 +150,11 @@ export class RoomDetailComponent {
         this.operations = [...this.operations, op];
       }, (e: HttpErrorResponse) => {
         console.log(e.status);
-        this.snackbarSvc.openError('messages.reservationError');
+        if (e.error) {
+          this.snackbarSvc.openErrorByCode(e.error.code);
+        } else {
+          this.snackbarSvc.openError('messages.reservationError');
+        }
       });
 
       this.router.navigate(['customer/home']);

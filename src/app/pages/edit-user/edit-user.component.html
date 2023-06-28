@@ -44,5 +44,5 @@
 </div>
 <div>
     <button mat-button (click)="onCancel()">{{ 'actions.cancel' | translate }}</button>
-    <button mat-button (click)="onSave()" [disabled]="confirmPassword()" cdkFocusInitial>{{ 'actions.save' | translate }}</button>
+    <button mat-flat-button color="primary" (click)="onSave()" [disabled]="confirmPassword()" cdkFocusInitial>{{ 'actions.save' | translate }}</button>
 </div>
