@@ -6,13 +6,15 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { TokenUtilsService } from '../services/token-utils.service';
 
 @Injectable()
 export class SecurityInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor(private tokenutilsSvc: TokenUtilsService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    this.tokenutilsSvc.checkTokenExpiration();
     return next.handle(this.addAuthToken(request));
   }
 
