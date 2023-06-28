@@ -12,7 +12,8 @@
         "makeReservation": "Make a reservation",
         "searchFilters": "Search filters",
         "unauthorized": "Unautorized",
-        "tokenExpired": "Session has expired"
+        "tokenExpired": "Session has expired",
+        "results": "Results"
     },
     "tableHeaders": {
         "location": ["Street", "Number", "Postcode", "Town", "Province", "Country", "Actions"],
@@ -133,5 +134,6 @@
     "searchBy": "Search by room, business or town name",
     "nHours": "Num. hours",
     "confirmPassword": "Confirm password",
-    "registerAs": "Register as"
+    "registerAs": "Register as",
+    "people": "people"
 }

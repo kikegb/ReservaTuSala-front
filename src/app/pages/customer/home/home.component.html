@@ -1,7 +1,7 @@
 
 <div>
     <form [formGroup]="searchForm" >
-        <p>
+        <div class="search-form">
             <mat-form-field appearance="outline" class="search-bar">
                 <mat-label>{{ "searchBy" | translate }}</mat-label>
                 <input matInput type="text" name="search" formControlName="search">
@@ -9,11 +9,12 @@
             <button mat-icon-button (click)="search()">
                 <mat-icon fontIcon="search"></mat-icon>
             </button>
-            <button mat-flat-button color="accent" (click)="showFilterDialog()">
+            <button mat-flat-button color="primary" (click)="showFilterDialog()">
                 {{ "actions.filter" | translate }}
             </button>
-        </p>
+        </div>
     </form>
+    <h2>{{ 'title.results' | translate }}:</h2>
     <div *ngIf="rooms.length">
         <mat-card *ngFor="let room of rooms">
             <mat-card-header>
@@ -21,12 +22,14 @@
               <mat-card-subtitle>{{ room.business.name }}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-                <p>{{ "tableHeaders.room.1" | translate }}:  
+                <p>
+                    <b>{{ "tableHeaders.room.1" | translate }}:</b>  
                     {{room.location.street}}, {{room.location.number}}, {{room.location.postcode}}, 
-                    {{room.location.town}}, {{room.location.province}}, {{room.location.country}}</p>
-                <p>{{ "tableHeaders.room.3" | translate }}: {{room.size}} m2</p>
-                <p>{{ "tableHeaders.room.4" | translate }}: {{room.capacity}}</p>
-                <p>{{ "tableHeaders.room.7" | translate }}: {{room.price}} €/h</p>
+                    {{room.location.town}}, {{room.location.province}}, {{room.location.country}}
+                </p>
+                <p><b>{{ "tableHeaders.room.3" | translate }}:</b> {{room.size}}</p>
+                <p><b>{{ "tableHeaders.room.4" | translate }}:</b> {{room.capacity}}</p>
+                <p><b>{{ "tableHeaders.room.7" | translate }}:</b> {{room.price}}</p>
             </mat-card-content>
             <mat-card-actions>
               <button mat-button color="primary" (click)="navigateDetails(room.id)">{{ "actions.seeDetails" | translate }}</button>

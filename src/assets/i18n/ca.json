@@ -12,7 +12,8 @@
         "makeReservation": "Feu una reserva",
         "searchFilters": "Filtres de cerca",
         "unauthorized": "No autoritzat",
-        "tokenExpired": "La sessió ha caducat"
+        "tokenExpired": "La sessió ha caducat",
+        "results": "Resultats"
     },
     "tableHeaders": {
         "location": ["Carrer", "Número", "Codi postal", "Ciutat", "Província", "País", "Accions"],
@@ -133,5 +134,6 @@
     "searchBy": "Cerca per nom de sala, empresa o ciutat",
     "nHours": "Núm. hores",
     "confirmPassword": "Confirmar contrasenya",
-    "registerAs": "Registrar-se com"
+    "registerAs": "Registrar-se com",
+    "people": "persones"
 }

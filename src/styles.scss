@@ -21,6 +21,10 @@ body {
     margin-top: 5px;
 }
 
+mat-form-field {
+    padding-right: 1rem;
+}
+
 .mat-mdc-snack-bar-container {
     &.error-snackbar {
         --mdc-snackbar-container-color: rgb(184, 50, 50);

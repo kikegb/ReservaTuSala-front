@@ -2,26 +2,34 @@
     <div class="content-left">
         <div *ngIf="room">
             <h1>{{ room.name }}</h1>
-            <h2 *ngIf="room.business">
+            <h3 *ngIf="room.business">
                 {{ room.business.name }}
                 <button mat-button color="primary" (click)="navigateDetails(room.business.id)">{{ "actions.moreInfo" | translate }}</button>
-            </h2>
-            <h3>{{ "title.details" | translate }}:</h3>
+            </h3>
+            <h2>{{ "title.details" | translate }}:</h2>
             <p *ngIf="room.location">
-                {{ 'tableHeaders.room.1' | translate }}:  {{room.location.street}}, {{room.location.number}}, {{room.location.postcode}}, 
+                <b>{{ 'tableHeaders.room.1' | translate }}:</b>  
+                {{room.location.street}}, {{room.location.number}}, {{room.location.postcode}}, 
                 {{room.location.town}}, {{room.location.province}}, {{room.location.country}} 
             </p>
-            <p>{{ 'tableHeaders.room.3' | translate }}: {{room.size}} m2</p>
-            <p>{{ 'tableHeaders.room.4' | translate }}: {{room.capacity}}</p>
-            <p>{{ 'tableHeaders.room.5' | translate }}:</p>
-            <p *ngFor="let material of room.materials">
-                - {{ material.material }} x {{ material.quantity }}
+            <p><b>{{ 'tableHeaders.room.3' | translate }}:</b> {{room.size}}</p>
+            <p><b>{{ 'tableHeaders.room.4' | translate }}:</b> {{room.capacity}} {{'people' | translate}}</p>
+            <p><b>{{ 'tableHeaders.room.5' | translate }}:</b></p>
+            <ul>
+                <li *ngFor="let material of room.materials">
+                    {{ material.material }} x {{ material.quantity }}
+                </li>
+            </ul>
+            <p><b>{{ 'tableHeaders.room.6' | translate }}:</b></p>
+            <ul>
+                <li *ngFor="let schedule of room.schedules">
+                    {{ week[schedule.weekDay] }}: {{ schedule.start.getHours() }}:00 - {{ schedule.end.getHours() }}:00
+                </li>
+            </ul>
+            <p>
+                <b>{{ 'tableHeaders.room.7' | translate }}:</b> 
+                {{room.price}}
             </p>
-            <p>{{ 'tableHeaders.room.6' | translate }}:</p>
-            <p *ngFor="let schedule of room.schedules">
-                - {{ week[schedule.weekDay] }}: {{ schedule.start.getHours() }}:00 - {{ schedule.end.getHours() }}:00
-            </p>
-            <p>{{ 'tableHeaders.room.7' | translate }}: {{room.price}} €/h</p>
         </div>
         <div *ngIf="!room">
             <p>{{ 'messages.roomNotAvailable' | translate }}</p>
@@ -61,10 +69,12 @@
                 </mat-form-field>
             </p>
             <p>
-                {{ 'nHours' | translate }}: {{ nHours }}
+                <b>{{ 'nHours' | translate }}: </b>
+                {{ nHours }}
             </p>
             <p>
-                {{ 'tableHeaders.operation.5' | translate }}: {{ cost }}
+                <b>{{ 'tableHeaders.operation.5' | translate }}: </b>
+                {{ cost }}
             </p>
         </form>
         <div *ngIf="isBeforeOrSame()">

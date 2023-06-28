@@ -12,7 +12,8 @@
         "makeReservation": "Haga una reserva",
         "searchFilters": "Filtros de búsqueda",
         "unauthorized": "No autorizado",
-        "tokenExpired": "La sesión ha caducado"
+        "tokenExpired": "La sesión ha caducado",
+        "results": "Resultados"
     },
     "tableHeaders": {
         "location": ["Calle", "Número", "Código postal", "Ciudad", "Provincia", "País", "Acciones"],
@@ -133,5 +134,6 @@
     "searchBy": "Busca por nombre de sala, empresa o ciudad",
     "nHours": "Núm. horas",
     "confirmPassword": "Confirmar contraseña",
-    "registerAs": "Registrarse como"
+    "registerAs": "Registrarse como",
+    "people": "personas"
 }
