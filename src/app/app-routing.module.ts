@@ -10,6 +10,7 @@ import { CustomerGuard } from './global/guards/customer.guard';
 import { CustomerModule } from './pages/customer/customer.module';
 import { EditUserModule } from './pages/edit-user/edit-user.module';
 import { SignUpModule } from './pages/sign-up/sign-up.module';
+import { EditUserGuard } from './global/guards/edit-user.guard';
 
 const routes: Routes = [
 
@@ -19,7 +20,7 @@ const routes: Routes = [
 
   { path: 'customer', canActivate: [CustomerGuard], loadChildren: () => CustomerModule },
 
-  { path: 'edit-user', loadChildren: () => EditUserModule },
+  { path: 'edit-user', canActivate: [EditUserGuard], loadChildren: () => EditUserModule },
   
   { path: 'login', loadChildren: () => LoginModule },
 
