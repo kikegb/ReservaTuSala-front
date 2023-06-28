@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/global/interfaces/user.interface';
@@ -65,7 +65,11 @@ export class SignUpComponent {
       }
     }, (e: HttpErrorResponse) => {
       console.log(e.status);
-      this.snackbarSvc.openError('messages.loginError');
+      if (e.error) {
+        this.snackbarSvc.openErrorByCode(e.error.code);
+      } else {
+        this.snackbarSvc.openError('messages.loginError');
+      }
     });
   }
 
@@ -83,6 +87,13 @@ export class SignUpComponent {
     this.userSvc.addUser(newUser)
     .subscribe(() => {
       this.login();
+    }, (e: HttpErrorResponse) => {
+      console.log(e.status);
+      if (e.error) {
+        this.snackbarSvc.openErrorByCode(e.error.code);
+      } else {
+        this.snackbarSvc.openError('messages.addError');
+      }
     });
   }
 }

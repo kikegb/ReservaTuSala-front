@@ -6,7 +6,7 @@ html, body {
 
 body { 
     margin: 0; 
-    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .add-button {
@@ -16,6 +16,7 @@ body {
 
 .error-message {
     color: red;
+    font-weight: bold;
     font-size: 14px;
     margin-top: 5px;
 }
@@ -31,4 +32,8 @@ body {
         --mat-mdc-snack-bar-button-color: white;
         --mdc-snackbar-supporting-text-color: white;
     }
+}
+
+.mat-sidenav{
+    width: 15% !important;
 }

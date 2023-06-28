@@ -83,7 +83,10 @@
         "quantityError": "La quantitat ha de ser almenys 1.",
         "cnifError": "El CIF o NIF ha de ser 8 números seguits d'1 lletra majúscula.",
         "emailError": "Format erroni de correu electrònic.",
-        "phoneError": "El telèfon ha de ser de 9 caràcters numèrics."
+        "phoneError": "El telèfon ha de ser de 9 caràcters numèrics.",
+        "notFoundId": "Error: element no trobat.",
+        "userConflict": "Error: Ja existeix un usuari amb aquest correu electrònic o CIF/NIF.",
+        "badRequest": "Error: los datos proporcionados son erróneos."
     },
     "actions": {
         "edit": "Editar",

@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
 import { TokenUtilsService } from 'src/app/global/services/token-utils.service';
 import { SidenavService } from 'src/app/global/services/sidenav.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { LoginService } from 'src/app/global/services/login.service';
 import { SnackBarService } from 'src/app/global/services/snack-bar.service';
@@ -53,7 +52,11 @@ export class LoginComponent {
       }
     }, (e: HttpErrorResponse) => {
       console.log(e.status);
-      this.snackbarSvc.openError('messages.loginError');
+      if (e.error) {
+        this.snackbarSvc.openErrorByCode(e.error.code);
+      } else {
+        this.snackbarSvc.openError('messages.loginError');
+      }
     });
   }
 

@@ -57,5 +57,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close (click)="onCancel()">{{ 'actions.cancel' | translate }}</button>
-  <button mat-button mat-dialog-close [disabled]="!userForm.valid" (click)="onSave()" cdkFocusInitial>{{ 'actions.save' | translate }}</button>
+  <button mat-button mat-dialog-close color="primary" [disabled]="!userForm.valid" (click)="onSave()" cdkFocusInitial>{{ 'actions.save' | translate }}</button>
 </div>

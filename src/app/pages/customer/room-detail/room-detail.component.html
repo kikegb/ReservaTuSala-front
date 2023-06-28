@@ -4,7 +4,7 @@
             <h1>{{ room.name }}</h1>
             <h2 *ngIf="room.business">
                 {{ room.business.name }}
-                <button mat-button (click)="navigateDetails(room.business.id)">{{ "actions.moreInfo" | translate }}</button>
+                <button mat-button color="primary" (click)="navigateDetails(room.business.id)">{{ "actions.moreInfo" | translate }}</button>
             </h2>
             <h3>{{ "title.details" | translate }}:</h3>
             <p *ngIf="room.location">
@@ -76,6 +76,6 @@
         <div *ngIf="operationForm.invalid">
             <p class="error-message">{{ 'messages.emptyRequiredFields' | translate }}</p>
         </div>
-        <button mat-button (click)="createOperation()" [disabled]="isBeforeOrSame() || isUnavailable() || !operationForm.valid" cdkFocusInitial>{{ 'actions.accept' | translate }}</button>
+        <button mat-button (click)="createOperation()" color="primary" [disabled]="isBeforeOrSame() || isUnavailable() || !operationForm.valid" cdkFocusInitial>{{ 'actions.accept' | translate }}</button>
     </div>
 </div>

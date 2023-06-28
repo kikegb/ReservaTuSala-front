@@ -83,7 +83,10 @@
         "quantityError": "La cantidad debe ser al menos 1.",
         "cnifError": "El CIF o NIF debe ser 8 números seguidos de 1 letra mayúscula.",
         "emailError": "Formato erróneo de correo electrónico.",
-        "phoneError": "El teléfono debe ser de 9 caracteres numéricos."
+        "phoneError": "El teléfono debe ser de 9 caracteres numéricos.",
+        "notFoundId": "Error: elemento no encontrado.",
+        "userConflict": "Error: Ya existe un usuario con ese correo electrónico o CIF/NIF.",
+        "badRequest": "Error: los datos proporcionados son erróneos."
     },
     "actions": {
         "edit": "Editar",

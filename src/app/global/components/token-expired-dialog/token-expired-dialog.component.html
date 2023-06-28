@@ -3,5 +3,5 @@
   {{ "messages.tokenExpired" | translate }}
 </div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)="onExit()">{{ "actions.exit" | translate }}</button>
+  <button mat-button mat-dialog-close color="primary" (click)="onExit()" cdkFocusInitial>{{ "actions.exit" | translate }}</button>
 </div>

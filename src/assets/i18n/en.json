@@ -83,7 +83,10 @@
         "quantityError": "Quantity must be at least 1.",
         "cnifError": "CIF or NIF must be 8 numbers followed by 1 uppercase letter.",
         "emailError": "Wrong email format.",
-        "phoneError": "Phone must be 9 numeric characters long."
+        "phoneError": "Phone must be 9 numeric characters long.",
+        "notFoundId": "Error: element not found.",
+        "userConflict": "Error: There is already a user with that email or CIF/NIF.",
+        "badRequest": "Error: wrong data provided."
     },
     "actions": {
         "edit": "Edit",

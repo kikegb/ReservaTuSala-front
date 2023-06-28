@@ -38,7 +38,11 @@ export class UserTableComponent {
       this.table.renderRows();
     }, (e: HttpErrorResponse) => {
       console.log(e.status);
-      this.snackbarSvc.openError('messages.addError');
+      if (e.error) {
+        this.snackbarSvc.openErrorByCode(e.error.code);
+      } else {
+        this.snackbarSvc.openError('messages.addError');
+      }
     });
   }
 
