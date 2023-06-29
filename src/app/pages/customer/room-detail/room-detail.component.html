@@ -44,6 +44,7 @@
                     <input matInput 
                         [matDatepicker]="datePicker" 
                         [min]="today"
+                        [matDatepickerFilter]="dateFilter"
                         formControlName="date" required>
                     <mat-hint>MM/DD/YYYY</mat-hint>
                     <mat-datepicker-toggle matIconSuffix [for]="datePicker"></mat-datepicker-toggle>

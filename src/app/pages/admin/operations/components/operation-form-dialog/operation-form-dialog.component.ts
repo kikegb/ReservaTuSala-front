@@ -8,6 +8,7 @@ import { tap } from 'rxjs';
 import { RoomsService } from 'src/app/global/services/rooms.service';
 import { Room } from 'src/app/global/interfaces/room.interface';
 import { OperationsService } from 'src/app/global/services/operations.service';
+import { Schedule } from 'src/app/global/interfaces/schedule.interface';
 
 @Component({
   selector: 'app-operation-form-dialog',
@@ -26,6 +27,7 @@ export class OperationFormDialogComponent {
   rooms: Room[] = [];
   operations: Operation[] = [];
   unavailableHours: number[] = [];
+  weekdays: number[] = [...Array(7).keys()]
 
   constructor(
     public dialogRef: MatDialogRef<OperationFormDialogComponent>,
@@ -51,36 +53,30 @@ export class OperationFormDialogComponent {
   }
 
   ngOnInit(): void {
-    this.userSvc.getUsers()
-    .pipe(
-        tap( (users: User[]) => {
-          for (let user of users) {
-            if (user.role === "CUSTOMER") {
-              this.customers.push(user)
-            } else if (user.role === "BUSINESS") {
-              this.businesses.push(user)
-            }
-          }
-        } )
-    )
-    .subscribe();
+    if (this.operation) {
+      this.getRooms(this.operation.business);
+    }
 
-    this.roomsSvc.getRooms()
-    .pipe(
-        tap( (rooms: Room[]) => this.rooms = rooms )
-    )
-    .subscribe(() => {
-      this.getHours(this.operationForm.value.date);
+    this.userSvc.getUsers().subscribe((users: User[]) => {
+      for (let user of users) {
+        if (user.role === "CUSTOMER") {
+          this.customers.push(user)
+        } else if (user.role === "BUSINESS") {
+          this.businesses.push(user)
+        }
+      }
     });
 
-    this.operationSvc.getOperations()
-    .pipe(
-        tap( (operations: Operation[]) => this.operations = operations )
-    )
-    .subscribe();
+    this.operationSvc.getOperations().subscribe(
+      (operations: Operation[]) => this.operations = operations
+    );
 
     this.operationForm.get("business")?.valueChanges.subscribe(newValue => {
       this.getRooms(newValue);
+    });
+
+    this.operationForm.get("room")?.valueChanges.subscribe(newValue => {
+      this.getWeekdays(newValue);
     });
 
     this.operationForm.get("date")?.valueChanges.subscribe(newValue => {
@@ -118,7 +114,8 @@ export class OperationFormDialogComponent {
       } else {
         this.unavailableHours = [];
         this.operations.map(operation => {
-          if (operation.start.toDateString() === date.toDateString() && (this.operation? operation.id !== this.operation.id : true)) {
+          if (operation.start.toDateString() === date.toDateString() && (this.operation? operation.id !== this.operation.id : true)
+              && operation.status != "CANCELLED") {
             for (let i = operation.start.getHours(); i <= operation.end.getHours(); i++) {
               this.unavailableHours.push(i);
             } 
@@ -137,24 +134,32 @@ export class OperationFormDialogComponent {
     }
   }
 
+  getWeekdays(room: Room) {
+    if (room) {
+      this.weekdays = room.schedules.map( (schedule: Schedule) => {
+        return schedule.weekDay;
+      });
+    }
+  }
+
   getRooms(business: User): void {
     if (business) {
-      this.userSvc.getById(business.id)
-      .pipe(
-          tap( (user: User) => {
-            this.rooms = user.rooms;
-          })
-      )
-      .subscribe();
+      this.userSvc.getById(business.id).subscribe((user: User) => {
+        this.rooms = user.rooms;
+        const actualRoom = this.rooms.find(room => room.id == this.operation.room.id);
+        if (actualRoom) {
+          this.getWeekdays(actualRoom);
+          this.getHours(this.operation.start);
+        }
+      });
     }
   }
 
   dateFilter = (d: Date | null): boolean => {
-    if (d && this.dates.length) {
-      return !this.dates.find(date => date.toDateString() === d?.toDateString())
-    }
-    return true;
+    const day = (d || new Date()).getDay();
+    return this.weekdays.includes(day);
   };
+
 
   compareById(a: any, b: any): boolean {
     return a && b ? a.id === b.id : a === b;

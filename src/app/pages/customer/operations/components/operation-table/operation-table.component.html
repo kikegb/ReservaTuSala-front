@@ -22,7 +22,7 @@
     <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> {{ "tableHeaders.operation.7" | translate }} </th>
         <td mat-cell *matCellDef="let operation">  
-            <button mat-icon-button matTooltip="{{ 'actions.cancel' | translate }}" (click)="showCancelDialog(operation)">
+            <button mat-icon-button matTooltip="{{ 'actions.cancel' | translate }}" (click)="showCancelDialog(operation)" *ngIf="operation.status != 'CANCELLED'">
                 <mat-icon fontIcon="clear"></mat-icon>
             </button>    
         </td>
