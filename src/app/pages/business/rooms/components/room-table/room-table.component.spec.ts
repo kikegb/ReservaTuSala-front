@@ -15,6 +15,7 @@ import { User } from 'src/app/global/interfaces/user.interface';
 import { UsersService } from 'src/app/global/services/users.service';
 import { UsersServiceMock } from 'src/test-helpers/mocks/users-service-mock';
 import { MatTable } from '@angular/material/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('Business RoomTableComponent', () => {
   let component: RoomTableComponent;
@@ -65,6 +66,7 @@ describe('Business RoomTableComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         MaterialModule,
+        BrowserAnimationsModule,
         TranslateModule.forRoot()
       ],
       declarations: [ RoomTableComponent ],

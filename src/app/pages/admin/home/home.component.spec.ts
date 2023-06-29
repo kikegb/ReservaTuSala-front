@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 import { TranslateTestingModule } from 'ngx-translate-testing';
 import { Router } from '@angular/router';
+import { MaterialModule } from 'src/app/material.module';
 
 describe('Admin HomeComponent', () => {
   let component: HomeComponent;
@@ -18,6 +19,7 @@ describe('Admin HomeComponent', () => {
   beforeEach(waitForAsync( () => {
     TestBed.configureTestingModule({
       imports: [
+        MaterialModule,
         TranslateTestingModule.withTranslations('en', translations)
       ],
       declarations: [ HomeComponent ],

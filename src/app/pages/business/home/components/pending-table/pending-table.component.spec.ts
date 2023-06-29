@@ -11,6 +11,7 @@ import { User } from 'src/app/global/interfaces/user.interface';
 import { Room } from 'src/app/global/interfaces/room.interface';
 import { of } from 'rxjs';
 import { MatTable } from '@angular/material/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('Business PendingTableComponent', () => {
   let component: PendingTableComponent;
@@ -67,6 +68,7 @@ describe('Business PendingTableComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         MaterialModule,
+        BrowserAnimationsModule,
         TranslateModule.forRoot()
       ],
       declarations: [ PendingTableComponent ],

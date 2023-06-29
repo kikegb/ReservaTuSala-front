@@ -12,6 +12,7 @@ import { Location } from 'src/app/global/interfaces/location.interface';
 import { DeleteDialogComponent } from 'src/app/global/components/delete-dialog/delete-dialog.component';
 import { LocationFormDialogComponent } from '../location-form-dialog/location-form-dialog.component';
 import { of } from 'rxjs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('Admin LocationTableComponent', () => {
   let component: LocationTableComponent;
@@ -43,6 +44,7 @@ describe('Admin LocationTableComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         MaterialModule,
+        BrowserAnimationsModule,
         TranslateModule.forRoot()
       ],
       declarations: [ LocationTableComponent ],

@@ -9,7 +9,7 @@ import { TokenExpiredDialogComponent } from '../components/token-expired-dialog/
 export class TokenUtilsService {
   jwtDecode = jwtDecode;
 
-  constructor(private dialog: MatDialog) { }
+  constructor(public dialog: MatDialog) { }
 
   setToken(token: string): void {
    localStorage.setItem('token', token);

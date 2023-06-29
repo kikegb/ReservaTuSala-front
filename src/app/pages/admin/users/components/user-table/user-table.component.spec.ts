@@ -11,6 +11,7 @@ import { UserFormDialogComponent } from '../user-form-dialog/user-form-dialog.co
 import { UserTableComponent } from './user-table.component';
 import { UsersService } from 'src/app/global/services/users.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('Admin UserTableComponent', () => {
   let component: UserTableComponent;
@@ -42,6 +43,7 @@ describe('Admin UserTableComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         MaterialModule,
+        BrowserAnimationsModule,
         TranslateModule.forRoot()
       ],
       declarations: [ UserTableComponent ],

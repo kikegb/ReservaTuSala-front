@@ -5,6 +5,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatDialogRefMock } from 'src/test-helpers/mocks/mat-dialog-ref-mock';
 import { Router } from '@angular/router';
+import { TokenUtilsService } from '../../services/token-utils.service';
+import { TokenUtilsServiceMock } from 'src/test-helpers/mocks/token-utils-service-mock';
 
 describe('TokenExpiredDialogComponent', () => {
   let component: TokenExpiredDialogComponent;
@@ -19,7 +21,8 @@ describe('TokenExpiredDialogComponent', () => {
       declarations: [ TokenExpiredDialogComponent ],
       providers: [
         {provide: MatDialogRef, useValue: MatDialogRefMock},
-        { provide: Router, useValue: jasmine.createSpyObj('Router', ['navigate']) }
+        { provide: Router, useValue: jasmine.createSpyObj('Router', ['navigate']) },
+        {provide: TokenUtilsService, useValue: TokenUtilsServiceMock},
       ],
     })
     .compileComponents();
@@ -38,5 +41,6 @@ describe('TokenExpiredDialogComponent', () => {
     const spyDialogRef = spyOn(component.dialogRef, 'close');
     component.onExit();
     expect(spyDialogRef).toHaveBeenCalled();
+    expect(router.navigate).toHaveBeenCalledWith(['/login'])
   });
 });

@@ -13,6 +13,7 @@ import { Room } from 'src/app/global/interfaces/room.interface';
 import { User } from 'src/app/global/interfaces/user.interface';
 import { DeleteDialogComponent } from 'src/app/global/components/delete-dialog/delete-dialog.component';
 import { OperationFormDialogComponent } from '../operation-form-dialog/operation-form-dialog.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('Admin OperationTableComponent', () => {
   let component: OperationTableComponent;
@@ -46,6 +47,7 @@ describe('Admin OperationTableComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         MaterialModule,
+        BrowserAnimationsModule,
         TranslateModule.forRoot()
       ],
       declarations: [ OperationTableComponent ],
