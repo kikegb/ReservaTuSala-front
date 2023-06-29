@@ -12,6 +12,9 @@ import { RoomTableComponent } from './room-table.component';
 import { RoomsService } from 'src/app/global/services/rooms.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { User } from 'src/app/global/interfaces/user.interface';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TokenUtilsService } from 'src/app/global/services/token-utils.service';
+import { TokenUtilsServiceMock } from 'src/test-helpers/mocks/token-utils-service-mock';
 
 describe('Admin RoomTableComponent', () => {
   let component: RoomTableComponent;
@@ -49,12 +52,14 @@ describe('Admin RoomTableComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         MaterialModule,
+        BrowserAnimationsModule,
         TranslateModule.forRoot()
       ],
       declarations: [ RoomTableComponent ],
       providers: [
         { provide: RoomsService, useValue: RoomsServiceMock },
-        { provide: MatDialog, useValue: MatDialogRefMock }
+        { provide: MatDialog, useValue: MatDialogRefMock },
+        { provide: TokenUtilsService, useValue: TokenUtilsServiceMock }
       ],
     })
     .compileComponents();

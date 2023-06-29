@@ -1,6 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
 import { TokenUtilsService } from './token-utils.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MatDialogRefMock } from 'src/test-helpers/mocks/mat-dialog-ref-mock';
 
 
 describe('TokenUtilsService', () => {
@@ -9,7 +11,8 @@ describe('TokenUtilsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        TokenUtilsService  
+        TokenUtilsService,
+        { provide: MatDialog, useValue: MatDialogRefMock }
       ]
     });
     service = TestBed.inject(TokenUtilsService);
@@ -43,5 +46,17 @@ describe('TokenUtilsService', () => {
     expect(localStorage.getItem).toHaveBeenCalledWith('token');
     expect(service.jwtDecode).toHaveBeenCalledWith(token);
     expect(result).toEqual(decodedToken);
+  });
+
+  it('should open dialog when token is expired', () => {
+    const token = '%$Token$&_Value';
+    const decodedToken = {id: '1', role: 'ADMIN', name: 'Dummy Name', exp: 0};
+    spyOn(localStorage, 'getItem').and.returnValue(token);
+    spyOn(service, 'jwtDecode').and.returnValue(decodedToken);
+    spyOn(service.dialog, 'open').and.callThrough();
+    service.checkTokenExpiration();
+    expect(localStorage.getItem).toHaveBeenCalledWith('token');
+    expect(service.jwtDecode).toHaveBeenCalledWith(token);
+    expect(service.dialog.open).toHaveBeenCalled();
   });
 });

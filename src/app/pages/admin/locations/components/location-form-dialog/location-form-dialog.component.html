@@ -16,7 +16,7 @@
         <p>
             <mat-form-field appearance="outline">
                 <mat-label>{{ "tableHeaders.location.2" | translate }}</mat-label>
-                <input matInput name="postcode" formControlName="postcode" required>
+                <input matInput type="number" name="postcode" formControlName="postcode" required>
             </mat-form-field> 
         </p>
         <p>
@@ -39,10 +39,18 @@
         </p>
     </form>
 </div>
-<div *ngIf="locationForm.invalid">
-    <p class="error-message">{{ 'messages.emptyRequiredFields' | translate }}</p>
+<div class="formErrors">
+    <div *ngIf="locationForm.get('number')?.errors?.['min']">
+        <p class="error-message">{{ 'messages.numberPositiveError' | translate }}</p>
+    </div>
+    <div *ngIf="locationForm.get('postcode')?.errors?.['pattern']">
+        <p class="error-message">{{ 'messages.postcodeLengthError' | translate }}</p>
+    </div>
+    <div *ngIf="locationForm.invalid">
+        <p class="error-message">{{ 'messages.emptyRequiredFields' | translate }}</p>
+    </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close (click)="onCancel()">{{ "actions.cancel" | translate }}</button>
-  <button mat-button mat-dialog-close [disabled]="!locationForm.valid" (click)="onSave()" cdkFocusInitial>{{ "actions.save" | translate }}</button>
+  <button mat-button mat-dialog-close color="primary" [disabled]="!locationForm.valid" (click)="onSave()" cdkFocusInitial>{{ "actions.save" | translate }}</button>
 </div>

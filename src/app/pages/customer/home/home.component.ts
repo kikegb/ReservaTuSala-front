@@ -34,37 +34,28 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
-    this.roomSvc.getRooms()
-    .pipe(
-        tap( (rooms: Room[]) => {
-          this.rooms = rooms;
-
-        })
-    )
-    .subscribe();
+    this.roomSvc.getRooms().subscribe((rooms: Room[]) => {
+      this.rooms = rooms;
+    });
   }
 
   search(): void {
-    this.roomSvc.getRooms()
-    .pipe(
-        tap( (rooms: Room[]) => {
-          this.rooms = rooms;
-          if (this.searchForm.value.search) {
-            this.rooms = rooms.filter((room: Room) => room.name.toLowerCase().includes(this.searchForm.value.search.toLowerCase()) 
-            || room.business.name.toLowerCase().includes(this.searchForm.value.search.toLowerCase())
-            || room.location.town.toLowerCase().includes(this.searchForm.value.search.toLowerCase()));
-          }
-          if (this.filters) {
-            this.rooms = this.rooms.filter(room => room.size >= this.filters?.minSize);
-            this.rooms = this.rooms.filter(room => room.size <= this.filters.maxSize);
-            this.rooms = this.rooms.filter(room => room.capacity >= this.filters.minCapacity);
-            this.rooms = this.rooms.filter(room => room.capacity <= this.filters.maxCapacity);
-            this.rooms = this.rooms.filter(room => room.price >= this.filters.minPrice);
-            this.rooms = this.rooms.filter(room => room.price <= this.filters.maxPrice);
-          }
-        })
-    )
-    .subscribe();
+    this.roomSvc.getRooms().subscribe((rooms: Room[]) => {
+      this.rooms = rooms;
+      if (this.searchForm.value.search) {
+        this.rooms = rooms.filter((room: Room) => room.name.toLowerCase().includes(this.searchForm.value.search.toLowerCase()) 
+        || room.business.name.toLowerCase().includes(this.searchForm.value.search.toLowerCase())
+        || room.location.town.toLowerCase().includes(this.searchForm.value.search.toLowerCase()));
+      }
+      if (this.filters) {
+        this.rooms = this.rooms.filter(room => room.size >= this.filters?.minSize);
+        this.rooms = this.rooms.filter(room => room.size <= this.filters.maxSize);
+        this.rooms = this.rooms.filter(room => room.capacity >= this.filters.minCapacity);
+        this.rooms = this.rooms.filter(room => room.capacity <= this.filters.maxCapacity);
+        this.rooms = this.rooms.filter(room => room.price >= this.filters.minPrice);
+        this.rooms = this.rooms.filter(room => room.price <= this.filters.maxPrice);
+      }
+    });
   }
 
   navigateDetails(id: number): void {

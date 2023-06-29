@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class HomeComponent {
   pages: string[] = [];
   refs: string[] = ['admin/users', 'admin/operations', 'admin/rooms', 'admin/locations'];
+  icons: string[] = ['people', 'event', 'door_front', 'location_on'];
 
   constructor(private router: Router,
     private translate: TranslateService) 

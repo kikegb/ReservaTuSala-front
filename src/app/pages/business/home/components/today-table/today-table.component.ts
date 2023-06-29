@@ -23,17 +23,13 @@ export class TodayTableComponent {
     if (token) {
       const decodedToken = <any>this.jwtDecode(token);
       const id = decodedToken.id;
-      this.userSvc.getById(id)
-      .pipe(
-          tap( (user: User) => {
-            user.businessOperations.map((operation: Operation) => {
-              if (operation.start.toDateString() === today.toDateString()) {
-                this.todayOperations.push(operation);
-              }
-            })
-          })
-      )
-      .subscribe();
+      this.userSvc.getById(id).subscribe((user: User) => {
+        user.businessOperations.map((operation: Operation) => {
+          if (operation.start.toDateString() === today.toDateString()) {
+            this.todayOperations.push(operation);
+          }
+        })
+      });
     }
   }
 }

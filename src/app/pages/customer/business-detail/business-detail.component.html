@@ -1,8 +1,8 @@
 <div *ngIf="business">
     <h1>{{ business.name }}</h1>
-    <h3>{{ "contact" | translate }}:</h3>
-    <p>{{ "tableHeaders.user.2" | translate }}: {{ business.email }}</p>
-    <p>{{ "tableHeaders.user.4" | translate }}: {{ business.phone }}</p>
+    <h2>{{ "contact" | translate }}:</h2>
+    <p><b>{{ "tableHeaders.user.2" | translate }}:</b> {{ business.email }}</p>
+    <p><b>{{ "tableHeaders.user.4" | translate }}:</b> {{ business.phone }}</p>
 </div>
 
 <div *ngIf="!business">

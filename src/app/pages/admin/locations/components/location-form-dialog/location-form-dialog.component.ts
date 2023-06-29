@@ -22,8 +22,8 @@ export class LocationFormDialogComponent {
     this.location = data.location;
     this.locationForm = this.formBuilder.group({
       'street': [data.location?.street || null, Validators.required],
-      'number': [data.location?.number || null, Validators.required],
-      'postcode': [data.location?.postcode || null, Validators.required],
+      'number': [data.location?.number || null, [Validators.required, Validators.min(0)]],
+      'postcode': [data.location?.postcode || null, [Validators.required, Validators.pattern('^[0-9]{5}$')]],
       'town': [data.location?.town || null, Validators.required],
       'province': [data.location?.province || null, Validators.required],
       'country': [data.location?.country || null, Validators.required],

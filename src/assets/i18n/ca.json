@@ -10,12 +10,15 @@
         "locations": "Ubicacions",
         "details": "Detalls",
         "makeReservation": "Feu una reserva",
-        "searchFilters": "Filtres de cerca"
+        "searchFilters": "Filtres de cerca",
+        "unauthorized": "No autoritzat",
+        "tokenExpired": "La sessió ha caducat",
+        "results": "Resultats"
     },
     "tableHeaders": {
         "location": ["Carrer", "Número", "Codi postal", "Ciutat", "Província", "País", "Accions"],
-        "operation": ["Client", "Empresa", "Sala", "Inici", "Final", "Cost", "Estat", "Accions"],
-        "room": ["Empresa", "Ubicació", "Nom", "Tamany", "Aforament", "Material", "Horari", "Preu", "Accions"],
+        "operation": ["Client", "Empresa", "Sala", "Inici", "Final", "Cost (€)", "Estat", "Accions"],
+        "room": ["Empresa", "Ubicació", "Nom", "Tamany (m2)", "Aforament", "Material", "Horari", "Preu (€/h)", "Accions"],
         "material": ["Material", "Quantitat", "Accions"],
         "schedule": ["Dia de la setmana", "Inici", "Final", "Accions"],
         "user": ["Nom", "CIF/NIF", "Correu electrònic", "Contrasenya", "Telèfon", "Rol", "Accions"]
@@ -47,6 +50,7 @@
     "messages": {
         "noElementsToShow": "No hi ha elements per mostrar.",
         "wouldLikeToDelete": "Vols eliminar aquest element?",
+        "wouldLikeToCancel": "¿Segur que vols cancel·lar aquesta operació?",
         "startBeforeEnd": "L'hora d'inici ha de ser anterior a l'hora final.",
         "unavailableHours": "Hi ha hores no disponibles en aquest interval.",
         "noReservationsToday": "No hi ha reserves per avui.",
@@ -59,8 +63,31 @@
         "alreadyHaveAccount": "Ja tens un compte? ",
         "loginError": "Error en iniciar sessió: correu electrònic o contrasenya incorrectes.",
         "loginSuccessful": "Inici de sessió correcte.",
+        "logoutSuccessful": "Sessió tancada correctament.",
         "unauthorizedPage": "No tens permés accedir a aquesta pàgina.",
-        "emptyRequiredFields": "Existeixen camps obligatoris buits."
+        "emptyRequiredFields": "Existeixen camps obligatoris buits.",
+        "tokenExpired": "Torna a iniciar sessió.",
+        "addError": "Error afegint el nou element.",
+        "addSuccess": "Element afegit correctament.",
+        "updateError": "Error actualitzant l'element.",
+        "updateSuccess": "Element actualitzat correctament.",
+        "deleteError": "Error eliminant l'element.",
+        "deleteSuccess": "Element eliminat correctament.",
+        "reservationError": "Error en processar la reserva.",
+        "reservationSuccess": "Reserva realitzada correctament.",
+        "postcodeLengthError": "El codi postal ha de ser de 5 caràcters numèrics.",
+        "costPositiveError": "El cost ha de ser un valor positiu.",
+        "numberPositiveError": "El número ha de ser un valor positiu.",
+        "sizePositiveError": "El tamany ha de ser un valor positiu.",
+        "pricePositiveError": "El preu ha de ser un valor positiu.",
+        "capacityPositiveError": "L'aforament ha de ser un valor positiu.",
+        "quantityError": "La quantitat ha de ser almenys 1.",
+        "cnifError": "El CIF o NIF ha de ser 8 números seguits d'1 lletra majúscula.",
+        "emailError": "Format erroni de correu electrònic.",
+        "phoneError": "El telèfon ha de ser de 9 caràcters numèrics.",
+        "notFoundId": "Error: element no trobat.",
+        "userConflict": "Error: Ja existeix un usuari amb aquest correu electrònic o CIF/NIF.",
+        "badRequest": "Error: los datos proporcionados son erróneos."
     },
     "actions": {
         "edit": "Editar",
@@ -78,7 +105,8 @@
         "moreInfo": "Més informació",
         "accept": "Acceptar",
         "close": "Tancar",
-        "signup": "Registrar-se"
+        "signup": "Registrar-se",
+        "exit": "Sortir"
     },
     "status": {
         "PENDING": "Pendent",
@@ -106,5 +134,6 @@
     "searchBy": "Cerca per nom de sala, empresa o ciutat",
     "nHours": "Núm. hores",
     "confirmPassword": "Confirmar contrasenya",
-    "registerAs": "Registrar-se com"
+    "registerAs": "Registrar-se com",
+    "people": "persones"
 }

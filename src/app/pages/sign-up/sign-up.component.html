@@ -1,59 +1,59 @@
-<h1>{{ 'actions.signup' | translate }}</h1>
-<div>
-    <form [formGroup]="userForm" >
-        <p>
-            <label>{{ "registerAs" | translate }}: </label>
-            <mat-radio-group formControlName="role" required>
-                <mat-radio-button value="CUSTOMER">{{ "role.customer" | translate }}</mat-radio-button>
-                <mat-radio-button value="BUSINESS">{{ "role.business" | translate }}</mat-radio-button>
-            </mat-radio-group>
-        </p>
-        <p>
-            <mat-form-field appearance="outline">
-                <mat-label>{{ 'tableHeaders.user.0' | translate }}</mat-label>
-                <input matInput name="name" formControlName="name" required>
-            </mat-form-field> 
-        </p>
-        <p>
-            <mat-form-field appearance="outline">
-                <mat-label>{{ 'tableHeaders.user.1' | translate }}</mat-label>
-                <input matInput name="cnif" formControlName="cnif" required>
-            </mat-form-field>
-        </p>
-        <p>
-            <mat-form-field appearance="outline">
-                <mat-label>{{ 'tableHeaders.user.2' | translate }}</mat-label>
-                <input matInput type="email" name="email" formControlName="email" required>
-            </mat-form-field>
-        </p>
-        <p>
-            <mat-form-field appearance="outline">
-                <mat-label>{{ 'tableHeaders.user.3' | translate }}</mat-label>
-                <input matInput type="password" name="password" formControlName="password" required>
-            </mat-form-field>
-        </p>
-        <p>
-            <mat-form-field appearance="outline">
-                <mat-label>{{ 'confirmPassword' | translate }}</mat-label>
-                <input matInput type="password" name="passwordConf" formControlName="passwordConf" required>
-            </mat-form-field>
-        </p>
-        <p>
-            <mat-form-field appearance="outline">
-                <mat-label>{{ 'tableHeaders.user.4' | translate }}</mat-label>
-                <input matInput type="tel" name="phone" formControlName="phone" required>
-            </mat-form-field>
-        </p>
-    </form>
-</div>
-<div *ngIf="confirmPassword()">
-    <p class="error-message">{{ 'messages.passwordsNotMatch' | translate }}</p>
-</div>
-<div *ngIf="userForm.invalid">
-    <p class="error-message">{{ 'messages.emptyRequiredFields' | translate }}</p>
-</div>
-<div>
-    <button mat-button (click)="signUp()" [disabled]="confirmPassword() || !userForm.valid" cdkFocusInitial>{{ 'actions.signup' | translate }}</button>
+<div class="content-container">
+    <h1>{{ 'actions.signup' | translate }}</h1>
+    <div class="form-div">
+        <form [formGroup]="userForm" >
+            <p>
+                <label>{{ "registerAs" | translate }}: </label>
+                <mat-radio-group formControlName="role" required>
+                    <mat-radio-button value="CUSTOMER">{{ "role.customer" | translate }}</mat-radio-button>
+                    <mat-radio-button value="BUSINESS">{{ "role.business" | translate }}</mat-radio-button>
+                </mat-radio-group>
+            </p>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'tableHeaders.user.0' | translate }}</mat-label>
+                    <input matInput name="name" formControlName="name" required>
+                </mat-form-field> 
+            </p>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'tableHeaders.user.1' | translate }}</mat-label>
+                    <input matInput name="cnif" formControlName="cnif" required>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'tableHeaders.user.2' | translate }}</mat-label>
+                    <input matInput type="email" name="email" formControlName="email" required>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'tableHeaders.user.3' | translate }}</mat-label>
+                    <input matInput type="password" name="password" formControlName="password" required>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'confirmPassword' | translate }}</mat-label>
+                    <input matInput type="password" name="passwordConf" formControlName="passwordConf" required>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>{{ 'tableHeaders.user.4' | translate }}</mat-label>
+                    <input matInput type="tel" name="phone" formControlName="phone" required>
+                </mat-form-field>
+            </p>
+        </form>
+    </div>
+    <div *ngIf="confirmPassword()">
+        <p class="error-message">{{ 'messages.passwordsNotMatch' | translate }}</p>
+    </div>
+    <div *ngIf="userForm.invalid">
+        <p class="error-message">{{ 'messages.emptyRequiredFields' | translate }}</p>
+    </div>
+    <button mat-flat-button color="primary" (click)="signUp()" [disabled]="confirmPassword() || !userForm.valid" cdkFocusInitial>{{ 'actions.signup' | translate }}</button>
     <p>
         {{ 'messages.alreadyHaveAccount' | translate }}
         <button mat-button (click)="navigateLogin()">{{ 'actions.login' | translate }}</button>

@@ -10,12 +10,15 @@
         "locations": "Ubicaciones",
         "details": "Detalles",
         "makeReservation": "Haga una reserva",
-        "searchFilters": "Filtros de búsqueda"
+        "searchFilters": "Filtros de búsqueda",
+        "unauthorized": "No autorizado",
+        "tokenExpired": "La sesión ha caducado",
+        "results": "Resultados"
     },
     "tableHeaders": {
         "location": ["Calle", "Número", "Código postal", "Ciudad", "Provincia", "País", "Acciones"],
-        "operation": ["Cliente", "Empresa", "Sala", "Inicio", "Final", "Coste", "Estado", "Acciones"],
-        "room": ["Empresa", "Ubicación", "Nombre", "Tamaño", "Aforo", "Material", "Horario", "Precio", "Acciones"],
+        "operation": ["Cliente", "Empresa", "Sala", "Inicio", "Final", "Coste (€)", "Estado", "Acciones"],
+        "room": ["Empresa", "Ubicación", "Nombre", "Tamaño (m2)", "Aforo", "Material", "Horario", "Precio (€/h)", "Acciones"],
         "material": ["Material", "Cantidad", "Acciones"],
         "schedule": ["Día de la semana", "Inicio", "Final", "Acciones"],
         "user": ["Nombre", "CIF/NIF", "Correo electrónico", "Contraseña", "Teléfono", "Rol", "Acciones"]
@@ -47,6 +50,7 @@
     "messages": {
         "noElementsToShow": "No hay elementos para mostrar.",
         "wouldLikeToDelete": "¿Quieres eliminar este elemento?",
+        "wouldLikeToCancel": "¿Seguro que quieres cancelar esta operación?",
         "startBeforeEnd": "La hora de inicio debe ser anterior a la hora final.",
         "unavailableHours": "Hay horas no disponibles en este intervalo.",
         "noReservationsToday": "No hay reservas para hoy.",
@@ -59,8 +63,31 @@
         "alreadyHaveAccount": "¿Ya tienes una cuenta?",
         "loginError": "Error al iniciar sesión: correo electrónico o contraseña incorrectos.",
         "loginSuccessful": "Inicio de sesión correcto.",
+        "logoutSuccessful": "Sesión cerrada correctamente.",
         "unauthorizedPage": "No tienes permitido acceder a esta página.",
-        "emptyRequiredFields": "Existen campos obligatiorios vacíos."
+        "emptyRequiredFields": "Existen campos obligatiorios vacíos.",
+        "tokenExpired": "Vuelve a iniciar sesión.",
+        "addError": "Error añadiendo el nuevo elemento.",
+        "addSuccess": "Elemento añadido correctamente.",
+        "updateError": "Error actualizando el elemento.",
+        "updateSuccess": "Elemento actualizado correctamente.",
+        "deleteError": "Error eliminando el elemento.",
+        "deleteSuccess": "Elemento eliminado correctamente.",
+        "reservationError": "Error al procesar la reserva.",
+        "reservationSuccess": "Reserva realizada correctamente.",
+        "postcodeLengthError": "El código postal debe ser de 5 caracteres numéricos.",
+        "costPositiveError": "El coste debe ser un valor positivo.",
+        "numberPositiveError": "El número debe ser un valor positivo.",
+        "sizePositiveError": "El tamaño debe ser un valor positivo.",
+        "pricePositiveError": "El precio debe ser un valor positivo.",
+        "capacityPositiveError": "El aforo debe ser un valor positivo.",
+        "quantityError": "La cantidad debe ser al menos 1.",
+        "cnifError": "El CIF o NIF debe ser 8 números seguidos de 1 letra mayúscula.",
+        "emailError": "Formato erróneo de correo electrónico.",
+        "phoneError": "El teléfono debe ser de 9 caracteres numéricos.",
+        "notFoundId": "Error: elemento no encontrado.",
+        "userConflict": "Error: Ya existe un usuario con ese correo electrónico o CIF/NIF.",
+        "badRequest": "Error: los datos proporcionados son erróneos."
     },
     "actions": {
         "edit": "Editar",
@@ -78,7 +105,8 @@
         "moreInfo": "Más información",
         "accept": "Aceptar",
         "close": "Cerrar",
-        "signup": "Registrarse"
+        "signup": "Registrarse",
+        "exit": "Salir"
     },
     "status": {
         "PENDING": "Pendiente",
@@ -106,5 +134,6 @@
     "searchBy": "Busca por nombre de sala, empresa o ciudad",
     "nHours": "Núm. horas",
     "confirmPassword": "Confirmar contraseña",
-    "registerAs": "Registrarse como"
+    "registerAs": "Registrarse como",
+    "people": "personas"
 }

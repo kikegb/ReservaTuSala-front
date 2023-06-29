@@ -1,20 +1,22 @@
-<h1 mat-dialog-title>{{ 'actions.login' | translate }}</h1>
-<form [formGroup]="userForm" >
+<div class="content-container">
+    <h1 mat-dialog-title>{{ 'actions.login' | translate }}</h1>
+    <form [formGroup]="userForm" >
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>{{ 'tableHeaders.user.2' | translate }}</mat-label>
+                <input matInput type="email" name="email" formControlName="email" required>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>{{ 'tableHeaders.user.3' | translate }}</mat-label>
+                <input matInput type="password" name="password" formControlName="password" required>
+            </mat-form-field>
+        </p>
+    </form>
+    <button mat-flat-button color="primary" (click)="login()">{{ 'actions.login' | translate }}</button>
     <p>
-        <mat-form-field appearance="outline">
-            <mat-label>{{ 'tableHeaders.user.2' | translate }}</mat-label>
-            <input matInput type="email" name="email" formControlName="email" required>
-        </mat-form-field>
+        {{ 'messages.dontHaveAccount' | translate }}
+        <button mat-button (click)="navigateSignup()">{{ 'actions.signup' | translate }}</button>
     </p>
-    <p>
-        <mat-form-field appearance="outline">
-            <mat-label>{{ 'tableHeaders.user.3' | translate }}</mat-label>
-            <input matInput type="password" name="password" formControlName="password" required>
-        </mat-form-field>
-    </p>
-</form>
-<button  mat-flat-button color="primary" (click)="login()">{{ 'actions.login' | translate }}</button>
-<p>
-    {{ 'messages.dontHaveAccount' | translate }}
-    <button mat-button (click)="navigateSignup()">{{ 'actions.signup' | translate }}</button>
-</p>
+</div>

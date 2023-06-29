@@ -1,6 +1,9 @@
 <div>
     <h1>{{ "title.home" | translate }}</h1>
-      <button mat-button *ngFor="let page of pages; let i = index" (click)="navigateTo(i)">
+    <mat-nav-list>
+      <a mat-list-item *ngFor="let page of pages; let i = index" (click)="navigateTo(i)">
+        <mat-icon fontIcon="{{icons[i]}}"></mat-icon>
         {{ page }}
-      </button>
+      </a>
+    </mat-nav-list>
 </div>

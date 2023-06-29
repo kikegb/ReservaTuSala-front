@@ -15,4 +15,16 @@
 
 .loginButton {
     margin-left: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 8px 16px;
+}
+
+.loginButton button {
+    margin-right: 1rem;
+}
+
+.user-info-card {
+    padding: 0 10px 20px;
 }

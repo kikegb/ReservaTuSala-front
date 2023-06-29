@@ -1,5 +1,5 @@
 <mat-toolbar class="main-header" color="primary">
-    <button mat-icon-button (click)="toggleSidenav()" *ngIf="!isLogin || !isSignup">
+    <button mat-icon-button (click)="toggleSidenav()" *ngIf="!isLogin && !isSignup">
         <mat-icon>menu</mat-icon>
     </button>
     ReservaTuSala
@@ -19,19 +19,19 @@
             </button>
         </mat-menu>
 
-        <button mat-flat-button (click)="logIn()" *ngIf="!token && !isLogin">
+        <button mat-flat-button color="accent" (click)="logIn()" *ngIf="isSignup && !isLogin">
             {{ 'actions.login' | translate }}
         </button>
 
-        <button mat-flat-button (click)="signUp()" *ngIf="!token && !isSignup">
+        <button mat-flat-button color="accent" (click)="signUp()" *ngIf="isLogin && !isSignup">
             {{ 'actions.signup' | translate }}
         </button>
 
-        <button mat-icon-button matTooltip="{{ 'userSettings' | translate }}" [matMenuTriggerFor]="menu" *ngIf="token">
+        <button mat-icon-button matTooltip="{{ 'userSettings' | translate }}" [matMenuTriggerFor]="menu" *ngIf="token && !isSignup && !isLogin">
             <mat-icon fontIcon="person"></mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-            <mat-card>
+            <mat-card class="user-info-card">
                 <mat-card-header>
                 <mat-card-title>{{ userName }}</mat-card-title>
                 <mat-card-subtitle>{{ userEmail }}</mat-card-subtitle>

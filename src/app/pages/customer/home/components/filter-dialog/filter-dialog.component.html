@@ -28,8 +28,8 @@
     </form>
 </div>
 <div mat-dialog-actions>
-    <button mat-button mat-dialog-close (click)="resetFilters()">{{ "actions.resetFilters" | translate }}</button>
+    <button mat-button mat-dialog-close color="primary" (click)="resetFilters()">{{ "actions.resetFilters" | translate }}</button>
     <button mat-button mat-dialog-close (click)="onCancel()">{{ "actions.cancel" | translate }}</button>
-    <button mat-button mat-dialog-close (click)="onSave()" cdkFocusInitial>{{ "actions.save" | translate }}</button>
+    <button mat-flat-button mat-dialog-close color="primary" (click)="onSave()" cdkFocusInitial>{{ "actions.save" | translate }}</button>
 </div>
 

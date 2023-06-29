@@ -7,6 +7,8 @@ import { Room } from 'src/app/global/interfaces/room.interface';
 import { RoomsService } from 'src/app/global/services/rooms.service';
 import { RoomFormDialogComponent } from '../room-form-dialog/room-form-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { SnackBarService } from 'src/app/global/services/snack-bar.service';
 
 @Component({
   selector: 'app-room-table',
@@ -21,7 +23,8 @@ export class RoomTableComponent {
 
   constructor(private roomSvc: RoomsService, 
     public dialog: MatDialog,
-    private translate: TranslateService) 
+    private translate: TranslateService,
+    private snackbarSvc: SnackBarService) 
     {
       this.translate.get(['weekDays']).subscribe(translations => {
         this.week = <string[]>translations['weekDays'];
@@ -29,33 +32,55 @@ export class RoomTableComponent {
     }
   
   ngOnInit(): void {
-    this.roomSvc.getRooms()
-    .pipe(
-        tap( (rooms: Room[]) => this.rooms = rooms )
-    )
-    .subscribe();
+    this.roomSvc.getRooms().subscribe(
+      (rooms: Room[]) => this.rooms = rooms
+    );
   }
 
   addRoom(room: Room): void {
     this.roomSvc.addRoom(room).subscribe(newRoom => {
+      this.snackbarSvc.openSuccess('messages.addSuccess');
       this.rooms = [...this.rooms, newRoom];
       this.table.renderRows();
+    }, (e: HttpErrorResponse) => {
+      console.log(e.status);
+      if (e.error) {
+        this.snackbarSvc.openErrorByCode(e.error.code);
+      } else {
+        this.snackbarSvc.openError('messages.addError');
+      }
     });
   }
 
   updateRoom(updatedRoom: Room): void {
     this.roomSvc.updateRoom(updatedRoom).subscribe(() => {
+      this.snackbarSvc.openSuccess('messages.updateSuccess');
       let index = this.rooms.findIndex( room => room.id == updatedRoom.id );
       this.rooms[index] = updatedRoom;
       this.rooms = [...this.rooms];
       this.table.renderRows();
+    }, (e: HttpErrorResponse) => {
+      console.log(e.status);
+      if (e.error) {
+        this.snackbarSvc.openErrorByCode(e.error.code);
+      } else {
+        this.snackbarSvc.openError('messages.updateError');
+      }
     });
   }
 
   deleteRoom(id: number): void {
     this.roomSvc.deleteRoom(id).subscribe(() => {
+      this.snackbarSvc.openSuccess('messages.deleteSuccess');
       this.rooms = this.rooms.filter(room => room.id !== id);
       this.table.renderRows();
+    }, (e: HttpErrorResponse) => {
+      console.log(e.status);
+      if (e.error) {
+        this.snackbarSvc.openErrorByCode(e.error.code);
+      } else {
+        this.snackbarSvc.openError('messages.deleteError');
+      }
     });
   }
 

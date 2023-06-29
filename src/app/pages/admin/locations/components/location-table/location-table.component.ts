@@ -7,6 +7,9 @@ import { Location } from 'src/app/global/interfaces/location.interface';
 import { DeleteDialogComponent } from 'src/app/global/components/delete-dialog/delete-dialog.component';
 import { LocationFormDialogComponent } from '../location-form-dialog/location-form-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarService } from 'src/app/global/services/snack-bar.service';
 
 @Component({
   selector: 'app-location-table',
@@ -20,51 +23,59 @@ export class LocationTableComponent {
 
   constructor(private locationSvc: LocationsService, 
     public dialog: MatDialog,
-    private translate: TranslateService) {}
+    private translate: TranslateService,
+    private snackbarSvc: SnackBarService) {}
   
   ngOnInit(): void {
-    this.locationSvc.getLocations()
-    .pipe(
-        tap( (locations: Location[]) => this.locations = locations )
-    )
-    .subscribe();
+    this.locationSvc.getLocations().subscribe(
+      (locations: Location[]) => this.locations = locations
+    );
   }
 
   addLocation(location: Location): void {
-    this.locationSvc.addLocation(location)
-    .pipe(
-      tap( newLocation => {
-        this.locations = [...this.locations, newLocation];
-      })
-    )
-    .subscribe(() => {
+    this.locationSvc.addLocation(location).subscribe(newLocation => {
+      this.snackbarSvc.openSuccess('messages.addSuccess');
+      this.locations = [...this.locations, newLocation];
       this.table.renderRows();
+    }, (e: HttpErrorResponse) => {
+      console.log(e.status);
+      if (e.error) {
+        this.snackbarSvc.openErrorByCode(e.error.code);
+      } else {
+        this.snackbarSvc.openError('messages.addError');
+      }
     });
   }
 
   updateLocation(updatedLocation: Location): void {
-    this.locationSvc.updateLocation(updatedLocation)
-    .pipe(
-      tap( () => {
-        let index = this.locations.findIndex( location => location.id == updatedLocation.id );
-        this.locations[index] = updatedLocation;
-        this.locations = [...this.locations];
-      })
-    )
-    .subscribe(() => {
+    this.locationSvc.updateLocation(updatedLocation).subscribe(() => {
+      this.snackbarSvc.openSuccess('messages.updateSuccess');
+      let index = this.locations.findIndex( location => location.id == updatedLocation.id );
+      this.locations[index] = updatedLocation;
+      this.locations = [...this.locations];
       this.table.renderRows();
+    }, (e: HttpErrorResponse) => {
+      console.log(e.status);
+      if (e.error) {
+        this.snackbarSvc.openErrorByCode(e.error.code);
+      } else {
+        this.snackbarSvc.openError('messages.updateError');
+      }
     });
   }
 
   deleteLocation(id: number): void {
-    this.locationSvc.deleteLocation(id)
-    .pipe(
-      tap( () => {
-        this.locations = this.locations.filter(location => location.id !== id);
-      })
-    )
-    .subscribe(() => {
+    this.locationSvc.deleteLocation(id).subscribe(() => {
+      this.snackbarSvc.openSuccess('messages.deleteSuccess');
+      this.locations = this.locations.filter(location => location.id !== id);
       this.table.renderRows();
+    }, (e: HttpErrorResponse) => {
+      console.log(e.status);
+      if (e.error) {
+        this.snackbarSvc.openErrorByCode(e.error.code);
+      } else {
+        this.snackbarSvc.openError('messages.deleteError');
+      }
     });
   }
 

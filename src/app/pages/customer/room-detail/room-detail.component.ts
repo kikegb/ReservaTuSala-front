@@ -1,14 +1,16 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import jwtDecode from 'jwt-decode';
-import { tap } from 'rxjs';
 import { Operation } from 'src/app/global/interfaces/operation.interface';
 import { Room } from 'src/app/global/interfaces/room.interface';
+import { Schedule } from 'src/app/global/interfaces/schedule.interface';
 import { User } from 'src/app/global/interfaces/user.interface';
 import { OperationsService } from 'src/app/global/services/operations.service';
 import { RoomsService } from 'src/app/global/services/rooms.service';
+import { SnackBarService } from 'src/app/global/services/snack-bar.service';
 
 @Component({
   selector: 'app-room-detail',
@@ -26,6 +28,7 @@ export class RoomDetailComponent {
   today = new Date();
   operations: Operation[] = [];
   unavailableHours: number[] = [];
+  weekdays: number[] = [...Array(7).keys()]
   jwtDecode = jwtDecode;
 
   constructor(
@@ -34,7 +37,8 @@ export class RoomDetailComponent {
     private formBuilder: FormBuilder,
     private operationSvc: OperationsService,
     private router: Router,
-    private translate: TranslateService)
+    private translate: TranslateService,
+    private snackbarSvc: SnackBarService)
   {
     this.id = parseInt(this.route.snapshot.paramMap.get('id') as string);  
     this.room = {} as Room;
@@ -50,19 +54,14 @@ export class RoomDetailComponent {
   }
 
   ngOnInit(): void {
-    this.roomSvc.getById(this.id)
-    .pipe(
-        tap( (room: Room) => {
-          this.room = room;
-        })
-    )
-    .subscribe();
+    this.roomSvc.getById(this.id).subscribe((room: Room) => {
+      this.room = room;
+      this.getWeekdays(room);
+    });
 
-    this.operationSvc.getOperations()
-    .pipe(
-        tap( (operations: Operation[]) => this.operations = operations )
-    )
-    .subscribe();
+    this.operationSvc.getOperations().subscribe(
+      (operations: Operation[]) => this.operations = operations
+    );
 
     this.operationForm.get("date")?.valueChanges.subscribe(newValue => {
       this.getHours(newValue);
@@ -112,7 +111,7 @@ export class RoomDetailComponent {
       } else {
         this.unavailableHours = [];
         this.operations.map(operation => {
-          if (operation.start.toDateString() === date.toDateString()) {
+          if (operation.start.toDateString() === date.toDateString() && operation.status != "CANCELLED") {
             for (let i = operation.start.getHours(); i <= operation.end.getHours(); i++) {
               this.unavailableHours.push(i);
             } 
@@ -130,6 +129,19 @@ export class RoomDetailComponent {
       }
     }
   }
+
+  getWeekdays(room: Room) {
+    if (room) {
+      this.weekdays = room.schedules.map( (schedule: Schedule) => {
+        return schedule.weekDay;
+      });
+    }
+  }
+
+  dateFilter = (d: Date | null): boolean => {
+    const day = (d || new Date()).getDay();
+    return this.weekdays.includes(day);
+  };
 
   createOperation(): void {
     var startDateTime = new Date(this.operationForm.value.date);
@@ -149,13 +161,17 @@ export class RoomDetailComponent {
         cost: this.cost,
         status: "PENDING"
       };
-      this.operationSvc.addOperation(newOperation)
-      .pipe(
-        tap( op => {
-          this.operations = [...this.operations, op];
-        })
-      )
-      .subscribe();
+      this.operationSvc.addOperation(newOperation).subscribe( op => {
+        this.snackbarSvc.openSuccess('messages.reservationSuccess');
+        this.operations = [...this.operations, op];
+      }, (e: HttpErrorResponse) => {
+        console.log(e.status);
+        if (e.error) {
+          this.snackbarSvc.openErrorByCode(e.error.code);
+        } else {
+          this.snackbarSvc.openError('messages.reservationError');
+        }
+      });
 
       this.router.navigate(['customer/home']);
     }

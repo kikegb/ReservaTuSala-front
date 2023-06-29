@@ -139,10 +139,21 @@
         </p>
     </form>
 </div>
-<div *ngIf="roomForm.invalid">
-    <p class="error-message">{{ 'messages.emptyRequiredFields' | translate }}</p>
+<div class="formErrors">
+    <div *ngIf="roomForm.get('size')?.errors?.['min']">
+        <p class="error-message">{{ 'messages.sizePositiveError' | translate }}</p>
+    </div>
+    <div *ngIf="roomForm.get('capacity')?.errors?.['min']">
+        <p class="error-message">{{ 'messages.capacityPositiveError' | translate }}</p>
+    </div>
+    <div *ngIf="roomForm.get('price')?.errors?.['min']">
+        <p class="error-message">{{ 'messages.pricePositiveError' | translate }}</p>
+    </div>
+    <div *ngIf="roomForm.invalid">
+        <p class="error-message">{{ 'messages.emptyRequiredFields' | translate }}</p>
+    </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close (click)="onCancel()">{{ 'actions.cancel' | translate }}</button>
-  <button mat-button mat-dialog-close [disabled]="!roomForm.valid" (click)="onSave()" cdkFocusInitial>{{ 'actions.save' | translate }}</button>
+  <button mat-button mat-dialog-close color="primary" [disabled]="!roomForm.valid" (click)="onSave()" cdkFocusInitial>{{ 'actions.save' | translate }}</button>
 </div>

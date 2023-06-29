@@ -1,9 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
 import { tap } from 'rxjs';
 import { User } from 'src/app/global/interfaces/user.interface';
+import { SnackBarService } from 'src/app/global/services/snack-bar.service';
 import { UsersService } from 'src/app/global/services/users.service';
 
 @Component({
@@ -19,7 +21,8 @@ export class EditUserComponent {
   constructor(
     private formBuilder: FormBuilder,
     private userSvc: UsersService,
-    private router: Router)
+    private router: Router,
+    private snackbarSvc: SnackBarService)
   {
     this.user = {} as User;
     this.userForm = this.userForm = this.formBuilder.group({
@@ -37,13 +40,8 @@ export class EditUserComponent {
     const token = localStorage.getItem('token');
     if (token) {
       const decodedToken = <any>this.jwtDecode(token);
-      this.userSvc.getById(decodedToken.id)
-      .pipe(
-          tap( (user: User) => {
-            this.user = user;
-          })
-      )
-      .subscribe(() => {
+      this.userSvc.getById(decodedToken.id).subscribe((user: User) => {
+        this.user = user;
         this.userForm = this.formBuilder.group({
           'name': [this.user?.name || null, Validators.required],
           'cnif': [this.user?.cnif || null, Validators.required],
@@ -88,13 +86,17 @@ export class EditUserComponent {
       phone: this.userForm?.value.phone,
       role: this.userForm?.value.role
     };
-    this.userSvc.updateUser(updatedUser)
-    .pipe(
-      tap( user => {
-        this.user = user;
-      })
-    )
-    .subscribe(() => {});
+    this.userSvc.updateUser(updatedUser).subscribe( user => {
+      this.snackbarSvc.openSuccess('messages.updateSuccess');
+      this.user = user;
+    }, (e: HttpErrorResponse) => {
+      console.log(e.status);
+      if (e.error) {
+        this.snackbarSvc.openErrorByCode(e.error.code);
+      } else {
+        this.snackbarSvc.openError('messages.updateError');
+      }
+    });
     const token = localStorage.getItem('token');
     if (token) {
       const decodedToken = <any>this.jwtDecode(token);

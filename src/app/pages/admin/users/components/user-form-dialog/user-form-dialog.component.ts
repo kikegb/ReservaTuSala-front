@@ -22,10 +22,10 @@ export class UserFormDialogComponent {
     this.user = data.user;
     this.userForm = this.formBuilder.group({
       'name': [data.user?.name || null, Validators.required],
-      'cnif': [data.user?.cnif || null, Validators.required],
-      'email': [data.user?.email || null, Validators.required],
+      'cnif': [data.user?.cnif || null, [Validators.required, Validators.pattern('^[0-9]{8}[A-Z]{1}$')]],
+      'email': [data.user?.email || null, [Validators.required, Validators.email]],
       'password': [data.user?.password || null, Validators.required],
-      'phone': [data.user?.phone || null, Validators.required],
+      'phone': [data.user?.phone || null, [Validators.required, Validators.pattern('^[0-9]{9}$')]],
       'role': [data.user?.role || null, Validators.required],
     });
   }

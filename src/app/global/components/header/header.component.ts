@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { SidenavService } from '../../services/sidenav.service';
 import { TokenUtilsService } from '../../services/token-utils.service';
-import jwtDecode from 'jwt-decode';
 import { UsersService } from '../../services/users.service';
 import { tap } from 'rxjs';
 import { User } from '../../interfaces/user.interface';
-import { TranslateService } from '@ngx-translate/core';
+import { SnackBarService } from '../../services/snack-bar.service';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {     
-  token?: string;
+  token: string = "";
   isLogin = false;
   isSignup = false;
   userName = '';
@@ -24,18 +23,19 @@ export class HeaderComponent implements OnInit {
     private sidenav: SidenavService,
     private router: Router,
     private tokenSvc: TokenUtilsService,
-    private userSvc: UsersService) {}
+    private userSvc: UsersService,
+    private snackbarSvc: SnackBarService) {}
   
   ngOnInit(): void {
     this.router.events.subscribe((event: any) => {
       if (event && event.url) {
-        this.isLogin = (event.url == '/login');
-        this.isSignup = (event.url == '/signup');
+        this.isLogin = (event.url === '/login');
+        this.isSignup = (event.url === '/signup');
       }
       if (event instanceof NavigationEnd) {
-        this.token = localStorage.getItem('token') || "";
+        this.token = this.tokenSvc.getToken() || "";
         if (this.token) {
-          const decodedToken = <any>jwtDecode(this.token);
+          const decodedToken = this.tokenSvc.getDecodedToken();
           this.userSvc.getById(decodedToken.id)
           .pipe(
               tap( (user: User) => {
@@ -44,6 +44,10 @@ export class HeaderComponent implements OnInit {
               })
           )
           .subscribe();
+        }
+
+        if (!this.isLogin && !this.isSignup && this.token) {
+          this.tokenSvc.checkTokenExpiration();
         }
       }
     });
@@ -57,6 +61,7 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('token');
     this.tokenSvc.setToken('');
     this.router.navigate(['/login']);
+    this.snackbarSvc.openSuccess('messages.logoutSuccessful');
   }
 
   logIn() {

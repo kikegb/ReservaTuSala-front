@@ -14,6 +14,8 @@ import { Schedule } from 'src/app/global/interfaces/schedule.interface';
 import { SchedulesService } from 'src/app/global/services/schedules.service';
 import { LocationFormDialogComponent } from '../../../locations/components/location-form-dialog/location-form-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { SnackBarService } from 'src/app/global/services/snack-bar.service';
 
 @Component({
   selector: 'app-room-form-dialog',
@@ -41,7 +43,8 @@ export class RoomFormDialogComponent {
     private materialSvc: MaterialsService,
     private scheduleSvc: SchedulesService,
     public dialog: MatDialog,
-    private translate: TranslateService)
+    private translate: TranslateService,
+    private snackbarSvc: SnackBarService)
   {
     this.title = data.title;
     this.room = data.room;
@@ -53,9 +56,9 @@ export class RoomFormDialogComponent {
       'name': [data.room?.name || null, Validators.required],
       'business': [data.room?.business || null, Validators.required],
       'location': [data.room?.location || null, Validators.required],
-      'size': [data.room?.size || null, Validators.required],
-      'capacity': [data.room?.capacity || null, Validators.required],
-      'price': [data.room?.price || null, Validators.required],
+      'size': [data.room?.size || null, [Validators.required, Validators.min(0)]],
+      'capacity': [data.room?.capacity || null, [Validators.required, Validators.min(0)]],
+      'price': [data.room?.price || null, [Validators.required, Validators.min(0)]],
       'material': [null],
       'quantity': [null],
       'weekday': [null],
@@ -89,20 +92,23 @@ export class RoomFormDialogComponent {
   }
 
   addNewMaterial(): void {
-    if (this.roomForm.value.material && this.roomForm.value.quantity) {
+    if (this.roomForm.value.material && this.roomForm.value.quantity && this.roomForm.value.quantity > 0) {
       const material = {
         material: this.roomForm.value.material,
         quantity: this.roomForm.value.quantity
       };
 
-      this.materialSvc.addMaterial(<Material>material)
-      .pipe(
-        tap( m => {
-          this.materials = [...this.materials, m];
-        })
-      )
-      .subscribe(() => {
+      this.materialSvc.addMaterial(<Material>material).subscribe( m => {
+        this.snackbarSvc.openSuccess('messages.addSuccess');
+        this.materials = [...this.materials, m];
         this.table.renderRows();
+      }, (e: HttpErrorResponse) => {
+        console.log(e.status);
+        if (e.error) {
+          this.snackbarSvc.openErrorByCode(e.error.code);
+        } else {
+          this.snackbarSvc.openError('messages.addError');
+        }
       });
     }
     this.roomForm.get('material')?.reset();
@@ -110,14 +116,17 @@ export class RoomFormDialogComponent {
   }
 
   deleteMaterial(id: number): void {
-    this.materialSvc.deleteMaterial(id)
-    .pipe(
-      tap( m => {
-        this.materials = this.materials.filter(m => m.id !== id);
-      })
-    )
-    .subscribe(() => {
+    this.materialSvc.deleteMaterial(id).subscribe(() => {
+      this.snackbarSvc.openSuccess('messages.deleteSuccess');
+      this.materials = this.materials.filter(m => m.id !== id);
       this.table.renderRows();
+    }, (e: HttpErrorResponse) => {
+      console.log(e.status);
+      if (e.error) {
+        this.snackbarSvc.openErrorByCode(e.error.code);
+      } else {
+        this.snackbarSvc.openError('messages.deleteError');
+      }
     });
   }
 
@@ -133,14 +142,17 @@ export class RoomFormDialogComponent {
         end: end,
       };
 
-      this.scheduleSvc.addSchedule(<Schedule>schedule)
-      .pipe(
-        tap( s => {
-          this.schedules = [...this.schedules, s];
-        })
-      )
-      .subscribe(() => {
+      this.scheduleSvc.addSchedule(<Schedule>schedule).subscribe( s => {
+        this.snackbarSvc.openSuccess('messages.addSuccess');
+        this.schedules = [...this.schedules, s];
         this.table.renderRows();
+      }, (e: HttpErrorResponse) => {
+        console.log(e.status);
+        if (e.error) {
+          this.snackbarSvc.openErrorByCode(e.error.code);
+        } else {
+          this.snackbarSvc.openError('messages.addError');
+        }
       });
     }
     this.roomForm.get('weekday')?.reset();
@@ -149,14 +161,17 @@ export class RoomFormDialogComponent {
   }
 
   deleteSchedule(id: number): void {
-    this.scheduleSvc.deleteSchedule(id)
-    .pipe(
-      tap( s => {
-        this.schedules = this.schedules.filter(s => s.id !== id);
-      })
-    )
-    .subscribe(() => {
+    this.scheduleSvc.deleteSchedule(id).subscribe(() => {
+      this.snackbarSvc.openSuccess('messages.deleteSuccess');
+      this.schedules = this.schedules.filter(s => s.id !== id);
       this.table.renderRows();
+    }, (e: HttpErrorResponse) => {
+      console.log(e.status);
+      if (e.error) {
+        this.snackbarSvc.openErrorByCode(e.error.code);
+      } else {
+        this.snackbarSvc.openError('messages.deleteError');
+      }
     });
   }
 
@@ -199,15 +214,18 @@ export class RoomFormDialogComponent {
   }
 
   addLocation(location: Location): void {
-    this.locationSvc.addLocation(location)
-    .pipe(
-      tap( newLocation => {
-        this.locations = [...this.locations, newLocation];
-        this.roomForm.get('location')?.setValue(newLocation);
-      })
-    )
-    .subscribe(() => {
+    this.locationSvc.addLocation(location).subscribe( newLocation => {
+      this.snackbarSvc.openSuccess('messages.addSuccess');
+      this.locations = [...this.locations, newLocation];
+      this.roomForm.get('location')?.setValue(newLocation);
       this.table.renderRows();
+    }, (e: HttpErrorResponse) => {
+      console.log(e.status);
+      if (e.error) {
+        this.snackbarSvc.openErrorByCode(e.error.code);
+      } else {
+        this.snackbarSvc.openError('messages.addError');
+      }
     });
   }
 

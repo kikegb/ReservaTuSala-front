@@ -78,16 +78,21 @@
         </p>
     </form>
 </div>
-<div *ngIf="isBeforeOrSame()">
-    <p class="error-message">{{ 'messages.startBeforeEnd' | translate }}</p>
-</div>
-<div *ngIf="isUnavailable()">
-    <p class="error-message">{{ 'messages.unavailableHours' | translate }}</p>
-</div>
-<div *ngIf="operationForm.invalid">
-    <p class="error-message">{{ 'messages.emptyRequiredFields' | translate }}</p>
+<div class="formErrors">
+    <div *ngIf="operationForm.get('cost')?.errors?.['min']">
+        <p class="error-message">{{ 'messages.costPositiveError' | translate }}</p>
+    </div>
+    <div *ngIf="isBeforeOrSame()">
+        <p class="error-message">{{ 'messages.startBeforeEnd' | translate }}</p>
+    </div>
+    <div *ngIf="isUnavailable()">
+        <p class="error-message">{{ 'messages.unavailableHours' | translate }}</p>
+    </div>
+    <div *ngIf="operationForm.invalid">
+        <p class="error-message">{{ 'messages.emptyRequiredFields' | translate }}</p>
+    </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close (click)="onCancel()">{{ 'actions.cancel' | translate }}</button>
-  <button mat-button mat-dialog-close (click)="onSave()" [disabled]="isBeforeOrSame() || !operationForm.valid" cdkFocusInitial>{{ 'actions.save' | translate }}</button>
+  <button mat-button mat-dialog-close color="primary" (click)="onSave()" [disabled]="isBeforeOrSame() || !operationForm.valid" cdkFocusInitial>{{ 'actions.save' | translate }}</button>
 </div>

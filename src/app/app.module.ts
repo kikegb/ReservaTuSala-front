@@ -15,6 +15,8 @@ import { TokenUtilsService } from './global/services/token-utils.service';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TokenExpiredDialogComponent } from './global/components/token-expired-dialog/token-expired-dialog.component';
+import { CancelDialogComponent } from './global/components/cancel-dialog/cancel-dialog.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -24,7 +26,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   declarations: [
     AppComponent,
     HeaderComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    TokenExpiredDialogComponent,
+    CancelDialogComponent
   ],
   imports: [
     BrowserModule,
