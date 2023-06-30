@@ -13,7 +13,7 @@ The backend of the project is available in [this repository](https://github.com/
 ### Installation
 1. Clone this repository.
    ```shell
-   git clone https://gitlab.com/profile-sevilla/practicas-22-23/reservatusala-front.git
+   git clone https://github.com/kikegb/ReservaTuSala-front.git
    ```
 2. Move to the new directory.
    ```shell
