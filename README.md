@@ -1,4 +1,8 @@
-# ReservatusalaFront
+# Reservatusala-Front
+
+## Introduction
+In this repository we have the frontend of ReservaTuSala, a web application for managing meeting room reservations. The project has been developed with Angular using TypeScript.
+The backend of the project is available in [this repository](https://github.com/kikegb/ReservaTuSala-back).
 
 ## Getting Started
 
