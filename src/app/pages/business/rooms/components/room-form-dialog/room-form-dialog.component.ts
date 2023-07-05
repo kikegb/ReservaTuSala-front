@@ -16,6 +16,7 @@ import { LocationFormDialogComponent } from 'src/app/pages/admin/locations/compo
 import { TranslateService } from '@ngx-translate/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SnackBarService } from 'src/app/global/services/snack-bar.service';
+import { TokenUtilsService } from 'src/app/global/services/token-utils.service';
 
 @Component({
   selector: 'app-room-form-dialog',
@@ -31,7 +32,8 @@ export class RoomFormDialogComponent {
   schedules: Schedule[] = [];
   @ViewChild(MatTable) table!: MatTable<any>;
   week: string[] = [];
-  hours = [...Array(24).keys()]
+  hours = [...Array(24).keys()];
+  business: User = <User>{};
 
   constructor(
     public dialogRef: MatDialogRef<RoomFormDialogComponent>,
@@ -43,7 +45,8 @@ export class RoomFormDialogComponent {
     private scheduleSvc: SchedulesService,
     public dialog: MatDialog,
     private translate: TranslateService,
-    private snackbarSvc: SnackBarService)
+    private snackbarSvc: SnackBarService,
+    private tokenSvc: TokenUtilsService)
   {
     this.title = data.title;
     this.room = data.room;
@@ -71,6 +74,7 @@ export class RoomFormDialogComponent {
 
   ngOnInit(): void {
     this.locationSvc.getLocations().subscribe((locations: Location[]) => this.locations = locations);
+    this.usersSvc.getById(this.tokenSvc.getDecodedToken().id).subscribe( user => this.business = user)
   }
 
   addNewMaterial(): void {
@@ -185,7 +189,7 @@ export class RoomFormDialogComponent {
     if(!this.room) {
       let newRoom = {
         name: this.roomForm.value.name,
-        business: this.roomForm.value.business,
+        business: this.business,
         location: this.roomForm.value.location,
         size: this.roomForm.value.size,
         capacity: this.roomForm.value.capacity,
